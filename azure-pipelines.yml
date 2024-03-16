@@ -1,0 +1,30 @@
+#the pipeline is still under testing
+trigger:
+  - main  # Assuming your main branch is called 'main'; adjust if your main branch has a different name
+
+pool:
+  vmImage: 'ubuntu-latest'  # Specifies to use the latest Ubuntu image in the Azure Pipelines agent pool
+
+jobs:
+  - job: BuildAndTest
+    displayName: 'Build and Test Angular App'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'  # Specifies the Node.js version to use; adjust this as per your project's requirements
+        displayName: 'Install Node.js'
+
+      - checkout: self  # Checks out the source code of your repository
+
+      - script: |
+          npm install -g @angular/cli@13.0.2
+          npm install
+        displayName: 'Install dependencies'
+
+      - script: |
+          ng build --prod
+        displayName: 'Build Angular App'
+
+      - script: |
+          ng test --watch=false --browsers=ChromeHeadless
+        displayName: 'Run Angular Tests'
