@@ -1,8 +1,8 @@
 trigger:
 - main
 
-pool:
-  vmImage: DevOps
+pool: DevOps
+
 
 variables:
   buildConfiguration: 'Release'
