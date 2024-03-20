@@ -7,25 +7,44 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '14.x'
-  displayName: 'Install Node.js'
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: Build
+    displayName: 'Build Job'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
 
-- script: |
-    cd angular-app
-    npm install
-  displayName: 'Install dependencies'
+    - script: |
+        cd angular-app
+        npm install
+      displayName: 'Install dependencies'
 
-- script: |
-    cd angular-app
-    npm run build -- --prod
-  displayName: 'Build Angular project'
+    - script: |
+        cd angular-app
+        npm run build -- --prod
+      displayName: 'Build Angular project'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'angular-app/dist/angular-app'
-    ArtifactName: 'AngularApp'  # Removed the extraneous 'a' from the end
-    publishLocation: 'Container'
-  displayName: 'Publish Build Artifacts'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'angular-app/dist/angular-app'
+        ArtifactName: 'AngularApp'
+        publishLocation: 'Container'
+      displayName: 'Publish Build Artifacts'
+
+- stage: CD
+  displayName: 'CD Stage'
+  jobs:
+  - deployment: Deploy
+    displayName: 'Deploy Job'
+    environment: 'Development' # Make sure this is the correct name of your environment in Azure DevOps
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo 'This is the dev job.'
+            displayName: 'Dev Testing'
