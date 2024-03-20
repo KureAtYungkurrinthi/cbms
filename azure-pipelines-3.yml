@@ -11,13 +11,25 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd FrontendAngularTesting/angular-app
-    npm install
+    pwd
+    ls -la
+    if [ -d "FrontendAngularTesting/angular-app" ]; then
+      cd FrontendAngularTesting/angular-app
+      npm install
+    else
+      echo "Directory FrontendAngularTesting/angular-app does not exist."
+      exit 1
+    fi
   displayName: 'Install dependencies'
 
 - script: |
-    cd FrontendAngularTesting/angular-app
-    npm run build -- --prod
+    if [ -d "FrontendAngularTesting/angular-app" ]; then
+      cd FrontendAngularTesting/angular-app
+      npm run build -- --prod
+    else
+      echo "Directory FrontendAngularTesting/angular-app does not exist."
+      exit 1
+    fi
   displayName: 'Build Angular project'
 
 - task: PublishBuildArtifacts@1
