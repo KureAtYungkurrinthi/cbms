@@ -36,15 +36,4 @@ stages:
         publishLocation: 'Container'
       displayName: 'Publish Build Artifacts'
 
-- stage: CD
-  displayName: 'CD Stage'
-  jobs:
-  - deployment: Deploy
-    displayName: 'Deploy Job'
-    environment: 'Development' # Make sure this is the correct name of your environment in Azure DevOps
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - script: echo 'This is the dev job.'
-            displayName: 'Dev Testing'
+
