@@ -1,13 +1,23 @@
-// Get the client
-const mysql = require('mysql2/promise');
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize(
+    process.env.DB_DATABASE,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        dialect: 'mysql',
+        dialectOptions: {
+            ssl: {
+                rejectUnauthorized: false
+            }
+        }
+    }
+);
 
-// create the connection to database
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'p@ssw0rd',
-    database: process.env.DB_DATABASE || 'cbms',
-    port: 3306
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+}).catch((error) => {
+    console.error('Unable to connect to the database: ', error);
 });
 
-module.exports = connection;
+module.exports = sequelize;

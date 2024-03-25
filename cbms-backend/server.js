@@ -8,11 +8,11 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 // Put all routes here
 app.use('/v1/auth', require('./routes/auth'));
-// app.use('/v1/users', require('./routes/users'));
+app.use('/v1/users', require('./routes/users'));
 // app.use('/v1/rooms', require('./routes/rooms'));
 // app.use('/v1/meetings', require('./routes/meetings'));
 
@@ -22,7 +22,7 @@ app.all('*', (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

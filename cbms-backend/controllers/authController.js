@@ -1,10 +1,10 @@
-const login = (req, res) => {
+const login = async (req, res) => {
 
 };
-const logout = (req, res) => {
+const logout = async (req, res) => {
 
 };
-const refreshToken = (req, res) => {
+const refreshToken = async (req, res) => {
 
 };
 
