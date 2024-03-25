@@ -1,3 +1,4 @@
+// Import libraries
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -9,12 +10,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'))
 
-// Routes
+// Put all routes here
 app.use('/v1/auth', require('./routes/auth'));
 // app.use('/v1/users', require('./routes/users'));
 // app.use('/v1/rooms', require('./routes/rooms'));
 // app.use('/v1/meetings', require('./routes/meetings'));
 
+// Catch-all for unhandled routes
+app.all('*', (req, res) => {
+    res.sendStatus(404);
+});
 
 // Start the server
 const PORT = process.env.PORT || 3500;
