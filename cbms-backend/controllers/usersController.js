@@ -19,10 +19,7 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const id = req?.params?.id;
-        if (!id) return res.status(400).json({'message': 'User ID required'});
-
-        const user = await User.findByPk(id, {
+        const user = await User.findByPk(req.params.id, {
             attributes: {exclude: ['hash', 'salt']}
         });
         if (user) {
@@ -50,7 +47,7 @@ const createUser = async (req, res) => {
             where: {email: email},
             defaults: {name: name, role: role, hash: hash, salt: salt}
         });
-        if (!created) return res.status(400).json({'message': 'Email is already registered'});
+        if (!created) return res.status(409).json({'message': 'Email is already registered'});
 
         // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
@@ -64,13 +61,10 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const id = req?.params?.id;
         const {name, email, role, password} = req.body;
-
-        if (!id) return res.status(400).json({'message': 'User ID required'});
         if (!name && !email && !password && !role) return res.status(400).json({'message': 'Name, email, role, or password are required'});
 
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({'message': 'User not found'});
 
         if (name) user.name = name;
@@ -94,10 +88,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const id = req?.params?.id;
-        if (!id) return res.status(400).json({'message': 'User ID required'});
-
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({'message': 'User not found'});
 
         // Delete the user
