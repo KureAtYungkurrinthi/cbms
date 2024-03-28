@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
         if (users.length > 0) {
             return res.json(users);
         } else {
-            return res.status(204).json({'message': 'No users found'});
+            return res.status(404).json({'message': 'No users found'});
         }
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -20,16 +20,15 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const id = req?.params?.id;
-        if (!id) {
-            return res.status(400).json({'message': 'User ID required'});
-        }
+        if (!id) return res.status(400).json({'message': 'User ID required'});
+
         const user = await User.findByPk(id, {
             attributes: {exclude: ['hash', 'salt']}
         });
         if (user) {
             return res.json(user);
         } else {
-            return res.status(204).json({'message': 'User not found'});
+            return res.status(404).json({'message': 'User not found'});
         }
     } catch (error) {
         console.error('Error fetching user by ID:', error);
@@ -41,9 +40,7 @@ const getUserById = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         const {name, email, role, password} = req.body;
-        if (!name || !email || !password || !role) {
-            return res.status(400).json({'message': 'Name, email, role, and password are required'});
-        }
+        if (!name || !email || !password || !role) return res.status(400).json({'message': 'Name, email, role, and password are required'});
 
         // Hash the password
         const salt = crypto.randomBytes(16).toString("hex");
@@ -53,15 +50,12 @@ const createUser = async (req, res) => {
             where: {email: email},
             defaults: {name: name, role: role, hash: hash, salt: salt}
         });
+        if (!created) return res.status(400).json({'message': 'Email is already registered'});
 
-        if (created) {
-            // Avoid returning hashed password back to frontend
-            delete user.dataValues.hash;
-            delete user.dataValues.salt;
-            return res.status(201).json(user);
-        } else {
-            return res.status(400).json({'message': 'Email is already registered'});
-        }
+        // Avoid returning hashed password back to frontend
+        delete user.dataValues.hash;
+        delete user.dataValues.salt;
+        return res.status(201).json(user);
     } catch (error) {
         console.error('Error creating user:', error);
         return res.status(500).json({'message': 'Internal Server Error'});
@@ -70,36 +64,49 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const id = req.params.id;
-        const { name, email, role, password } = req.body;
-        if (!name && !email && !password && !role) {
-            return res.status(400).json({'message': 'Name, email, role, and password are required'});
-        }
+        const id = req?.params?.id;
+        const {name, email, role, password} = req.body;
+
+        if (!id) return res.status(400).json({'message': 'User ID required'});
+        if (!name && !email && !password && !role) return res.status(400).json({'message': 'Name, email, role, or password are required'});
 
         const user = await User.findByPk(id);
-        if (user) {
-            if (name) user.name = name;
-            if (email) user.email = email;
-            if (role) user.role = role;
-            if (password) {
-                user.salt = crypto.randomBytes(16).toString("hex");
-                user.hash = crypto.scryptSync(password, user.salt, 64).toString('hex');
-            }
-            await user.save();
-            delete user.dataValues.hash;
-            delete user.dataValues.salt;
-            return res.json(user);
-        } else {
-            return res.status(204).json({message: 'User not found'});
+        if (!user) return res.status(404).json({'message': 'User not found'});
+
+        if (name) user.name = name;
+        if (email) user.email = email;
+        if (role) user.role = role;
+        if (password) {
+            user.salt = crypto.randomBytes(16).toString("hex");
+            user.hash = crypto.scryptSync(password, user.salt, 64).toString('hex');
         }
+        await user.save();
+
+        // Avoid returning hashed password back to frontend
+        delete user.dataValues.hash;
+        delete user.dataValues.salt;
+        return res.json(user);
     } catch (error) {
         console.error('Error updating user:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        return res.status(500).json({'message': 'Internal Server Error'});
     }
 };
 
 const deleteUser = async (req, res) => {
+    try {
+        const id = req?.params?.id;
+        if (!id) return res.status(400).json({'message': 'User ID required'});
 
+        const user = await User.findByPk(id);
+        if (!user) return res.status(404).json({'message': 'User not found'});
+
+        // Delete the user
+        await user.destroy();
+        return res.json(user);
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        return res.status(500).json({'message': 'Internal Server Error'});
+    }
 };
 
 module.exports = {getAllUsers, getUserById, createUser, updateUser, deleteUser};
