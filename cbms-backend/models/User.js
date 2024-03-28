@@ -10,10 +10,12 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING, allowNull: false, validate: {
             isEmail: true
         }
-    }, password: {
-        type: DataTypes.STRING, allowNull: false
     }, role: {
         type: DataTypes.ENUM('admin', 'member'), allowNull: false
+    }, hash: {
+        type: DataTypes.CHAR(128), allowNull: false
+    }, salt: {
+        type: DataTypes.CHAR(32), allowNull: false
     }, createdAt: {
         field: 'created_at', type: DataTypes.DATE, defaultValue: DataTypes.NOW
     }, updatedAt: {
