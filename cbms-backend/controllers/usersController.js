@@ -19,11 +19,11 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const userId = req?.params?.id;
-        if (!userId) {
+        const id = req?.params?.id;
+        if (!id) {
             return res.status(400).json({'message': 'User ID required'});
         }
-        const user = await User.findByPk(userId, {
+        const user = await User.findByPk(id, {
             attributes: {exclude: ['hash', 'salt']}
         });
         if (user) {
@@ -69,7 +69,33 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { name, email, role, password } = req.body;
+        if (!name && !email && !password && !role) {
+            return res.status(400).json({'message': 'Name, email, role, and password are required'});
+        }
 
+        const user = await User.findByPk(id);
+        if (user) {
+            if (name) user.name = name;
+            if (email) user.email = email;
+            if (role) user.role = role;
+            if (password) {
+                user.salt = crypto.randomBytes(16).toString("hex");
+                user.hash = crypto.scryptSync(password, user.salt, 64).toString('hex');
+            }
+            await user.save();
+            delete user.dataValues.hash;
+            delete user.dataValues.salt;
+            return res.json(user);
+        } else {
+            return res.status(204).json({message: 'User not found'});
+        }
+    } catch (error) {
+        console.error('Error updating user:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
 };
 
 const deleteUser = async (req, res) => {
