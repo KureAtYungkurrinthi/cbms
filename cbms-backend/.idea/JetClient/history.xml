@@ -4,11 +4,11 @@
     <option name="requestHistoryStates">
       <list>
         <requestHistoryState>
-          <option name="dateTime" value="1711372389006" />
-          <option name="id" value="5c53927e-4b8a-4765-a91f-648d7c9e4787" />
+          <option name="dateTime" value="1711636339652" />
+          <option name="id" value="5c31f5a4-edf7-417f-bf57-767e565e5d7e" />
           <option name="request">
             <requestState>
-              <option name="id" value="2b5be66b-db01-43d9-898d-91c3410af55d" />
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
               <option name="method" value="GET" />
               <option name="name" value="Draft" />
               <option name="url" value="http://localhost:3000/v1/users" />
@@ -16,7 +16,8 @@
           </option>
           <option name="response">
             <responseState>
-              <option name="bodyString" value="null" />
+              <option name="bodyBytesBase64" value="W3siaWQiOjEsIm5hbWUiOiJaaGFuZyBTYW4iLCJlbWFpbCI6InpoYW5nQHNhLmdvdi5hdSIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9LHsiaWQiOjIsIm5hbWUiOiJMaSBTaSIsImVtYWlsIjoibGlAc2EuZ292LmF1Iiwicm9sZSI6Im1lbWJlciIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9LHsiaWQiOjMsIm5hbWUiOiJXYW5nIFd1IiwiZW1haWwiOiJ3YW5nQHNhLmdvdi5hdSIsInJvbGUiOiJtZW1iZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoifSx7ImlkIjo0LCJuYW1lIjoiWmhhbyBMaXUiLCJlbWFpbCI6InpoYW9Ac2EuZ292LmF1Iiwicm9sZSI6Im1lbWJlciIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9XQ==" />
+              <option name="bodyString" value="[&#10;  {&#10;    &quot;id&quot; : 1,&#10;    &quot;name&quot; : &quot;Zhang San&quot;,&#10;    &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;    &quot;role&quot; : &quot;admin&quot;,&#10;    &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;    &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;  },&#10;  {&#10;    &quot;id&quot; : 2,&#10;    &quot;name&quot; : &quot;Li Si&quot;,&#10;    &quot;email&quot; : &quot;li@sa.gov.au&quot;,&#10;    &quot;role&quot; : &quot;member&quot;,&#10;    &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;    &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;  },&#10;  {&#10;    &quot;id&quot; : 3,&#10;    &quot;name&quot; : &quot;Wang Wu&quot;,&#10;    &quot;email&quot; : &quot;wang@sa.gov.au&quot;,&#10;    &quot;role&quot; : &quot;member&quot;,&#10;    &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;    &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;  },&#10;  {&#10;    &quot;id&quot; : 4,&#10;    &quot;name&quot; : &quot;Zhao Liu&quot;,&#10;    &quot;email&quot; : &quot;zhao@sa.gov.au&quot;,&#10;    &quot;role&quot; : &quot;member&quot;,&#10;    &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;    &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;  }&#10;]" />
               <option name="code" value="200" />
               <option name="contentType" value="application/json; charset=utf-8" />
               <option name="headers">
@@ -30,173 +31,16 @@
                     <option name="value" value="application/json; charset=utf-8" />
                   </headerState>
                   <headerState>
-                    <option name="key" value="Date" />
-                    <option name="value" value="Mon, 25 Mar 2024 12:19:31 GMT" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Connection" />
-                    <option name="value" value="keep-alive" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Keep-Alive" />
-                    <option name="value" value="timeout=5" />
-                  </headerState>
-                  <headerState>
                     <option name="key" value="Content-Length" />
-                    <option name="value" value="0" />
-                  </headerState>
-                </list>
-              </option>
-              <option name="id" value="5c53927e-4b8a-4765-a91f-648d7c9e4787" />
-              <option name="message" value="OK" />
-              <option name="prettyResponseType" value="JSON" />
-              <option name="rawBodyString" value="" />
-              <option name="time" value="16" />
-            </responseState>
-          </option>
-        </requestHistoryState>
-        <requestHistoryState>
-          <option name="dateTime" value="1711372392764" />
-          <option name="id" value="cdb691c8-dfbb-4721-8a85-f1c3262887b9" />
-          <option name="request">
-            <requestState>
-              <option name="id" value="2b5be66b-db01-43d9-898d-91c3410af55d" />
-              <option name="method" value="GET" />
-              <option name="name" value="Draft" />
-              <option name="url" value="http://localhost:3000/v1/users" />
-            </requestState>
-          </option>
-          <option name="response">
-            <responseState>
-              <option name="bodyString" value="null" />
-              <option name="code" value="200" />
-              <option name="contentType" value="application/json; charset=utf-8" />
-              <option name="headers">
-                <list>
-                  <headerState>
-                    <option name="key" value="X-Powered-By" />
-                    <option name="value" value="Express" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Type" />
-                    <option name="value" value="application/json; charset=utf-8" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Date" />
-                    <option name="value" value="Mon, 25 Mar 2024 12:19:35 GMT" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Connection" />
-                    <option name="value" value="keep-alive" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Keep-Alive" />
-                    <option name="value" value="timeout=5" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Length" />
-                    <option name="value" value="0" />
-                  </headerState>
-                </list>
-              </option>
-              <option name="id" value="cdb691c8-dfbb-4721-8a85-f1c3262887b9" />
-              <option name="message" value="OK" />
-              <option name="prettyResponseType" value="JSON" />
-              <option name="rawBodyString" value="" />
-              <option name="time" value="13" />
-            </responseState>
-          </option>
-        </requestHistoryState>
-        <requestHistoryState>
-          <option name="dateTime" value="1711372393724" />
-          <option name="id" value="3c4bd30b-ca6c-4253-be81-8e35e58cfde6" />
-          <option name="request">
-            <requestState>
-              <option name="id" value="2b5be66b-db01-43d9-898d-91c3410af55d" />
-              <option name="method" value="GET" />
-              <option name="name" value="Draft" />
-              <option name="url" value="http://localhost:3000/v1/users" />
-            </requestState>
-          </option>
-          <option name="response">
-            <responseState>
-              <option name="bodyString" value="null" />
-              <option name="code" value="200" />
-              <option name="contentType" value="application/json; charset=utf-8" />
-              <option name="headers">
-                <list>
-                  <headerState>
-                    <option name="key" value="X-Powered-By" />
-                    <option name="value" value="Express" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Type" />
-                    <option name="value" value="application/json; charset=utf-8" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Date" />
-                    <option name="value" value="Mon, 25 Mar 2024 12:19:36 GMT" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Connection" />
-                    <option name="value" value="keep-alive" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Keep-Alive" />
-                    <option name="value" value="timeout=5" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Length" />
-                    <option name="value" value="0" />
-                  </headerState>
-                </list>
-              </option>
-              <option name="id" value="3c4bd30b-ca6c-4253-be81-8e35e58cfde6" />
-              <option name="message" value="OK" />
-              <option name="prettyResponseType" value="JSON" />
-              <option name="rawBodyString" value="" />
-              <option name="time" value="6" />
-            </responseState>
-          </option>
-        </requestHistoryState>
-        <requestHistoryState>
-          <option name="dateTime" value="1711372677733" />
-          <option name="id" value="4f6836fd-38b8-46aa-a89b-ef9049cb56fb" />
-          <option name="request">
-            <requestState>
-              <option name="id" value="2b5be66b-db01-43d9-898d-91c3410af55d" />
-              <option name="method" value="GET" />
-              <option name="name" value="Draft" />
-              <option name="url" value="http://localhost:3000/v1/usersss" />
-            </requestState>
-          </option>
-          <option name="response">
-            <responseState>
-              <option name="bodyBytesBase64" value="Tm90IEZvdW5k" />
-              <option name="bodyString" value="Not Found" />
-              <option name="code" value="404" />
-              <option name="contentType" value="text/plain; charset=utf-8" />
-              <option name="headers">
-                <list>
-                  <headerState>
-                    <option name="key" value="X-Powered-By" />
-                    <option name="value" value="Express" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Type" />
-                    <option name="value" value="text/plain; charset=utf-8" />
-                  </headerState>
-                  <headerState>
-                    <option name="key" value="Content-Length" />
-                    <option name="value" value="9" />
+                    <option name="value" value="580" />
                   </headerState>
                   <headerState>
                     <option name="key" value="ETag" />
-                    <option name="value" value="W/&quot;9-0gXL1ngzMqISxa6S1zx3F4wtLyg&quot;" />
+                    <option name="value" value="W/&quot;244-JC7sZuYiKYqdCeWyyYbI+ta+spw&quot;" />
                   </headerState>
                   <headerState>
                     <option name="key" value="Date" />
-                    <option name="value" value="Mon, 25 Mar 2024 12:24:44 GMT" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:32:19 GMT" />
                   </headerState>
                   <headerState>
                     <option name="key" value="Connection" />
@@ -208,12 +52,766 @@
                   </headerState>
                 </list>
               </option>
-              <option name="id" value="4f6836fd-38b8-46aa-a89b-ef9049cb56fb" />
-              <option name="message" value="Not Found" />
-              <option name="prettyResponseType" value="TEXT" />
-              <option name="rawBodyString" value="Not Found" />
-              <option name="size" value="9" />
-              <option name="time" value="19" />
+              <option name="id" value="5c31f5a4-edf7-417f-bf57-767e565e5d7e" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="[{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;},{&quot;id&quot;:2,&quot;name&quot;:&quot;Li Si&quot;,&quot;email&quot;:&quot;li@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;},{&quot;id&quot;:3,&quot;name&quot;:&quot;Wang Wu&quot;,&quot;email&quot;:&quot;wang@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;},{&quot;id&quot;:4,&quot;name&quot;:&quot;Zhao Liu&quot;,&quot;email&quot;:&quot;zhao@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}]" />
+              <option name="size" value="580" />
+              <option name="time" value="413" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636394733" />
+          <option name="id" value="26d649ee-54e7-471e-b939-4318a1252224" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/1/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MSwibmFtZSI6IlpoYW5nIFNhbiIsImVtYWlsIjoiemhhbmdAc2EuZ292LmF1Iiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 1,&#10;  &quot;name&quot; : &quot;Zhang San&quot;,&#10;  &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;admin&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="146" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;92-nIMd2WRsBXVtPuVghwrv8abBn90&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:33:14 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="26d649ee-54e7-471e-b939-4318a1252224" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="146" />
+              <option name="time" value="273" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636433052" />
+          <option name="id" value="ff15f9e5-6d0f-4616-8624-5018daa19e83" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/2/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MSwibmFtZSI6IlpoYW5nIFNhbiIsImVtYWlsIjoiemhhbmdAc2EuZ292LmF1Iiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 1,&#10;  &quot;name&quot; : &quot;Zhang San&quot;,&#10;  &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;admin&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="146" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;92-nIMd2WRsBXVtPuVghwrv8abBn90&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:33:53 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="ff15f9e5-6d0f-4616-8624-5018daa19e83" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="146" />
+              <option name="time" value="241" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636441456" />
+          <option name="id" value="fa4a74e3-b15f-46e8-96fe-a66d59b835e4" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/2/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MSwibmFtZSI6IlpoYW5nIFNhbiIsImVtYWlsIjoiemhhbmdAc2EuZ292LmF1Iiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 1,&#10;  &quot;name&quot; : &quot;Zhang San&quot;,&#10;  &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;admin&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="146" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;92-nIMd2WRsBXVtPuVghwrv8abBn90&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:34:01 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="fa4a74e3-b15f-46e8-96fe-a66d59b835e4" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="146" />
+              <option name="time" value="34" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636442536" />
+          <option name="id" value="083ed942-f19f-4b5e-9561-cbad8191d66f" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/2/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MSwibmFtZSI6IlpoYW5nIFNhbiIsImVtYWlsIjoiemhhbmdAc2EuZ292LmF1Iiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 1,&#10;  &quot;name&quot; : &quot;Zhang San&quot;,&#10;  &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;admin&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="146" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;92-nIMd2WRsBXVtPuVghwrv8abBn90&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:34:02 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="083ed942-f19f-4b5e-9561-cbad8191d66f" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="146" />
+              <option name="time" value="33" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636449389" />
+          <option name="id" value="9a767cbb-a03d-49f8-ab55-2919d297228f" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/2/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MiwibmFtZSI6IkxpIFNpIiwiZW1haWwiOiJsaUBzYS5nb3YuYXUiLCJyb2xlIjoibWVtYmVyIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 2,&#10;  &quot;name&quot; : &quot;Li Si&quot;,&#10;  &quot;email&quot; : &quot;li@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="140" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;8c-MdChvoZslUi/1S00p7mL4GKIwps&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:34:09 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="9a767cbb-a03d-49f8-ab55-2919d297228f" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:2,&quot;name&quot;:&quot;Li Si&quot;,&quot;email&quot;:&quot;li@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="140" />
+              <option name="time" value="42" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711636727537" />
+          <option name="id" value="f5035fcd-abc2-4ca0-95f9-06164ef1b132" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/3/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MywibmFtZSI6IldhbmcgV3UiLCJlbWFpbCI6IndhbmdAc2EuZ292LmF1Iiwicm9sZSI6Im1lbWJlciIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 3,&#10;  &quot;name&quot; : &quot;Wang Wu&quot;,&#10;  &quot;email&quot; : &quot;wang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="144" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;90-FPpssBvd+NaV58tFhOhInRoFXRI&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:38:47 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="f5035fcd-abc2-4ca0-95f9-06164ef1b132" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:3,&quot;name&quot;:&quot;Wang Wu&quot;,&quot;email&quot;:&quot;wang@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="144" />
+              <option name="time" value="337" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637147805" />
+          <option name="id" value="c84a10ee-43bc-4b24-802e-e82fa61946a2" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/4/" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6NCwibmFtZSI6IlpoYW8gTGl1IiwiZW1haWwiOiJ6aGFvQHNhLmdvdi5hdSIsInJvbGUiOiJtZW1iZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoifQ==" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 4,&#10;  &quot;name&quot; : &quot;Zhao Liu&quot;,&#10;  &quot;email&quot; : &quot;zhao@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="145" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;91-0opxgCpSlivTcXhpt0oBsM51Im0&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:45:47 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="c84a10ee-43bc-4b24-802e-e82fa61946a2" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:4,&quot;name&quot;:&quot;Zhao Liu&quot;,&quot;email&quot;:&quot;zhao@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="145" />
+              <option name="time" value="419" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637191086" />
+          <option name="id" value="ea6f0c18-8336-4298-878b-51f8c0649a63" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/4" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6NCwibmFtZSI6IlpoYW8gTGl1IiwiZW1haWwiOiJ6aGFvQHNhLmdvdi5hdSIsInJvbGUiOiJtZW1iZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoifQ==" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 4,&#10;  &quot;name&quot; : &quot;Zhao Liu&quot;,&#10;  &quot;email&quot; : &quot;zhao@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="145" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;91-0opxgCpSlivTcXhpt0oBsM51Im0&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:31 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="ea6f0c18-8336-4298-878b-51f8c0649a63" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:4,&quot;name&quot;:&quot;Zhao Liu&quot;,&quot;email&quot;:&quot;zhao@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="145" />
+              <option name="time" value="49" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637194865" />
+          <option name="id" value="ef1984af-4a66-44e1-883c-1e717eeb61a4" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/3" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MywibmFtZSI6IldhbmcgV3UiLCJlbWFpbCI6IndhbmdAc2EuZ292LmF1Iiwicm9sZSI6Im1lbWJlciIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 3,&#10;  &quot;name&quot; : &quot;Wang Wu&quot;,&#10;  &quot;email&quot; : &quot;wang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="144" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;90-FPpssBvd+NaV58tFhOhInRoFXRI&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:34 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="ef1984af-4a66-44e1-883c-1e717eeb61a4" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:3,&quot;name&quot;:&quot;Wang Wu&quot;,&quot;email&quot;:&quot;wang@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="144" />
+              <option name="time" value="34" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637209289" />
+          <option name="id" value="87cf0133-342a-4b81-81f5-b455f5cbf8ed" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/1" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MSwibmFtZSI6IlpoYW5nIFNhbiIsImVtYWlsIjoiemhhbmdAc2EuZ292LmF1Iiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 1,&#10;  &quot;name&quot; : &quot;Zhang San&quot;,&#10;  &quot;email&quot; : &quot;zhang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;admin&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="146" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;92-nIMd2WRsBXVtPuVghwrv8abBn90&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:49 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="87cf0133-342a-4b81-81f5-b455f5cbf8ed" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Zhang San&quot;,&quot;email&quot;:&quot;zhang@sa.gov.au&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="146" />
+              <option name="time" value="47" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637213061" />
+          <option name="id" value="4d9922b7-7f49-4cc4-addf-3c6b6a7fb58c" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/2" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MiwibmFtZSI6IkxpIFNpIiwiZW1haWwiOiJsaUBzYS5nb3YuYXUiLCJyb2xlIjoibWVtYmVyIiwiY3JlYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wMy0yNVQxMzoyMzozMy4wMDBaIn0=" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 2,&#10;  &quot;name&quot; : &quot;Li Si&quot;,&#10;  &quot;email&quot; : &quot;li@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="140" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;8c-MdChvoZslUi/1S00p7mL4GKIwps&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:53 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="4d9922b7-7f49-4cc4-addf-3c6b6a7fb58c" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:2,&quot;name&quot;:&quot;Li Si&quot;,&quot;email&quot;:&quot;li@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="140" />
+              <option name="time" value="41" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637216221" />
+          <option name="id" value="01c85d0d-d08f-4461-a7e0-a755e73d0f42" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/3" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6MywibmFtZSI6IldhbmcgV3UiLCJlbWFpbCI6IndhbmdAc2EuZ292LmF1Iiwicm9sZSI6Im1lbWJlciIsImNyZWF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDMtMjVUMTM6MjM6MzMuMDAwWiJ9" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 3,&#10;  &quot;name&quot; : &quot;Wang Wu&quot;,&#10;  &quot;email&quot; : &quot;wang@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="144" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;90-FPpssBvd+NaV58tFhOhInRoFXRI&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:56 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="01c85d0d-d08f-4461-a7e0-a755e73d0f42" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:3,&quot;name&quot;:&quot;Wang Wu&quot;,&quot;email&quot;:&quot;wang@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="144" />
+              <option name="time" value="32" />
+            </responseState>
+          </option>
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1711637219404" />
+          <option name="id" value="79f6d89c-e8d6-460b-9422-ebdc34ac1ad3" />
+          <option name="request">
+            <requestState>
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
+              <option name="method" value="GET" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/v1/users/4" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJpZCI6NCwibmFtZSI6IlpoYW8gTGl1IiwiZW1haWwiOiJ6aGFvQHNhLmdvdi5hdSIsInJvbGUiOiJtZW1iZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAzLTI1VDEzOjIzOjMzLjAwMFoifQ==" />
+              <option name="bodyString" value="{&#10;  &quot;id&quot; : 4,&#10;  &quot;name&quot; : &quot;Zhao Liu&quot;,&#10;  &quot;email&quot; : &quot;zhao@sa.gov.au&quot;,&#10;  &quot;role&quot; : &quot;member&quot;,&#10;  &quot;createdAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;,&#10;  &quot;updatedAt&quot; : &quot;2024-03-25T13:23:33.000Z&quot;&#10;}" />
+              <option name="code" value="200" />
+              <option name="contentType" value="application/json; charset=utf-8" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="X-Powered-By" />
+                    <option name="value" value="Express" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Type" />
+                    <option name="value" value="application/json; charset=utf-8" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Content-Length" />
+                    <option name="value" value="145" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="ETag" />
+                    <option name="value" value="W/&quot;91-0opxgCpSlivTcXhpt0oBsM51Im0&quot;" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Thu, 28 Mar 2024 14:46:59 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="79f6d89c-e8d6-460b-9422-ebdc34ac1ad3" />
+              <option name="message" value="OK" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;id&quot;:4,&quot;name&quot;:&quot;Zhao Liu&quot;,&quot;email&quot;:&quot;zhao@sa.gov.au&quot;,&quot;role&quot;:&quot;member&quot;,&quot;createdAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;,&quot;updatedAt&quot;:&quot;2024-03-25T13:23:33.000Z&quot;}" />
+              <option name="size" value="145" />
+              <option name="time" value="80" />
             </responseState>
           </option>
         </requestHistoryState>

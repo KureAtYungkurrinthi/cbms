@@ -6,10 +6,10 @@
         <option name="requests">
           <list>
             <requestState>
-              <option name="id" value="2b5be66b-db01-43d9-898d-91c3410af55d" />
+              <option name="id" value="cf607d5e-69da-448c-b5fc-05a20390c5d2" />
               <option name="method" value="GET" />
               <option name="name" value="Draft" />
-              <option name="url" value="http://localhost:3000/v1/users" />
+              <option name="url" value="http://localhost:3000/v1/users/4" />
             </requestState>
           </list>
         </option>
