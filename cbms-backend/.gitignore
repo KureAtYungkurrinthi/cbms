@@ -1,2 +1,5 @@
-# Dependency directories
+# Dependency directory
 node_modules/
+
+# WebStorm projects
+.idea/
