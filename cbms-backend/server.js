@@ -3,14 +3,14 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const {verifyJWT} = require("./lib/verifier");
+const {verifyJWT} = require('./lib/verifier');
 
 // Initiate express.js
 const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(cors());
 
 // Unprotected route for authentication

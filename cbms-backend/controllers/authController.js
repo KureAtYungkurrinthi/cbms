@@ -41,13 +41,13 @@ const refreshToken = async (req, res) => {
         const refreshToken = cookies.jwt;
         res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
 
-        // jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
-        //     if (err) return res.sendStatus(403); //invalid token
-        //     req.id = decoded.id;
-        //     req.name = decoded.name;
-        //     req.email = decoded.email;
-        //     req.role = decoded.role;
-        // });
+        jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
+            if (err) return res.sendStatus(403); //invalid token
+            req.id = decoded.id;
+            req.name = decoded.name;
+            req.email = decoded.email;
+            req.role = decoded.role;
+        });
 
         const user = await User.findByPk(req.id);
         if (!user) return res.sendStatus(403);
