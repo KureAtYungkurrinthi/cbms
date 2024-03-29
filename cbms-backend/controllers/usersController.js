@@ -4,7 +4,7 @@ const User = require('../models/User');
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll({
-            attributes: {exclude: ['hash', 'salt']}
+            attributes: {exclude: ['hash', 'salt', 'token']}
         });
         if (users.length > 0) {
             return res.json(users);
@@ -20,7 +20,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
-            attributes: {exclude: ['hash', 'salt']}
+            attributes: {exclude: ['hash', 'salt', 'token']}
         });
         if (user) {
             return res.json(user);
@@ -52,6 +52,7 @@ const createUser = async (req, res) => {
         // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
         delete user.dataValues.salt;
+        delete user.dataValues.token;
         return res.status(201).json(user);
     } catch (error) {
         console.error('Error creating user:', error);
@@ -79,6 +80,7 @@ const updateUser = async (req, res) => {
         // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
         delete user.dataValues.salt;
+        delete user.dataValues.token;
         return res.json(user);
     } catch (error) {
         console.error('Error updating user:', error);

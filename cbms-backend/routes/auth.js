@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 
-router.post('/login', authController.login);
-router.post('/logout', authController.login);
-router.post('/refresh', authController.refreshToken);
+const methodNotAllowed = async (req, res) => res.sendStatus(405);
+
+router.route('/')
+    .post(authController.login)
+    .get(authController.refreshToken)
+    .delete(authController.logout)
+    .all(methodNotAllowed);
 
 module.exports = router;
