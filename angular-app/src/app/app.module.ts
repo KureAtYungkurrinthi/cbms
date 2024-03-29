@@ -8,19 +8,33 @@ import { PostComponent } from './post/post.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {RouterModule, Routes} from '@angular/router';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+
+const appRoutes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PostComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    AddMeetingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes, {enableTracing: true}  // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
