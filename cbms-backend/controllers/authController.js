@@ -77,7 +77,36 @@ const refreshToken = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-    return res.sendStatus(500);
+    try {
+        const cookies = req.cookies;
+        if (!cookies?.jwt) return res.sendStatus(204); //No content
+        const refreshToken = cookies.jwt;
+        res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
+
+        // Is refreshToken in db?
+        jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
+            if (err) return res.sendStatus(403); //invalid token
+            req.id = decoded.id;
+            req.name = decoded.name;
+            req.email = decoded.email;
+            req.role = decoded.role;
+        });
+
+        const user = await User.findByPk(req.id);
+        if (!user) return res.sendStatus(403);
+
+        if (crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
+            return res.sendStatus(403);
+        } else {
+            // Delete refreshToken in db
+            user.token = null;
+            await user.save();
+            return res.sendStatus(200);
+        }
+    } catch (error) {
+        console.error('Error logout:', error);
+        return res.status(500).json({'message': 'Internal Server Error'});
+    }
 };
 
 module.exports = {login, refreshToken, logout};
