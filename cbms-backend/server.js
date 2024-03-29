@@ -1,7 +1,8 @@
 // Import libraries
 const express = require('express');
-const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const cors = require('cors');
 
 // Initiate express.js
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(cors());
 
 // Put all routes here
 app.use('/v1/auth', require('./routes/auth'));
