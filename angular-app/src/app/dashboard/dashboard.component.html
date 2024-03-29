@@ -29,7 +29,18 @@
     <div class="col-md-9">
       <h1>Board Meeting</h1>
       <hr>
-      <!-- Here you can use ngx-bootstrap components to display a calendar and the list of meetings -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm">
+            <div *ngFor="let meeting of meetings">
+              <app-meeting-card [meeting]="meeting"></app-meeting-card>
+            </div>
+          </div>
+      </div>
+
+
     </div>
   </div>
 </div>
