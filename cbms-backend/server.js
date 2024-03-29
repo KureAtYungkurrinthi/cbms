@@ -1,20 +1,22 @@
 // Import libraries
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const verifier = require('./lib/verifier');
+const {verifyJWT} = require("./lib/verifier");
 
 // Initiate express.js
 const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cookieParser);
 app.use(cors());
 
-// Put all routes here
+// Unprotected route for authentication
 app.use('/v1/auth', require('./routes/auth'));
-
-app.use(verifier.verifyJWT);
+// Protected routes
+app.use(verifyJWT);
 app.use('/v1/users', require('./routes/users'));
 // app.use('/v1/rooms', require('./routes/rooms'));
 // app.use('/v1/meetings', require('./routes/meetings'));
