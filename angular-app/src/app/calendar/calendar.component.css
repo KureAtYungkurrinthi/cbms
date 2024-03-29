@@ -1,0 +1,51 @@
+.calendar {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.month-label {
+  text-align: center;
+  margin: 16px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.day-names {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: bold;
+  text-align: center;
+}
+
+.cus-50-width {
+  width: 48px;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 8px;
+  padding: 8px;
+}
+
+.days-grid .day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  /*background-color: #e0e0e0;*/
+  /*border-radius: 50%;*/
+  border: 1px solid black;
+}
+
+.days-grid-active  {
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  border: 0px solid black;
+}
+
+/* You may add additional styles for current day, selected day, etc. */

@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { MeetingCardComponent } from './meeting-card/meeting-card.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     AddMeetingComponent,
-    MeetingCardComponent
+    MeetingCardComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
