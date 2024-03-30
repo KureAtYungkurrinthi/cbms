@@ -16,6 +16,8 @@ const User = sequelize.define('User', {
         type: DataTypes.CHAR(128), allowNull: false
     }, salt: {
         type: DataTypes.CHAR(32), allowNull: false
+    }, token: {
+        type: DataTypes.CHAR(128), allowNull: true
     }, createdAt: {
         field: 'created_at', type: DataTypes.DATE, defaultValue: DataTypes.NOW
     }, updatedAt: {
