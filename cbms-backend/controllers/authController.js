@@ -19,10 +19,10 @@ const login = async (req, res) => {
         if (!email || !password) return res.status(400).json({message: 'Missing email or password'});
 
         const user = await User.findOne({where: {email: email}});
-        if (!user) return res.sendStatus(401);
+        if (!user) return res.status(401).json({message: 'Invalid email or password'});
 
         if (crypto.scryptSync(password, user.salt, 64).toString('hex') !== user.hash) {
-            return res.sendStatus(401);
+            return res.status(401).json({message: 'Invalid email or password'});
         }
 
         const accessToken = generateAccessToken(user);
@@ -41,13 +41,14 @@ const login = async (req, res) => {
 const refreshToken = async (req, res) => {
     try {
         const refreshToken = req.cookies.jwt;
-        if (!refreshToken) return res.sendStatus(401);
+        if (!refreshToken) return res.status(401).json({message: 'No refresh token provided'});
+        res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
-            if (err) return res.sendStatus(403);
+            if (err) return res.status(403).json({message: 'Invalid refresh token'});
             const user = await User.findByPk(decoded.id);
             if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
-                return res.sendStatus(403);
+                return res.status(403).json({message: 'Invalid refresh token'});
             }
             const accessToken = generateAccessToken(user);
             const newRefreshToken = generateRefreshToken(user);
@@ -65,12 +66,13 @@ const logout = async (req, res) => {
     try {
         const refreshToken = req.cookies.jwt;
         if (!refreshToken) return res.sendStatus(204);
+        res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
-            if (err) return res.sendStatus(403);
+            if (err) return res.status(403).json({message: 'Invalid refresh token'});
             const user = await User.findByPk(decoded.id);
             if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
-                return res.sendStatus(403);
+                return res.status(403).json({message: 'Invalid refresh token'});
             }
             user.token = null;
             await user.save();
