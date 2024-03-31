@@ -6,11 +6,11 @@ const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 
 const generateAccessToken = (user) => {
-    return jwt.sign({id: user.id, email: user.email, role: user.role}, accessTokenSecret, {expiresIn: '15m'});
+    return jwt.sign({id: user.id, role: user.role}, accessTokenSecret, {expiresIn: '15m'});
 };
 
 const generateRefreshToken = (user) => {
-    return jwt.sign({id: user.id, email: user.email, role: user.role}, refreshTokenSecret, {expiresIn: '1d'});
+    return jwt.sign({id: user.id, role: user.role}, refreshTokenSecret, {expiresIn: '1d'});
 };
 
 const login = async (req, res) => {
@@ -42,7 +42,7 @@ const refreshToken = async (req, res) => {
     try {
         const refreshToken = req.cookies.jwt;
         if (!refreshToken) return res.status(401).json({message: 'No refresh token provided'});
-        res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
+        res.clearCookie('jwt', {httpOnly: true});
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
             if (err) return res.status(403).json({message: 'Invalid refresh token'});
@@ -66,7 +66,7 @@ const logout = async (req, res) => {
     try {
         const refreshToken = req.cookies.jwt;
         if (!refreshToken) return res.sendStatus(204);
-        res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
+        res.clearCookie('jwt', {httpOnly: true});
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
             if (err) return res.status(403).json({message: 'Invalid refresh token'});
