@@ -3,9 +3,9 @@ const sequelize = require('../lib/database');
 
 const User = sequelize.define('User', {
     id: {
-        field: 'user_id', type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, field: 'user_id'
     }, name: {
-        type: DataTypes.STRING, allowNull: false,
+        type: DataTypes.STRING, allowNull: false
     }, email: {
         type: DataTypes.STRING, allowNull: false, validate: {
             isEmail: true
@@ -19,9 +19,9 @@ const User = sequelize.define('User', {
     }, token: {
         type: DataTypes.CHAR(128), allowNull: true
     }, createdAt: {
-        field: 'created_at', type: DataTypes.DATE, defaultValue: DataTypes.NOW
+        type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'created_at'
     }, updatedAt: {
-        field: 'updated_at', type: DataTypes.DATE, defaultValue: DataTypes.NOW
+        type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'updated_at'
     }
 }, {
     tableName: 'users'

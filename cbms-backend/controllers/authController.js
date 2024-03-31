@@ -2,110 +2,85 @@ const User = require("../models/User");
 const crypto = require("node:crypto");
 const jwt = require("jsonwebtoken");
 
+const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
+
+const generateAccessToken = (user) => {
+    return jwt.sign({id: user.id, email: user.email, role: user.role}, accessTokenSecret, {expiresIn: '15m'});
+};
+
+const generateRefreshToken = (user) => {
+    return jwt.sign({id: user.id, email: user.email, role: user.role}, refreshTokenSecret, {expiresIn: '1d'});
+};
+
 const login = async (req, res) => {
     try {
         const {email, password} = req.body;
-        if (!email || !password) return res.status(400).json({'message': 'Missing email or password'});
+        if (!email || !password) return res.status(400).json({message: 'Missing email or password'});
 
         const user = await User.findOne({where: {email: email}});
-        if (!user) return res.sendStatus(401);
+        if (!user) return res.status(401).json({message: 'Invalid email or password'});
 
         if (crypto.scryptSync(password, user.salt, 64).toString('hex') !== user.hash) {
-            return res.sendStatus(401);
-        } else {
-            // Create JWT
-            const accessToken = jwt.sign({
-                'id': user.id, 'name': user.name, 'email': user.email, 'role': user.role
-            }, process.env.ACCESS_SECRET, {expiresIn: '30s'});
-            const refreshToken = jwt.sign({
-                'id': user.id, 'name': user.name, 'email': user.email, 'role': user.role
-            }, process.env.REFRESH_SECRET, {expiresIn: '1d'});
-
-            // Save refreshToken in database
-            user.token = crypto.scryptSync(refreshToken, user.salt, 64).toString('hex');
-            await user.save();
-
-            // Return accessToken and refreshToken (in cookies)
-            return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json(accessToken);
+            return res.status(401).json({message: 'Invalid email or password'});
         }
+
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);
+
+        user.token = crypto.scryptSync(refreshToken, user.salt, 64).toString('hex');
+        await user.save();
+
+        return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json(accessToken);
     } catch (error) {
         console.error('Error login user:', error);
-        return res.status(500).json({'message': 'Internal Server Error'});
+        return res.status(500).json({message: 'Internal Server Error'});
     }
 };
 
 const refreshToken = async (req, res) => {
     try {
-        const cookies = req.cookies;
-        if (!cookies?.jwt) return res.sendStatus(401);
-        const refreshToken = cookies.jwt;
+        const refreshToken = req.cookies.jwt;
+        if (!refreshToken) return res.status(401).json({message: 'No refresh token provided'});
         res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
 
-        jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
-            if (err) return res.sendStatus(403); //invalid token
-            req.id = decoded.id;
-            req.name = decoded.name;
-            req.email = decoded.email;
-            req.role = decoded.role;
-        });
-
-        const user = await User.findByPk(req.id);
-        if (!user) return res.sendStatus(403);
-
-        if (crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
-            return res.sendStatus(403);
-        } else {
-            // Create JWT
-            const accessToken = jwt.sign({
-                'id': user.id, 'name': user.name, 'email': user.email, 'role': user.role
-            }, process.env.ACCESS_SECRET, {expiresIn: '30s'});
-            const newRefreshToken = jwt.sign({
-                'id': user.id, 'name': user.name, 'email': user.email, 'role': user.role
-            }, process.env.REFRESH_SECRET, {expiresIn: '1d'});
-
-            // Save refreshToken in database
+        jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
+            if (err) return res.status(403).json({message: 'Invalid refresh token'});
+            const user = await User.findByPk(decoded.id);
+            if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
+                return res.status(403).json({message: 'Invalid refresh token'});
+            }
+            const accessToken = generateAccessToken(user);
+            const newRefreshToken = generateRefreshToken(user);
             user.token = crypto.scryptSync(newRefreshToken, user.salt, 64).toString('hex');
             await user.save();
-
-            // Return accessToken and refreshToken (in cookies)
             return res.cookie('jwt', newRefreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json(accessToken);
-        }
+        });
     } catch (error) {
         console.error('Error refresh access token:', error);
-        return res.status(500).json({'message': 'Internal Server Error'});
+        return res.status(500).json({message: 'Internal Server Error'});
     }
 };
 
 const logout = async (req, res) => {
     try {
-        const cookies = req.cookies;
-        if (!cookies?.jwt) return res.sendStatus(204); //No content
-        const refreshToken = cookies.jwt;
+        const refreshToken = req.cookies.jwt;
+        if (!refreshToken) return res.sendStatus(204);
         res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
 
-        // Is refreshToken in db?
-        jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
-            if (err) return res.sendStatus(403); //invalid token
-            req.id = decoded.id;
-            req.name = decoded.name;
-            req.email = decoded.email;
-            req.role = decoded.role;
-        });
-
-        const user = await User.findByPk(req.id);
-        if (!user) return res.sendStatus(403);
-
-        if (crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
-            return res.sendStatus(403);
-        } else {
-            // Delete refreshToken in db
+        jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
+            if (err) return res.status(403).json({message: 'Invalid refresh token'});
+            const user = await User.findByPk(decoded.id);
+            if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
+                return res.status(403).json({message: 'Invalid refresh token'});
+            }
             user.token = null;
             await user.save();
             return res.sendStatus(200);
-        }
+        });
     } catch (error) {
         console.error('Error logout:', error);
-        return res.status(500).json({'message': 'Internal Server Error'});
+        return res.status(500).json({message: 'Internal Server Error'});
     }
 };
 
