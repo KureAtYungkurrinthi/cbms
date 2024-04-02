@@ -13,6 +13,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { MeetingCardComponent } from './meeting-card/meeting-card.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -38,7 +39,9 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes, {enableTracing: true}  // <-- debugging purposes only
-    )
+    ),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
