@@ -23,6 +23,17 @@ CREATE TABLE Users
 
 GRANT ALL PRIVILEGES ON cbms_database.Users TO backend_server;
 
+CREATE TABLE Rooms
+(
+    room_id    INT AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(255)             NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+GRANT ALL PRIVILEGES ON cbms_database.Rooms TO backend_server;
+
+
 -- Passwords are 'admin123', 'member123', 'pass123', 'word123'
 INSERT INTO Users (name, email, role, hash, salt)
 VALUES ('Zhang San', 'zhang@sa.gov.au', 'admin',
