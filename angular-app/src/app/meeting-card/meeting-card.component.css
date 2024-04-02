@@ -1,0 +1,40 @@
+.meeting-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.meeting-date {
+  margin-right: 15px;
+  text-align: center;
+}
+
+.meeting-date .meeting-day {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.meeting-date .meeting-day-name {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.meeting-details h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.meeting-details .meeting-time,
+.meeting-details .meeting-room {
+  margin: 0;
+  font-size: 14px;
+}
+
+.meeting-details .icon-room {
+  /* Add style for your room icon here, if using a font icon set */
+}

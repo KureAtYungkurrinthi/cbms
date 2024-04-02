@@ -6,17 +6,42 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {RouterModule, Routes} from '@angular/router';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+import { MeetingCardComponent } from './meeting-card/meeting-card.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
+const appRoutes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PostComponent
+    PostComponent,
+    LoginComponent,
+    DashboardComponent,
+    AddMeetingComponent,
+    MeetingCardComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes, {enableTracing: true}  // <-- debugging purposes only
+    ),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

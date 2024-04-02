@@ -1,0 +1,18 @@
+<div class="calendar">
+  <div class="month-label">{{ currentMonth | date: 'MMMM y' }}</div>
+  <div class="day-names">
+    <div class="cus-50-width">Su</div>
+    <div class="cus-50-width">Mo</div>
+    <div class="cus-50-width">Tu</div>
+    <div class="cus-50-width">We</div>
+    <div class="cus-50-width">Th</div>
+    <div class="cus-50-width">Fr</div>
+    <div class="cus-50-width">Sa</div>
+  </div>
+  <div class="days-grid">
+    <div *ngFor="let empty of emptyDays" class="day empty-day"></div>
+    <div *ngFor="let day of daysInMonth" class="day">
+      {{ day | date: 'dd' }}
+    </div>
+  </div>
+</div>
