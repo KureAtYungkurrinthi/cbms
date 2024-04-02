@@ -31,7 +31,12 @@ const login = async (req, res) => {
         user.token = crypto.scryptSync(refreshToken, user.salt, 64).toString('hex');
         await user.save();
 
-        return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json(accessToken);
+        delete user.dataValues.hash;
+        delete user.dataValues.salt;
+        delete user.dataValues.token;
+        delete user.dataValues.createdAt;
+        delete user.dataValues.updatedAt;
+        return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
     } catch (error) {
         console.error('Error login user:', error);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -54,7 +59,13 @@ const refreshToken = async (req, res) => {
             const newRefreshToken = generateRefreshToken(user);
             user.token = crypto.scryptSync(newRefreshToken, user.salt, 64).toString('hex');
             await user.save();
-            return res.cookie('jwt', newRefreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json(accessToken);
+
+            delete user.dataValues.hash;
+            delete user.dataValues.salt;
+            delete user.dataValues.token;
+            delete user.dataValues.createdAt;
+            delete user.dataValues.updatedAt;
+            return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
         });
     } catch (error) {
         console.error('Error refresh access token:', error);
