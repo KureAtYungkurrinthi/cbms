@@ -24,7 +24,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/v1/auth`, { "email": username, "password": password })
+    return this.http.post<any>(`http://localhost:3000/v1/auth`, { "email": username, "password": password })
       .pipe(map(obj => {
         var accessToken = obj['accessToken'];
         var user = obj['user'];
