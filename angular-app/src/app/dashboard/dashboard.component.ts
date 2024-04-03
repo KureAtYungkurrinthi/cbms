@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {AddMeetingComponent} from "src/app/add-meeting/add-meeting.component";
 import {Meeting} from "src/app/meeting.model";
+import {AuthenticationService} from "src/app/_services/authentication.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.updateDateTime();
@@ -62,5 +63,9 @@ export class DashboardComponent implements OnInit {
       minute: '2-digit',
       hour12: true
     });
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }
