@@ -3,6 +3,16 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from "src/app/_services/authentication.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
+interface StatusCodes {
+  [key: number]: string;
+}
+
+var statusCodes: StatusCodes = {
+  401: "Username or password is wrong",
+  400: "Server error",
+  0: "Cannot connect to server"
+};
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +30,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private authenticationService: AuthenticationService) {
     if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -36,6 +46,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     // event.preventDefault();
     // login logic
+    console.log(this.f.username.errors);
+    console.log(this.loginForm.invalid);
 
     this.submitted = true;
 
@@ -53,11 +65,12 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          console.log("testing");
           this.router.navigate(['/dashboard']);
         },
         error: error => {
-          this.error = error;
+          // to update the error message
+          console.log(error);
+          this.error = statusCodes[error.status];
           this.loading = false;
         }
       });
