@@ -6,11 +6,16 @@ const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 
 const generateAccessToken = (user) => {
-    return jwt.sign({id: user.id, role: user.role}, accessTokenSecret, {expiresIn: '15m'});
+    return jwt.sign({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+    }, accessTokenSecret, {expiresIn: '1h'});
 };
 
 const generateRefreshToken = (user) => {
-    return jwt.sign({id: user.id, role: user.role}, refreshTokenSecret, {expiresIn: '1d'});
+    return jwt.sign({id: user.id}, refreshTokenSecret, {expiresIn: '1d'});
 };
 
 const login = async (req, res) => {
@@ -31,11 +36,10 @@ const login = async (req, res) => {
         user.token = crypto.scryptSync(refreshToken, user.salt, 64).toString('hex');
         await user.save();
 
+        // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
         delete user.dataValues.salt;
         delete user.dataValues.token;
-        delete user.dataValues.createdAt;
-        delete user.dataValues.updatedAt;
         return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
     } catch (error) {
         console.error('Error login user:', error);
@@ -51,21 +55,23 @@ const refreshToken = async (req, res) => {
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
             if (err) return res.status(403).json({message: 'Invalid refresh token'});
+
             const user = await User.findByPk(decoded.id);
             if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
                 return res.status(403).json({message: 'Invalid refresh token'});
             }
+
             const accessToken = generateAccessToken(user);
             const newRefreshToken = generateRefreshToken(user);
+
             user.token = crypto.scryptSync(newRefreshToken, user.salt, 64).toString('hex');
             await user.save();
 
+            // Avoid returning hashed password back to frontend
             delete user.dataValues.hash;
             delete user.dataValues.salt;
             delete user.dataValues.token;
-            delete user.dataValues.createdAt;
-            delete user.dataValues.updatedAt;
-            return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
+            return res.cookie('jwt', newRefreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
         });
     } catch (error) {
         console.error('Error refresh access token:', error);
@@ -81,12 +87,15 @@ const logout = async (req, res) => {
 
         jwt.verify(refreshToken, refreshTokenSecret, async (err, decoded) => {
             if (err) return res.status(403).json({message: 'Invalid refresh token'});
+
             const user = await User.findByPk(decoded.id);
             if (!user || crypto.scryptSync(refreshToken, user.salt, 64).toString('hex') !== user.token) {
                 return res.status(403).json({message: 'Invalid refresh token'});
             }
+
             user.token = null;
             await user.save();
+
             return res.sendStatus(200);
         });
     } catch (error) {
