@@ -7,7 +7,10 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 
 const generateAccessToken = (user) => {
     return jwt.sign({
-        id: user.id, name: user.name, email: user.email, role: user.role
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
     }, accessTokenSecret, {expiresIn: '1h'});
 };
 
@@ -68,9 +71,7 @@ const refreshToken = async (req, res) => {
             delete user.dataValues.hash;
             delete user.dataValues.salt;
             delete user.dataValues.token;
-            return res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({
-                accessToken, user
-            });
+            return res.cookie('jwt', newRefreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}).json({accessToken, user});
         });
     } catch (error) {
         console.error('Error refresh access token:', error);
