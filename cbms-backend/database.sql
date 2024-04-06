@@ -23,17 +23,6 @@ CREATE TABLE Users
 
 GRANT ALL PRIVILEGES ON cbms_database.Users TO backend_server;
 
-CREATE TABLE Rooms
-(
-    room_id    INT AUTO_INCREMENT PRIMARY KEY,
-    name       VARCHAR(255)             NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-GRANT ALL PRIVILEGES ON cbms_database.Rooms TO backend_server;
-
-
 -- Passwords are 'admin123', 'member123', 'pass123', 'word123'
 INSERT INTO Users (name, email, role, hash, salt)
 VALUES ('Zhang San', 'zhang@sa.gov.au', 'admin',
@@ -48,3 +37,16 @@ VALUES ('Zhang San', 'zhang@sa.gov.au', 'admin',
        ('Zhao Liu', 'zhao@sa.gov.au', 'member',
         'a9fdf3166deaa760362637e816f546d0a7796ea1ac34b1100d45539f7c1d28ea6757cda34b93b586779ddb0f3be8497090ae07ffc7dda146b05f5c9e24c87357',
         '85952d970baa9b8717caa6cff208c944');
+
+CREATE TABLE Rooms
+(
+    room_id    INT AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(255)             NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+GRANT ALL PRIVILEGES ON cbms_database.Rooms TO backend_server;
+
+INSERT INTO Rooms (name)
+VALUES ('Conference Room'), ('Meeting Room'), ('Training Room');
