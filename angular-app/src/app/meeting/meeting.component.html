@@ -1,13 +1,37 @@
 <!-- Main Content -->
-<div class="col-md-9">
+<div class="col-md-9 meetings-container">
   <div class="row">
     <div class="col-10">
-      <h1>Meetings</h1>
+      <h1 class="meetings-header">Meetings</h1>
     </div>
-
   </div>
   <hr>
-  <div class="container">
+  <div class="meetings-table">
+    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [class.bg-color]="i % 2 === 0">
+      <div class="col-2">
+        <div class="meeting-date">{{ meeting.date }} </div>
+      </div>
+      <div class="col-7 meeting-details">
+        <div class="meeting-details">
+          <h5>{{ meeting.title }} </h5>
+          Time: {{ meeting.time }} Location: {{ meeting.location }}</div>
+        <button class="meeting-buttons" (click)="onPublish(meeting.id)">Publish</button>
+        <button class="meeting-buttons" (click)="onMakeAgenda(meeting.id)">Make Agenda</button>
+        <button class="meeting-buttons" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
+      </div>
+      <div class="col-3 button-col">
+        <button class="edit-button meeting-buttons">Edit</button>
+        <button class="delete-button meeting-buttons">×</button>
+      </div>
 
+    </div>
+  </div>
+  <div class="pagination">
+    <!-- Add pagination if needed -->
+    <button class="pagination-button">1</button>
+    <button class="pagination-button">2</button>
+    <button class="pagination-button">3</button>
+    <!-- etc. -->
   </div>
 </div>
+

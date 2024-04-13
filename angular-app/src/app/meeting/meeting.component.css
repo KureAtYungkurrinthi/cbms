@@ -1,0 +1,117 @@
+/*.meeting-details {*/
+/*  padding-top: 10px;*/
+/*  padding-bottom: 10px;*/
+/*}*/
+
+.meetings-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.meetings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.meetings-table th, .meetings-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.meeting-row:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/*.meeting-row:hover {*/
+/*  background-color: #ddd;*/
+/*}*/
+
+.meeting-date {
+  font-weight: bold;
+}
+
+.meeting-details {
+  padding-left: 15px;
+}
+
+.meeting-buttons {
+  padding: 5px;
+  margin-right: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meeting-buttons:hover {
+  background-color: #45a049;
+}
+
+.edit-button {
+  background: #6DC89E;
+  color: white;
+}
+
+.edit-button:hover {
+  background: #5bc594;
+}
+
+.delete-button {
+  background: #C6C3C3;
+}
+
+.delete-button:hover {
+  background: #C6C3C3;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  color: #333;
+  cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: #ddd;
+}
+
+.pagination-button.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.meeting-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid white;
+}
+
+.button-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.edit-button, .delete-button {
+  flex: 1;
+}
+
+.edit-button {
+  margin: 0;
+}
+
+.delete-button {
+  margin: 0;
+}
