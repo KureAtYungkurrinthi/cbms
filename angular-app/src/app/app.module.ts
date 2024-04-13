@@ -15,10 +15,12 @@ import { MeetingCardComponent } from './meeting-card/meeting-card.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { MeetingComponent } from './meeting/meeting.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'meeting', component: MeetingComponent},
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     AddMeetingComponent,
     MeetingCardComponent,
     CalendarComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    MeetingComponent
   ],
   imports: [
     BrowserModule,
