@@ -1,0 +1,27 @@
+<div class=" sidebar">
+  <div class="profile-section">
+    <img src="" class="avatar" alt="">
+    <p style="font-size: 26px;">Hello, [username]</p>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+  <div class="current-time">
+    <div class="flex-container">
+      <div class="today">Today</div>
+      <div class="time-display">{{ currentTime }}</div>
+    </div>
+    <div class="date-display">{{ currentDate }}</div>
+  </div>
+  <button class="add-meeting-button">+ Add Meeting</button>
+  <div>
+  </div>
+  <div class="navigation nav-cus-box">
+    <ul class="nav flex-column">
+      <li class="nav-item "><a class="nav-link" href="#">Home</a></li>
+      <hr class="nav-cus">
+      <li class="nav-item"><a class="nav-link" href="#">Meetings</a></li>
+      <hr class="nav-cus">
+      <li class="nav-item"><a class="nav-link" href="#">Documents</a></li>
+      <hr class="nav-cus">
+    </ul>
+  </div>
+</div>

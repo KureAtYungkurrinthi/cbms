@@ -14,6 +14,7 @@ import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { MeetingCardComponent } from './meeting-card/meeting-card.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     AddMeetingComponent,
     MeetingCardComponent,
-    CalendarComponent
+    CalendarComponent,
+    SidemenuComponent
   ],
   imports: [
     BrowserModule,
