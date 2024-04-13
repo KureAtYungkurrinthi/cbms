@@ -12,8 +12,7 @@ import {AuthenticationService} from "src/app/_services/authentication.service";
 export class DashboardComponent implements OnInit {
   // bsModalRef: BsModalRef | undefined;
 
-  currentDate: string | undefined;
-  currentTime: string | undefined;
+
 
   meetings: Meeting[] = [
     {
@@ -39,33 +38,16 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.updateDateTime();
-    // Update the time every minute to keep it current
-    setInterval(() => this.updateDateTime(), 60000);
+
   }
 
   addMeeting() {
     // this.bsModalRef = this.modalService.show(AddMeetingComponent);
   }
 
-  private updateDateTime() {
-    const now = new Date();
-    this.currentDate = now.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-    this.currentTime = now.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  }
 
-  logout() {
-    this.authenticationService.logout();
-  }
+
 }

@@ -1,29 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <div class="col-md-3 sidebar">
-      <div class="profile-section">
-        <img src="" class="avatar" alt="">
-        <p style="font-size: 26px;">Hello, [username]</p>
-      </div>
-      <div class="current-time">
-        <div class="flex-container">
-          <div class="today">Today</div>
-          <div class="time-display">{{ currentTime }}</div>
-        </div>
-        <div class="date-display">{{ currentDate }}</div>
-      </div>
-      <button class="add-meeting-button">+ Add Meeting</button>
-      <div class="navigation nav-cus-box">
-        <ul class="nav flex-column">
-          <li class="nav-item "><a class="nav-link" href="#">Home</a></li>
-          <hr class="nav-cus">
-          <li class="nav-item"><a class="nav-link" href="#">Meetings</a></li>
-          <hr class="nav-cus">
-          <li class="nav-item"><a class="nav-link" href="#">Documents</a></li>
-          <hr class="nav-cus">
-        </ul>
-      </div>
+    <div class="col-md-3">
+      <app-sidemenu></app-sidemenu>
     </div>
     <!-- Main Content -->
     <div class="col-md-9">
@@ -31,9 +10,7 @@
         <div class="col-10">
         <h1>Board Meeting</h1>
         </div>
-        <div class="col-1">
-          <button (click)="logout()">Logout</button>
-        </div>
+
       </div>
       <hr>
       <div class="container">
