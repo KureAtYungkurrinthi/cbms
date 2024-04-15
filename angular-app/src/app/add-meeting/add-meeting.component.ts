@@ -14,8 +14,11 @@ export class AddMeetingComponent implements OnInit {
     this.meetingForm = this.fb.group({
       title: '',
       date: '',
-      time: '',
-      room: ''
+      startTime: '',
+      endTime: '',
+      location: '',
+      attendees: '',
+      notes: '',
     });
   }
 
@@ -26,8 +29,11 @@ export class AddMeetingComponent implements OnInit {
     this.meetingForm = this.fb.group({
       title: '',
       date: '',
-      time: '',
-      room: ''
+      startTime: '',
+      endTime: '',
+      location: '',
+      attendees: '',
+      notes: '',
     });
   }
 

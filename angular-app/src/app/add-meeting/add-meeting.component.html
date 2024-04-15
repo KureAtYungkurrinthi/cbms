@@ -2,32 +2,51 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="meetingModalLabel">Add Meeting</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="meetingModalLabel" style="width: 100%">Add A Meeting</h5>
+        <button type="button" class="close" (click)="closeMeetingModal()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="meeting-title">Meeting Title</label>
+            <label for="meeting-title">Title</label>
             <input type="text" class="form-control" id="meeting-title" formControlName="title">
           </div>
           <div class="form-group">
-            <label for="meeting-date">Date</label>
-            <input type="date" class="form-control" id="meeting-date" formControlName="date">
+            <div class="row">
+              <div class="col-4">
+                <label for="meeting-date">Date</label>
+                <input type="date" class="form-control" id="meeting-date" formControlName="date">
+              </div>
+              <div class="col-4">
+                <label for="meeting-date">Start Time</label>
+                <input type="time" class="form-control" id="meeting-start-time" formControlName="startTime">
+              </div>
+              <div class="col-4">
+                <label for="meeting-date">End Time</label>
+                <input type="time" class="form-control" id="meeting-end-time" formControlName="endTime">
+              </div>
+            </div>
+
           </div>
           <div class="form-group">
-            <label for="meeting-time">Time</label>
-            <input type="time" class="form-control" id="meeting-time" formControlName="time">
+            <label for="meeting-room">Location</label>
+            <input type="text" class="form-control" id="meeting-room" formControlName="location">
           </div>
           <div class="form-group">
-            <label for="meeting-room">Room</label>
-            <input type="text" class="form-control" id="meeting-room" formControlName="room">
+            <label for="meeting-room">Attendees</label>
+            <input type="text" class="form-control" id="meeting-attendees" formControlName="attendees">
           </div>
+
+          <div class="form-group">
+            <label for="meeting-room">Notes</label>
+            <textarea type="text" class="form-control" id="meeting-notes" formControlName="notes"></textarea>
+          </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeMeetingModal()">Close</button>
-            <button type="submit" class="btn btn-primary">Save Meeting</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeMeetingModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add</button>
           </div>
         </form>
       </div>
