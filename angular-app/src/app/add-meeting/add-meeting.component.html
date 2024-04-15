@@ -1,1 +1,36 @@
-<p>add-meeting works!</p>
+<!--<div class="modal fade" id="meetingModal" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel" aria-hidden="true">-->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="meetingModalLabel">Add Meeting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="meeting-title">Meeting Title</label>
+            <input type="text" class="form-control" id="meeting-title" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="meeting-date">Date</label>
+            <input type="date" class="form-control" id="meeting-date" formControlName="date">
+          </div>
+          <div class="form-group">
+            <label for="meeting-time">Time</label>
+            <input type="time" class="form-control" id="meeting-time" formControlName="time">
+          </div>
+          <div class="form-group">
+            <label for="meeting-room">Room</label>
+            <input type="text" class="form-control" id="meeting-room" formControlName="room">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeMeetingModal()">Close</button>
+            <button type="submit" class="btn btn-primary">Save Meeting</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<!--</div>-->

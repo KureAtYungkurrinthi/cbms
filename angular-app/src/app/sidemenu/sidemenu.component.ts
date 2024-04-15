@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "src/app/_services/authentication.service";
 
 @Component({
@@ -9,6 +9,9 @@ import {AuthenticationService} from "src/app/_services/authentication.service";
 export class SidemenuComponent implements OnInit {
   currentDate: string | undefined;
   currentTime: string | undefined;
+  @Output() openModal = new EventEmitter<void>();
+
+
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -34,5 +37,10 @@ export class SidemenuComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
   }
+
+  openMeetingModal() {
+    this.openModal.emit();
+  }
+
 
 }
