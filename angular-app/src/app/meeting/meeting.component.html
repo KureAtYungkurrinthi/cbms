@@ -14,7 +14,7 @@
       <div class="col-7 meeting-details">
         <div class="meeting-details">
           <h5>{{ meeting.title }} </h5>
-          Time: {{ meeting.time }} Location: {{ meeting.location }}</div>
+          Time: {{ meeting.time }} Location: {{ meeting.room }}</div>
         <button class="meeting-buttons" (click)="onPublish(meeting.id)">Publish</button>
         <button class="meeting-buttons" (click)="onMakeAgenda(meeting.id)">Make Agenda</button>
         <button class="meeting-buttons" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
