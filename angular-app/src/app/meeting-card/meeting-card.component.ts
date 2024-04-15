@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Meeting} from "src/app/meeting.model";
+import {Meeting} from "src/app/_models/meeting.model";
 
 @Component({
   selector: 'app-meeting-card',

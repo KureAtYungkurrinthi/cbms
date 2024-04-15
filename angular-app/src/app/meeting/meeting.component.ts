@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MeetingList} from "src/app/_models/meeting-list";
+import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.se
   styleUrls: ['./meeting.component.css']
 })
 export class MeetingComponent implements OnInit {
-  public meetings: MeetingList[] = [];
+  public meetings: Meeting[] = [];
     constructor(private meetingListService:MeetingListService) { }
 
   ngOnInit(): void {

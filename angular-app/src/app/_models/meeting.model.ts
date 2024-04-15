@@ -1,4 +1,4 @@
-export class MeetingList {
+export class Meeting {
   id?: number;
   title?: string;
   date?: string;

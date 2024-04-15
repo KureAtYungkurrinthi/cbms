@@ -18,7 +18,8 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div class="container-fluid">
+
+<div *ngIf="user" class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
     <div class="col-md-3">
@@ -29,6 +30,9 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+</div>
+<div *ngIf="!user" class="container-fluid">
+  <router-outlet></router-outlet>
 </div>
 
 

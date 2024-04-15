@@ -23,6 +23,10 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
+  public get userObservable() {
+    return this.user;
+  }
+
   login(username: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/v1/auth`, { "email": username, "password": password })
       .pipe(map(obj => {
