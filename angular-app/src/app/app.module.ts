@@ -45,7 +45,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(
-      appRoutes, {enableTracing: true}  // <-- debugging purposes only
+      appRoutes, {enableTracing: false}  // <-- debugging purposes onl
     ),
     FormsModule,
     ReactiveFormsModule

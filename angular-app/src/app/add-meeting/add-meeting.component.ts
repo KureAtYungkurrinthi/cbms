@@ -1,7 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
+import {User} from "src/app/_models/user";
+import {Room} from "src/app/_models/room.model";
 
 @Component({
   selector: 'app-add-meeting',
@@ -11,6 +13,8 @@ import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.se
 export class AddMeetingComponent implements OnInit {
   public meetingForm: FormGroup;
   @Output() closeModal = new EventEmitter<void>();
+  @Input() users!: User[];
+  @Input() rooms!: Room[];
 
   constructor(private fb: FormBuilder,private meetingListService :MeetingListService) {
     this.meetingForm = this.fb.group({
@@ -56,4 +60,7 @@ export class AddMeetingComponent implements OnInit {
     this.closeModal.emit();
   }
 
+  onSelect($event: Event) {
+    console.log($event);
+  }
 }

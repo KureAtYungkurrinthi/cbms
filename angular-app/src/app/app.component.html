@@ -19,7 +19,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<div *ngIf="user" class="container-fluid">
+<div *ngIf="loginUser" class="container-fluid">
   <div class="row" [class.modal-open]="showModal">
     <!-- Sidebar -->
     <div class="col-md-3">
@@ -29,13 +29,13 @@
     <div class="col-md-9">
       <router-outlet></router-outlet>
       <div #meetingModal class="modal fade" id="meetingModal" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel" aria-hidden="true">
-      <app-add-meeting (closeModal)="closeMeetingModalFromApp()"></app-add-meeting>
+      <app-add-meeting [users]="users" [rooms]="rooms" (closeModal)="closeMeetingModalFromApp()"></app-add-meeting>
       </div>
     </div>
-    <div *ngIf="showModal" class="modal-backdrop" (click)="closeMeetingModalFromApp()"></div>
+    <div *ngIf="showModal" class="modal-backdrop"  (click)="closeMeetingModalFromApp()"></div>
 </div>
 </div>
-<div *ngIf="!user" class="container-fluid">
+<div *ngIf="!loginUser" class="container-fluid">
   <router-outlet></router-outlet>
 </div>
 

@@ -2,6 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {User} from "src/app/_models/user";
 import {AuthenticationService} from "src/app/_services/authentication.service";
+import {UserService} from "src/app/_services/user.service";
+import {RoomService} from "src/app/_services/room.service";
+import {Room} from "src/app/_models/room.model";
 // import { HomeComponent } from './home/home.component';
 // import { PostComponent} from "src/app/post/post.component";
 
@@ -12,13 +15,36 @@ import {AuthenticationService} from "src/app/_services/authentication.service";
 })
 export class AppComponent {
   title = 'Angular Testing';
-  public user: User | null | undefined;
+  public loginUser: User | null | undefined;
+  public users: User[]  = [];
+  public rooms: Room[]  = [];
   showModal: boolean = false;
   @ViewChild('meetingModal') meetingModal: any;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService,
+              private userService: UserService,
+              private roomService: RoomService,
+              ) {
     authenticationService.userObservable.subscribe(
-      value => this.user=value
+      value => {
+        this.loginUser=value;
+        console.log("checking users ");
+        this.userService.getAll().subscribe( value => {
+          this.users = value;
+          for (const user of value) {
+            console.log(user); // Log each item
+          }
+        });
+
+        this.roomService.getAll().subscribe( value => {
+          this.rooms = value;
+          console.log("checking  rooms");
+          for (const room of value) {
+            console.log(room); // Log each item
+          }
+        })
+
+      }
     );
   }
 
