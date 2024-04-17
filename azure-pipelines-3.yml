@@ -39,28 +39,4 @@ stages:
               publishLocation: 'container'
             displayName: 'Create and publish artifact'
 
-  - stage: Deploy
-    dependsOn: Build
-    condition: succeeded()
-    jobs:
-      - deployment: DeploymentJob
-        environment: 
-          name: newtest
-          resourceName: newtest
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    buildType: 'current'
-                    artifactName: 'angular-app'
-                    targetPath: '$(Pipeline.Workspace)/artifacts'
 
-                - script: |
-                    unzip -o $(Pipeline.Workspace)/artifacts/angular-app.zip -d /var/www/html/
-                    sudo chown -R apache:apache /var/www/html
-                    sudo chmod -R 777 /var/www/html
-                    sudo systemctl restart httpd
-                    # Add your specific deployment scripts here, e.g., restart nginx
-                  displayName: 'Deploy Application'
