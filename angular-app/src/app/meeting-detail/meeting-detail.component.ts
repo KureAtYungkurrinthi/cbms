@@ -11,6 +11,8 @@ import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.se
 export class MeetingDetailComponent implements OnInit {
   meetingId: number | null = null;
   meeting: Meeting | undefined;
+  showModal: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private meetingService: MeetingListService
@@ -35,6 +37,19 @@ export class MeetingDetailComponent implements OnInit {
   }
 
   cancelChanges() {
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  confirmAction() {
+    this.closeModal();
+    console.log('Action confirmed!');
   }
 
 }
