@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {User} from "src/app/_models/user";
 import {environment} from "src/environments/environment";
 import {CommonHttpService} from "src/app/_services/common-http.service";
+import {Meeting} from "src/app/_models/meeting.model";
 
 
 @Injectable({ providedIn: 'root' })

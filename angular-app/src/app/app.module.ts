@@ -17,11 +17,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { MeetingFormComponent } from './meeting-form/meeting-form.component';
+import { MeetingDetailComponent } from './meeting-detail/meeting-detail.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'meeting', component: MeetingComponent},
+  {path: 'meeting/:id', component: MeetingDetailComponent},
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     CalendarComponent,
     SidemenuComponent,
     MeetingComponent,
-    MeetingFormComponent
+    MeetingFormComponent,
+    MeetingDetailComponent
   ],
   imports: [
     BrowserModule,

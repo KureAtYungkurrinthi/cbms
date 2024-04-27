@@ -26,4 +26,13 @@ export class MeetingListService {
   getMeetings(): Observable<Meeting[]> {
     return of(this.meetings);
   }
+
+  // getMeetingById(id: number): Observable<Meeting | undefined> {
+  //   const meeting = this.meetings.find(meeting => meeting.id === id);
+  //   return of(meeting);
+  // }
+
+  getMeetingById(id: number):Meeting | undefined {
+    return this.meetings.find(meeting => meeting.id === id);
+  }
 }

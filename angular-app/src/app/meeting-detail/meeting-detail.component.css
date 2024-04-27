@@ -1,0 +1,122 @@
+/* Reset some default styles */
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.font32 {
+  font-size: 32px;
+}
+
+.font24 {
+  font-size: 24px;
+}
+
+.meeting-detail-container {
+  padding-top: 40px;
+}
+
+/* Styles for buttons to match the screenshot */
+.btn {
+  margin-left: 10px;
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.delete {
+  /*margin-left: 10px;*/
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.publish, .make-agenda, .save, .cancel, .delete {
+  color: white; /* All buttons have white text */
+  font-weight: bold; /* Bold text for all buttons */
+}
+
+
+.publish {
+  background-color: #3C3A3A;
+}
+
+.make-agenda {
+  background-color: #0D8041;
+}
+
+.save {
+  background-color: #3C3A3A;
+}
+
+.cancel {
+  background-color: #989494;
+}
+
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+
+
+/* Style the notes section and buttons container */
+.notes-section {
+  border: 1px solid #ccc; /* Light grey border */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Spacing between buttons */
+}
+
+/* If you have a form, ensure the inputs match the style */
+input[type="text"], textarea {
+  width: 100%; /* Full width */
+  padding: 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px;
+  box-sizing: border-box; /* Border included in width */
+}
+
+textarea {
+  height: 150px; /* Larger area for notes */
+}
+
+/* Additional styles for other elements as needed */

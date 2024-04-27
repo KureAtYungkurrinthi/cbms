@@ -10,9 +10,10 @@ export class Meeting {
   // attendees?: User[];
   attendees?: string;
   room?: string;
+  note?: string;
 
 
-  constructor(id: number, title: string, date: string, time: string, startTime: string, endTime: string, attendees: string, room: string) {
+  constructor(id: number, title: string, date: string, time: string, startTime: string, endTime: string, attendees: string, room: string, note:string = "") {
     this.id = id;
     this.title = title;
     this.date = date;
@@ -21,5 +22,6 @@ export class Meeting {
     this.endTime = endTime;
     this.attendees = attendees;
     this.room = room;
+    this.note = note;
   }
 }
