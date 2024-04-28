@@ -31,8 +31,24 @@ CREATE TABLE Rooms
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE Meetings
+(
+    meeting_id INT AUTO_INCREMENT PRIMARY KEY,
+    title      VARCHAR(255) NOT NULL,
+    date       DATE         NOT NULL,
+    start_time TIME         NOT NULL,
+    end_time   TIME         NOT NULL,
+    room_id    INT          NOT NULL,
+    created_by INT          NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (room_id) REFERENCES Rooms(room_id),
+    FOREIGN KEY (created_by) REFERENCES Users(user_id)
+);
+
 GRANT ALL PRIVILEGES ON cbms_database.Users TO backend_server;
 GRANT ALL PRIVILEGES ON cbms_database.Rooms TO backend_server;
+GRANT ALL PRIVILEGES ON cbms_database.Meetings TO backend_server;
 
 -- Passwords are 'admin123', 'member123', 'pass123', 'word123'
 INSERT INTO Users (name, email, role, hash, salt)
@@ -57,3 +73,12 @@ VALUES ('Theatre 1 - G42', 'Tonsley', 160),
        ('Meeting room – 2.33', 'Adelaide CBD', 6),
        ('Videoconferencing meeting room - 3.30', 'Adelaide CBD', 14),
        ('Conference space - 5.29', 'Adelaide CBD', 40);
+
+       INSERT INTO Meetings (title, date, start_time, end_time, room_id, created_by)
+VALUES ('Meeting 1', '2023-03-01', '10:00:00', '11:30:00', 1, 1),
+       ('Meeting 2', '2023-03-02', '14:00:00', '15:30:00', 2, 2),
+       ('Meeting 3', '2023-03-03', '09:00:00', '10:30:00', 3, 3),
+       ('Meeting 4', '2023-03-04', '11:00:00', '12:30:00', 4, 4),
+       ('Meeting 5', '2023-03-05', '13:00:00', '14:30:00', 5, 5),
+       ('Meeting 6', '2023-03-06', '15:00:00', '16:30:00', 6, 6),
+       ('Meeting 7', '2023-03-07', '10:00:00', '11:30:00', 7, 7);
