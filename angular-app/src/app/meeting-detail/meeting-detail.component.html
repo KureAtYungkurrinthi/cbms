@@ -116,6 +116,11 @@
     <div class="modal fade" id="agendaModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': agendaModal}" [ngStyle]="{'display': agendaModal ? 'block' : 'none'}">
       <div class="modal-dialog modal-dialog-cus" role="document">
         <div class="modal-content cus-padding">
+
+          <button type="button" class="btn close-btn" (click)="closeAgendaModal()">
+            <i class="fa fa-times"></i>
+          </button>
+
           <div class="modal-header">
               <h3>Meeting Agenda</h3>
             <div class="modal-header-buttons">
@@ -208,9 +213,9 @@
 
 
           </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn make-agenda" (click)="closeAgendaModal()">OK</button>
-          </div>
+<!--          <div class="modal-footer d-flex justify-content-center">-->
+<!--            <button type="button" class="btn make-agenda" (click)="closeAgendaModal()">OK</button>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
