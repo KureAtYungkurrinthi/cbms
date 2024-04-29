@@ -87,4 +87,7 @@ export class AgendaComponent implements OnInit {
   //   return this.agendaForm.get('welcomeDuration');
   // }
 
+  goBack() {
+    this.location.back();
+  }
 }
