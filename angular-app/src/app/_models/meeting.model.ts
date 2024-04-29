@@ -1,4 +1,5 @@
 import {User} from "src/app/_models/user";
+import {Agenda} from "src/app/_models/agenda.model";
 
 export class Meeting {
   id?: number;
@@ -11,9 +12,10 @@ export class Meeting {
   attendees?: string;
   room?: string;
   note?: string;
+  agenda?: Agenda;
 
 
-  constructor(id: number, title: string, date: string, time: string, startTime: string, endTime: string, attendees: string, room: string, note:string = "") {
+  constructor(id: number, title: string, date: string, time: string, startTime: string, endTime: string, attendees: string, room: string, note:string = "", agenda:Agenda = undefined) {
     this.id = id;
     this.title = title;
     this.date = date;

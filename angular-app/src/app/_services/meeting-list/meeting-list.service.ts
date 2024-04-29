@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Meeting} from "src/app/_models/meeting.model";
 import {Observable, of} from "rxjs";
+import {Agenda} from "src/app/_models/agenda.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,11 @@ export class MeetingListService {
 
   getMeetingById(id: number):Meeting | undefined {
     return this.meetings.find(meeting => meeting.id === id);
+  }
+
+  addAgendaToMeeting(id: number, agenda: Agenda) {
+    const meeting: Meeting = this.getMeetingById(id);
+    meeting.agenda = agenda;
+    console.log(meeting);
   }
 }

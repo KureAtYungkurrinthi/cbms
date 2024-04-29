@@ -18,12 +18,14 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { MeetingFormComponent } from './meeting-form/meeting-form.component';
 import { MeetingDetailComponent } from './meeting-detail/meeting-detail.component';
+import { AgendaComponent } from './agenda/agenda.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'meeting', component: MeetingComponent},
   {path: 'meeting/:id', component: MeetingDetailComponent},
+  {path: 'meeting/:id/agenda', component: AgendaComponent},
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     SidemenuComponent,
     MeetingComponent,
     MeetingFormComponent,
-    MeetingDetailComponent
+    MeetingDetailComponent,
+    AgendaComponent
   ],
   imports: [
     BrowserModule,
