@@ -115,7 +115,6 @@ button {
   gap: 10px; /* Spacing between buttons */
 }
 
-/* If you have a form, ensure the inputs match the style */
 input[type="text"], textarea {
   width: 100%; /* Full width */
   padding: 10px;
@@ -131,3 +130,29 @@ textarea {
 }
 
 /* Additional styles for other elements as needed */
+
+.modal-header-buttons .icon-btn {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+.modal-header-buttons .icon-btn:focus {
+  outline: none;
+}
+
+.modal-header-buttons .icon-btn .fa {
+  font-size: 16px;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog-cus {
+    max-width: 60%;
+  }
+}
+
+.cus-padding {
+  padding: 40px;
+}

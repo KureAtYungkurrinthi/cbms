@@ -12,6 +12,7 @@ export class MeetingDetailComponent implements OnInit {
   meetingId: number | null = null;
   meeting: Meeting | undefined;
   showModal: boolean = false;
+  agendaModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,4 +53,23 @@ export class MeetingDetailComponent implements OnInit {
     console.log('Action confirmed!');
   }
 
+  openAgendaModal() {
+    this.agendaModal = true;
+  }
+
+  closeAgendaModal() {
+    this.agendaModal = false;
+  }
+
+  downloadAgenda(selectedMeeting: any) {
+
+  }
+
+  editAgenda(selectedMeeting: any) {
+
+  }
+
+  deleteAgenda(selectedMeeting: any) {
+
+  }
 }

@@ -10,7 +10,8 @@
       <div class="col-4">
         <div class="button-group">
           <button class="btn publish" (click)="openModal()">Publish</button>
-          <button class="btn make-agenda" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
+          <button *ngIf="!meeting.agenda" class="btn make-agenda" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
+          <button *ngIf="meeting.agenda" class="btn make-agenda" (click)="openAgendaModal()">Agenda</button>
           <button class="delete">-</button>
         </div>
       </div>
@@ -71,8 +72,8 @@
       <div class="col-2"></div>
     </div>
 
+<!--    popup-->
     <div class="modal-backdrop" *ngIf="showModal" [ngStyle]="{'display': showModal ? 'block' : 'none'}"></div>
-
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -91,6 +92,130 @@
         </div>
       </div>
     </div>
+
+<!--    agenda modal-->
+<!--    <div class="modal-backdrop" *ngIf="agendaModal" [ngStyle]="{'display': agendaModal ? 'block' : 'none'}"></div>-->
+<!--    <div class="modal fade" id="agendaModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': agendaModal}" [ngStyle]="{'display': agendaModal ? 'block' : 'none'}">-->
+<!--      <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h3>Agenda</h3>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <h5>-->
+<!--              Agenda-->
+<!--            </h5>-->
+<!--          </div>-->
+<!--          <div class="modal-footer d-flex justify-content-center">-->
+<!--            <button type="button" class="btn make-agenda" (click)="closeAgendaModal()">OK</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="modal-backdrop" *ngIf="agendaModal" [ngStyle]="{'display': agendaModal ? 'block' : 'none'}"></div>
+    <div class="modal fade" id="agendaModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': agendaModal}" [ngStyle]="{'display': agendaModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-cus" role="document">
+        <div class="modal-content cus-padding">
+          <div class="modal-header">
+              <h3>Meeting Agenda</h3>
+            <div class="modal-header-buttons">
+              <button class="btn icon-btn" (click)="downloadAgenda(meeting)">
+                <i class="fa fa-download"></i>
+              </button>
+              <button class="btn icon-btn" (click)="editAgenda(meeting)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn icon-btn" (click)="deleteAgenda(meeting)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <h5>Title: {{ meeting.title }}</h5>
+            <p>Date: {{ meeting.date }}</p>
+            <p>Time: {{ meeting.startTime }} - {{ meeting.endTime }}</p>
+            <p>Location: {{ meeting.room }}</p>
+            <p>Presenter: {{ meeting.agenda?.welcomePresenter }}</p>
+            <p>Attendees: {{ meeting.attendees }}</p>
+            <hr>
+
+            <div class="row">
+              <div class="col-8">
+                <h4>1. Welcome</h4>
+                <p>Presenter name: {{ meeting.agenda?.welcomePresenter }}</p>
+                <h5>1.1. Confirm Attendance</h5>
+                <p>{{ meeting.agenda?.confirmAttendance }}</p>
+              </div>
+              <div class="col-4">
+                <p>Time: {{ meeting.agenda?.welcomeDuration }} minutes</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <h4>2. Meeting Purpose</h4>
+                <p>Presenter name: {{ meeting.agenda?.purposePresenter }}</p>
+                <p>Time: {{ meeting.agenda?.purposeDuration }} minutes</p>
+                <h5>2.1. Goals and Objectives</h5>
+                <p>{{ meeting.agenda?.goalsAndObjectives2_1 }}</p>
+                <h5>2.2. Implementation</h5>
+                <p>{{ meeting.agenda?.implementation2_2 }}</p>
+              </div>
+              <div class="col-4">
+                <p>Time: {{ meeting.agenda?.purposeDuration}} minutes</p>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-8">
+                <h4>2. Meeting Purpose</h4>
+                <p>Presenter name: {{ meeting.agenda?.purposePresenter }}</p>
+                <h5>2.1. Goals and Objectives</h5>
+                <p>{{ meeting.agenda?.goalsAndObjectives2_1 }}</p>
+                <h5>2.2. Implementation</h5>
+                <p>{{ meeting.agenda?.implementation2_2 }}</p>
+              </div>
+              <div class="col-4">
+                <p>Time: {{ meeting.agenda?.purposeDuration}} minutes</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <h4>3. Agenda Item</h4>
+                <p>Presenter name: {{ meeting.agenda?.agendaPresenter }}</p>
+                <h5>3.1. Previous Meeting Review</h5>
+                <p>{{ meeting.agenda?.previousMeetingReview3_1 }}</p>
+                <h5>3.2. Action Taken</h5>
+                <p>{{ meeting.agenda?.actionTaken3_2 }}</p>
+              </div>
+              <div class="col-4">
+                <p>Time: {{ meeting.agenda?.agendaDuration}} minutes</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <h5>4. Closing</h5>
+                <p>Presenter name: {{ meeting.agenda?.closingPresenter }}</p>
+                <p>Note: {{ meeting.agenda?.note }}</p>
+              </div>
+              <div class="col-4">
+                <p>Time: {{ meeting.agenda?.closingDuration}} minutes</p>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn make-agenda" (click)="closeAgendaModal()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
   </div>
 
