@@ -13,6 +13,7 @@ export class MeetingDetailComponent implements OnInit {
   meeting: Meeting | undefined;
   showModal: boolean = false;
   agendaModal: boolean = false;
+  deleteAgendaModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,6 +62,14 @@ export class MeetingDetailComponent implements OnInit {
     this.agendaModal = false;
   }
 
+  openDeleteAgendaModal() {
+    this.deleteAgendaModal= true;
+  }
+
+  closeDeleteAgendaModal() {
+    this.deleteAgendaModal= false;
+  }
+
   downloadAgenda(selectedMeeting: any) {
 
   }
@@ -70,6 +79,14 @@ export class MeetingDetailComponent implements OnInit {
   }
 
   deleteAgenda(selectedMeeting: any) {
+    this.openDeleteAgendaModal();
 
+  }
+
+  confirmDeleteAgenda() {
+    this.closeDeleteAgendaModal();
+    this.closeAgendaModal();
+
+    this.meetingService.deleteAgenda(this.meetingId);
   }
 }

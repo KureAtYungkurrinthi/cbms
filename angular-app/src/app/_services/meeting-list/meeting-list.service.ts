@@ -20,10 +20,12 @@ export class MeetingListService {
   private meetings: Meeting[] = [
     new Meeting(1, 'Meeting Title 1', '2024-03-11', '10:00 AM', 'Visionary Room A', 'notes', 'attendee 1',  '10:00 AM', '10:00 AM',
       new Agenda(1, 30, 'John Doe', 'User 1, User 2', 60, 'Review quarterly goals', 'Implement new strategies', 'Alice Johnson', 120, 'Discussed last quarter', 'Completed follow-ups', 'Bob Smith', 15, 'Final remarks', 2)),
-    new Meeting(2, 'Meeting Title 2', '2024-03-14', '09:30 AM', 'Visionary Room B', 'notes', 'attendee 1'),
-    new Meeting(3, 'Meeting Title 3', '2024-03-20', '02:30 PM', 'Visionary Room C', 'notes', 'attendee 1'),
-    new Meeting(4, 'Meeting Title 4', '2024-03-21', '09:00 AM', 'Visionary Room D', 'notes', 'attendee 1'),
-    new Meeting(5, 'Meeting Title 5', '2024-03-28', '09:00 AM', 'Visionary Room C', 'notes', 'attendee 1')
+    new Meeting(2, 'Meeting Title 1 - to delete', '2024-03-11', '10:00 AM', 'Visionary Room A', 'notes', 'attendee 1',  '10:00 AM', '10:00 AM',
+      new Agenda(2, 30, 'John Doe', 'User 1, User 2', 60, 'Review quarterly goals', 'Implement new strategies', 'Alice Johnson', 120, 'Discussed last quarter', 'Completed follow-ups', 'Bob Smith', 15, 'Final remarks', 2)),
+    new Meeting(3, 'Meeting Title 2', '2024-03-14', '09:30 AM', 'Visionary Room B', 'notes', 'attendee 1'),
+    new Meeting(4, 'Meeting Title 3', '2024-03-20', '02:30 PM', 'Visionary Room C', 'notes', 'attendee 1'),
+    new Meeting(5, 'Meeting Title 4', '2024-03-21', '09:00 AM', 'Visionary Room D', 'notes', 'attendee 1'),
+    new Meeting(6, 'Meeting Title 5', '2024-03-28', '09:00 AM', 'Visionary Room C', 'notes', 'attendee 1')
   ];
 
 
@@ -50,5 +52,11 @@ export class MeetingListService {
     const meeting: Meeting = this.getMeetingById(id);
     meeting.agenda = agenda;
     console.log(meeting);
+  }
+
+  deleteAgenda(id: number) {
+    const meeting: Meeting = this.getMeetingById(id);
+    meeting.agenda = null;
+    // call service
   }
 }
