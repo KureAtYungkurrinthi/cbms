@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "src/environments/environment";
 import {Observable} from "rxjs";
+import {StorageUtil} from "src/app/_helpers/storage.util";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class CommonHttpService {
 
   getHttpHeaders(): HttpHeaders {
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('accessToken'); // Replace 'access_token' with your token's key
+    const token = StorageUtil.getItem('accessToken'); // Replace 'access_token' with your token's key
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }

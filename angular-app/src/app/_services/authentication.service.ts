@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from "src/app/_models/user";
 import {environment} from "src/environments/environment";
+import {StorageUtil} from "src/app/_helpers/storage.util";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -15,7 +16,7 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient
   ) {
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+    this.userSubject = new BehaviorSubject(JSON.parse(StorageUtil.getItem('user')!));
     this.user = this.userSubject.asObservable();
   }
 
@@ -35,8 +36,8 @@ export class AuthenticationService {
         console.log(accessToken);
         console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('accessToken', accessToken);
+        StorageUtil.setItem('user', JSON.stringify(user));
+        StorageUtil.setItem('accessToken', accessToken);
         this.userSubject.next(user);
         return user;
       }));
@@ -44,7 +45,7 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    StorageUtil.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
