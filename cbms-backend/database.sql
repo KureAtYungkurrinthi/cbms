@@ -33,29 +33,26 @@ CREATE TABLE Rooms
 
 CREATE TABLE Meetings
 (
-    meeting_id INT AUTO_INCREMENT PRIMARY KEY,
-    title      VARCHAR(255) NOT NULL,
-    start_time DATETIME     NOT NULL,
-    end_time   DATETIME     NOT NULL,
-    room_id    INT          NOT NULL,
-    notes      TEXT,
-    is_published BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (room_id) REFERENCES Rooms (room_id)
+    meeting_id   INT AUTO_INCREMENT PRIMARY KEY,
+    title        VARCHAR(255) NOT NULL,
+    start_time   DATETIME     NOT NULL,
+    end_time     DATETIME     NOT NULL,
+    room_id      INT REFERENCES Rooms (room_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    notes        TEXT,
+    is_published BOOLEAN   DEFAULT FALSE,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Attendees
 (
-    attendee_id INT AUTO_INCREMENT PRIMARY KEY,
-    meeting_id  INT NOT NULL,
-    user_id     INT NOT NULL,
-    is_presenter BOOLEAN DEFAULT FALSE,
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (meeting_id) REFERENCES Meetings (meeting_id),
-    FOREIGN KEY (user_id) REFERENCES Users (user_id),
-    UNIQUE (meeting_id, user_id)
+    meeting_id   INT NOT NULL REFERENCES Meetings (meeting_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    user_id      INT NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    is_presenter BOOLEAN   DEFAULT FALSE,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (meeting_id, user_id),
+    PRIMARY KEY (meeting_id, user_id)
 );
 
 GRANT ALL PRIVILEGES ON cbms_database.Users TO backend_server;
@@ -91,9 +88,12 @@ INSERT INTO Meetings (title, start_time, end_time, room_id, notes)
 VALUES ('Project meeting', '2024-05-01 09:00:00', '2024-05-01 10:00:00', 1, 'Discuss project progress'),
        ('Team meeting', '2024-05-02 10:00:00', '2024-05-02 11:00:00', 2, 'Discuss team progress'),
        ('Training session', '2024-05-03 11:00:00', '2024-05-03 12:00:00', 3, 'Training session for new employees'),
-       ('Client meeting', '2024-05-04 12:00:00', '2024-05-04 13:00:00', 4, 'Meeting with client to discuss project requirements'),
-       ('Board meeting', '2024-05-05 13:00:00', '2024-05-05 14:00:00', 5, 'Board meeting to discuss government strategy'),
-       ('Video conference', '2024-05-06 14:00:00', '2024-05-06 15:00:00', 6, 'Video conference with international partners'),
+       ('Client meeting', '2024-05-04 12:00:00', '2024-05-04 13:00:00', 4,
+        'Meeting with client to discuss project requirements'),
+       ('Board meeting', '2024-05-05 13:00:00', '2024-05-05 14:00:00', 5,
+        'Board meeting to discuss government strategy'),
+       ('Video conference', '2024-05-06 14:00:00', '2024-05-06 15:00:00', 6,
+        'Video conference with international partners'),
        ('Workshop', '2024-05-07 15:00:00', '2024-05-07 16:00:00', 7, 'Workshop on new technologies');
 
 INSERT INTO Attendees (meeting_id, user_id, is_presenter)
