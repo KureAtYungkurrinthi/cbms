@@ -9,10 +9,10 @@
       </div>
       <div class="col-4">
         <div class="button-group">
-          <button class="btn publish" (click)="openModal()">Publish</button>
-          <button *ngIf="!meeting.agenda" class="btn make-agenda" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
+          <button *ngIf="user.role == 'admin'" class="btn publish" (click)="openModal()">Publish</button>
+          <button *ngIf="user.role == 'admin' && !meeting.agenda" class="btn make-agenda" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
           <button *ngIf="meeting.agenda" class="btn make-agenda" (click)="openAgendaModal()">Agenda</button>
-          <button class="delete">-</button>
+          <button *ngIf="user.role == 'admin'" class="delete">-</button>
         </div>
       </div>
     </div>
@@ -65,8 +65,8 @@
       <div class="col-4"></div>
       <div class="col-4">
         <div class="button-group">
-          <button class="btn save">Save</button>
-          <button class="btn cancel">Cancel</button>
+          <button *ngIf="user.role == 'admin'" class="btn save">Save</button>
+          <button *ngIf="user.role == 'admin'" class="btn cancel">Cancel</button>
         </div>
       </div>
       <div class="col-2"></div>
@@ -127,10 +127,10 @@
               <button class="btn icon-btn" (click)="downloadAgenda(meeting)">
                 <i class="fa fa-download"></i>
               </button>
-              <button class="btn icon-btn" (click)="editAgenda(meeting)">
+              <button *ngIf="user.role == 'admin'" class="btn icon-btn" (click)="editAgenda(meeting)">
                 <i class="fa fa-edit"></i>
               </button>
-              <button class="btn icon-btn" (click)="deleteAgenda(meeting)">
+              <button *ngIf="user.role == 'admin'" class="btn icon-btn" (click)="deleteAgenda(meeting)">
                 <i class="fa fa-trash"></i>
               </button>
             </div>

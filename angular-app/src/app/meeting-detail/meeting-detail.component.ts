@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
+import {AuthenticationService} from "src/app/_services/authentication.service";
+import {User} from "src/app/_models/user";
 
 @Component({
   selector: 'app-meeting-detail',
@@ -14,11 +16,15 @@ export class MeetingDetailComponent implements OnInit {
   showModal: boolean = false;
   agendaModal: boolean = false;
   deleteAgendaModal: boolean = false;
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
-    private meetingService: MeetingListService
-    ) { }
+    private meetingService: MeetingListService,
+    private authenticationService: AuthenticationService
+    ) {
+    this.user = authenticationService.userValue;
+  }
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
