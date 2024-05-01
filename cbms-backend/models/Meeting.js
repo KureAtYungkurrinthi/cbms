@@ -14,7 +14,7 @@ const Meeting = sequelize.define('Meeting', {
     }, endTime: {
         type: DataTypes.DATE, allowNull: false, field: 'end_time'
     }, roomId: {
-        type: DataTypes.INTEGER, allowNull: false, field: 'room_id', references: {
+        type: DataTypes.INTEGER, field: 'room_id', references: {
             model: Room, key: 'id',
         },
     }, notes: {
@@ -48,9 +48,10 @@ const Attendee = sequelize.define('Attendee', {
     tableName: 'attendees'
 });
 
-Room.hasMany(Meeting);
-Meeting.belongsTo(Room);
+Room.hasMany(Meeting, {foreignKey: 'roomId'});
+Meeting.belongsTo(Room, {foreignKey: 'roomId'});
 
-User.belongsToMany(Meeting, {through: Attendee});
+User.belongsToMany(Meeting, {through: Attendee, foreignKey: 'userId'});
+Meeting.belongsToMany(User, {through: Attendee, foreignKey: 'meetingId'});
 
-module.exports = {Meeting, Attendee}
+module.exports = {Meeting, Attendee, Room, User};

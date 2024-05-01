@@ -19,7 +19,7 @@ app.use('/v1/auth', require('./routes/auth'));
 app.use(verifyJWT);
 app.use('/v1/users', require('./routes/users'));
 app.use('/v1/rooms', require('./routes/rooms'));
-// app.use('/v1/meetings', require('./routes/meetings'));
+app.use('/v1/meetings', require('./routes/meetings'));
 
 // Catch-all for unhandled routes
 app.all('*', (req, res) => {
