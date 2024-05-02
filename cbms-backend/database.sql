@@ -31,8 +31,34 @@ CREATE TABLE Rooms
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE Meetings
+(
+    meeting_id   INT AUTO_INCREMENT PRIMARY KEY,
+    title        VARCHAR(255) NOT NULL,
+    start_time   DATETIME     NOT NULL,
+    end_time     DATETIME     NOT NULL,
+    room_id      INT REFERENCES Rooms (room_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    notes        TEXT,
+    is_published BOOLEAN   DEFAULT FALSE,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Attendees
+(
+    meeting_id   INT NOT NULL REFERENCES Meetings (meeting_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    user_id      INT NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    is_presenter BOOLEAN   DEFAULT FALSE,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (meeting_id, user_id),
+    PRIMARY KEY (meeting_id, user_id)
+);
+
 GRANT ALL PRIVILEGES ON cbms_database.Users TO backend_server;
 GRANT ALL PRIVILEGES ON cbms_database.Rooms TO backend_server;
+GRANT ALL PRIVILEGES ON cbms_database.Meetings TO backend_server;
+GRANT ALL PRIVILEGES ON cbms_database.Attendees TO backend_server;
 
 -- Passwords are 'admin123', 'member123', 'pass123', 'word123'
 INSERT INTO Users (name, email, role, hash, salt)
@@ -57,3 +83,28 @@ VALUES ('Theatre 1 - G42', 'Tonsley', 160),
        ('Meeting room – 2.33', 'Adelaide CBD', 6),
        ('Videoconferencing meeting room - 3.30', 'Adelaide CBD', 14),
        ('Conference space - 5.29', 'Adelaide CBD', 40);
+
+INSERT INTO Meetings (title, start_time, end_time, room_id, notes)
+VALUES ('Project meeting', '2024-05-01 09:00:00', '2024-05-01 10:00:00', 1, 'Discuss project progress'),
+       ('Team meeting', '2024-05-02 10:00:00', '2024-05-02 11:00:00', 2, 'Discuss team progress'),
+       ('Training session', '2024-05-03 11:00:00', '2024-05-03 12:00:00', 3, 'Training session for new employees'),
+       ('Client meeting', '2024-05-04 12:00:00', '2024-05-04 13:00:00', 4,
+        'Meeting with client to discuss project requirements'),
+       ('Board meeting', '2024-05-05 13:00:00', '2024-05-05 14:00:00', 5,
+        'Board meeting to discuss government strategy'),
+       ('Video conference', '2024-05-06 14:00:00', '2024-05-06 15:00:00', 6,
+        'Video conference with international partners');
+
+INSERT INTO Attendees (meeting_id, user_id, is_presenter)
+VALUES (1, 1, TRUE),
+       (1, 2, FALSE),
+       (2, 1, FALSE),
+       (2, 3, TRUE),
+       (3, 1, TRUE),
+       (3, 4, FALSE),
+       (4, 2, TRUE),
+       (4, 3, FALSE),
+       (5, 2, FALSE),
+       (5, 4, TRUE),
+       (6, 3, TRUE),
+       (6, 4, FALSE);
