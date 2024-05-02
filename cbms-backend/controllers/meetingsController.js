@@ -61,12 +61,16 @@ const createMeeting = async (req, res) => {
 
         const meeting = await Meeting.create({title, startTime, endTime, roomId, notes});
 
-        const attendeesArray = await Promise.all(attendees.map(async attendee => {
+        const attendeesArray = [];
+        for (const attendee of attendees) {
             const user = await User.findByPk(attendee.id);
             if (!user) return res.status(404).json({message: `User ID ${attendee.id} not found`});
 
-            return Attendee.create({meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter});
-        }));
+            const attendeeRecord = await Attendee.create({
+                meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter
+            });
+            attendeesArray.push(attendeeRecord);
+        }
 
         return res.status(201).json({meeting, attendees: attendeesArray});
     } catch (error) {
@@ -78,8 +82,6 @@ const createMeeting = async (req, res) => {
 const updateMeeting = async (req, res) => {
     try {
         const meeting = await Meeting.findByPk(req.params.id);
-        let attendeesArray = Attendee.findAll({where: {meetingId: req.params.id}})
-
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
         if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
 
@@ -92,17 +94,21 @@ const updateMeeting = async (req, res) => {
 
         if (attendees) {
             await Attendee.destroy({where: {meetingId: meeting.id}});
-            attendeesArray = await Promise.all(attendees.map(async attendee => {
+            const attendeesArray = [];
+            for (const attendee of attendees) {
                 const user = await User.findByPk(attendee.id);
                 if (!user) return res.status(404).json({message: `User ID ${attendee.id} not found`});
 
-                return Attendee.create({meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter});
+                const attendeeRecord = await Attendee.create({
+                    meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter
+                });
+                attendeesArray.push(attendeeRecord);
             }
-            ));
+            meeting.attendees = attendeesArray;
         }
 
         await meeting.save();
-        return res.json({meeting, attendees: attendeesArray});
+        return res.json(meeting);
     } catch (error) {
         console.error('Error updating meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -117,7 +123,7 @@ const deleteMeeting = async (req, res) => {
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();
-        return res.json({message: 'Meeting deleted'});
+        return res.json(meeting);
     } catch (error) {
         console.error('Error deleting meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});

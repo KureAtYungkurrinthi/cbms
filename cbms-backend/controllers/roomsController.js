@@ -50,7 +50,7 @@ const createRoom = async (req, res) => {
 
 const updateRoom = async (req, res) => {
     try {
-        const {name, location,capacity} = req.body;
+        const {name, location, capacity} = req.body;
         if (!name && !location && !capacity) return res.status(400).json({message: 'Name, location or capacity is required'});
         if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update room details'});
 
