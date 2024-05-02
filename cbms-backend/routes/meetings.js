@@ -6,13 +6,13 @@ const methodNotAllowed = async (req, res) => res.sendStatus(405);
 
 router.route('/')
     .get(meetingsController.getAllMeetings)
-    // .post(meetingsController.createMeeting)
+    .post(meetingsController.createMeeting)
     .all(methodNotAllowed);
 
 router.route('/:id')
     .get(meetingsController.getMeetingById)
-//     .put(meetingsController.updateMeeting)
-//     .delete(meetingsController.deleteMeeting)
+    .put(meetingsController.updateMeeting)
+    .delete(meetingsController.deleteMeeting)
     .all(methodNotAllowed);
 
 module.exports = router;

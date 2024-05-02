@@ -53,4 +53,75 @@ const getMeetingById = async (req, res) => {
     }
 }
 
-module.exports = {getAllMeetings, getMeetingById};
+const createMeeting = async (req, res) => {
+    try {
+        const {title, startTime, endTime, roomId, notes, attendees} = req.body;
+        if (!title || !startTime || !endTime || !roomId || !attendees) return res.status(400).json({message: 'Title, start time, end time, room ID, and attendees are required'});
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
+
+        const meeting = await Meeting.create({title, startTime, endTime, roomId, notes});
+
+        const attendeesArray = await Promise.all(attendees.map(async attendee => {
+            const user = await User.findByPk(attendee.id);
+            if (!user) return res.status(404).json({message: `User ID ${attendee.id} not found`});
+
+            return Attendee.create({meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter});
+        }));
+
+        return res.status(201).json({meeting, attendees: attendeesArray});
+    } catch (error) {
+        console.error('Error creating meeting:', error);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+const updateMeeting = async (req, res) => {
+    try {
+        const meeting = await Meeting.findByPk(req.params.id);
+        let attendeesArray = Attendee.findAll({where: {meetingId: req.params.id}})
+
+        if (!meeting) return res.status(404).json({message: 'Meeting not found'});
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
+
+        const {title, startTime, endTime, roomId, notes, attendees} = req.body;
+        if (title) meeting.title = title;
+        if (startTime) meeting.startTime = startTime;
+        if (endTime) meeting.endTime = endTime;
+        if (roomId) meeting.roomId = roomId;
+        if (notes) meeting.notes = notes;
+
+        if (attendees) {
+            await Attendee.destroy({where: {meetingId: meeting.id}});
+            attendeesArray = await Promise.all(attendees.map(async attendee => {
+                const user = await User.findByPk(attendee.id);
+                if (!user) return res.status(404).json({message: `User ID ${attendee.id} not found`});
+
+                return Attendee.create({meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter});
+            }
+            ));
+        }
+
+        await meeting.save();
+        return res.json({meeting, attendees: attendeesArray});
+    } catch (error) {
+        console.error('Error updating meeting:', error);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+const deleteMeeting = async (req, res) => {
+    try {
+        const meeting = await Meeting.findByPk(req.params.id);
+        if (!meeting) return res.status(404).json({message: 'Meeting not found'});
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
+
+        await Attendee.destroy({where: {meetingId: meeting.id}});
+        await meeting.destroy();
+        return res.json({message: 'Meeting deleted'});
+    } catch (error) {
+        console.error('Error deleting meeting:', error);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+module.exports = {getAllMeetings, getMeetingById, createMeeting, updateMeeting, deleteMeeting};
