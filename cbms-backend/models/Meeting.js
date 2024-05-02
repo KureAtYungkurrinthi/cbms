@@ -53,5 +53,6 @@ Meeting.belongsTo(Room, {foreignKey: 'roomId'});
 
 User.belongsToMany(Meeting, {through: Attendee, foreignKey: 'userId'});
 Meeting.belongsToMany(User, {through: Attendee, foreignKey: 'meetingId'});
+Meeting.belongsToMany(User, {through: Attendee, foreignKey: 'meetingId', as: 'attendees'});
 
 module.exports = {Meeting, Attendee, Room, User};

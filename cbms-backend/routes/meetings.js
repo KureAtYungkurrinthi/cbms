@@ -9,10 +9,10 @@ router.route('/')
     // .post(meetingsController.createMeeting)
     .all(methodNotAllowed);
 
-// router.route('/:id')
-//     .get(meetingsController.getMeetingById)
+router.route('/:id')
+    .get(meetingsController.getMeetingById)
 //     .put(meetingsController.updateMeeting)
 //     .delete(meetingsController.deleteMeeting)
-//     .all(methodNotAllowed);
+    .all(methodNotAllowed);
 
 module.exports = router;
