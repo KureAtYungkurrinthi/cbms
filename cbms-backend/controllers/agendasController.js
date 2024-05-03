@@ -10,7 +10,6 @@ const getAgendas = async (req, res) => {
 
         // I hate this I hate this I hate this but this is what frontend dev wants
         const agendasOutput = {
-            meetingId: req.params.id,
             welcomeDuration: agendas[0].duration,
             welcomePresenter: agendas[0].presenterId ? await User.findByPk(agendas[0].presenterId, {
                 attributes: ['id', 'name', 'email']
@@ -41,6 +40,82 @@ const getAgendas = async (req, res) => {
 }
 
 const createAgendas = async (req, res) => {
+    try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Members can only view their own meeting agendas'});
+
+        const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
+        if (agendas.length > 0) return res.status(409).json({message: 'Agendas already exists for this meeting'});
+
+        // I hate this I hate this I hate this but this is what frontend dev wants
+        const {
+            welcomeDuration,
+            welcomePresenter,
+            purposeDuration,
+            goalsAndObjectives2_1,
+            implementation2_2,
+            purposePresenter,
+            agendaDuration,
+            previousMeetingReview3_1,
+            actionTaken3_2,
+            agendaPresenter,
+            closingDuration,
+            notes,
+            closingPresenter
+        } = req.body;
+
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 1000,
+            heading: 'Confirm Attendance',
+            content: 'Confirm Attendance',
+            duration: welcomeDuration,
+            presenterId: welcomePresenter
+        });
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 2000,
+            heading: 'Goals and Objectives',
+            content: goalsAndObjectives2_1,
+            duration: purposeDuration,
+            presenterId: purposePresenter
+        });
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 2500,
+            heading: 'Implementation',
+            content: implementation2_2,
+            duration: purposeDuration,
+            presenterId: purposePresenter
+        });
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 3000,
+            heading: 'Agenda',
+            content: previousMeetingReview3_1,
+            duration: agendaDuration,
+            presenterId: agendaPresenter
+        });
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 3500,
+            heading: 'Action Taken',
+            content: actionTaken3_2,
+            duration: agendaDuration,
+            presenterId: agendaPresenter
+        });
+        await Agenda.create({
+            meetingId: req.params.id,
+            position: 4000,
+            heading: 'Closing',
+            content: notes,
+            duration: closingDuration,
+            presenterId: closingPresenter
+        });
+        return res.json({message: 'Agendas created'});
+    } catch (error) {
+        console.error('Error fetching agendas:', error);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
 }
 
 const updateAgendas = async (req, res) => {
