@@ -85,12 +85,16 @@ const updateMeeting = async (req, res) => {
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
         if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
 
-        const {title, startTime, endTime, roomId, notes, attendees} = req.body;
+        const {title, startTime, endTime, roomId, notes, isPublished, attendees} = req.body;
         if (title) meeting.title = title;
         if (startTime) meeting.startTime = startTime;
         if (endTime) meeting.endTime = endTime;
         if (roomId) meeting.roomId = roomId;
         if (notes) meeting.notes = notes;
+        if (isPublished) {
+            meeting.isPublished = isPublished;
+            // TBD send email to attendees
+        }
 
         if (attendees) {
             await Attendee.destroy({where: {meetingId: meeting.id}});
