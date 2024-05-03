@@ -8,23 +8,32 @@ const getAgendas = async (req, res) => {
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length <= 0) return res.status(404).json({message: 'No agendas found'});
 
-        const agendasArray = [];
-        for (const agenda of agendas) {
-            let presenter = null;
-            if (agenda.presenterId) {
-                const user = await User.findByPk(agenda.presenterId);
-                presenter = {id: user.id, name: user.name, email: user.email};
-            }
-            agendasArray.push({
-                id: agenda.id,
-                position: agenda.position,
-                heading: agenda.heading,
-                content: agenda.content,
-                duration: agenda.duration,
-                presenter: presenter
-            });
-        }
-        return res.json(agendasArray);
+        // I hate this I hate this I hate this but this is what frontend dev wants
+        const agendasOutput = {
+            meetingId: req.params.id,
+            welcomeDuration: agendas[0].duration,
+            welcomePresenter: agendas[0].presenterId ? await User.findByPk(agendas[0].presenterId, {
+                attributes: ['id', 'name', 'email']
+            }) : null,
+            purposeDuration: agendas[1].duration,
+            goalsAndObjectives2_1: agendas[1].content,
+            implementation2_2: agendas[2].content,
+            purposePresenter: agendas[1].presenterId ? await User.findByPk(agendas[1].presenterId, {
+                attributes: ['id', 'name', 'email']
+            }) : null,
+            agendaDuration: agendas[3].duration,
+            previousMeetingReview3_1: agendas[3].content,
+            actionTaken3_2: agendas[4].content,
+            agendaPresenter: agendas[3].presenterId ? await User.findByPk(agendas[3].presenterId, {
+                attributes: ['id', 'name', 'email']
+            }) : null,
+            closingDuration: agendas[5].duration,
+            notes: agendas[5].content,
+            closingPresenter: agendas[5].presenterId ? await User.findByPk(agendas[5].presenterId, {
+                attributes: ['id', 'name', 'email']
+            }) : null
+        };
+        return res.json(agendasOutput);
     } catch (error) {
         console.error('Error fetching agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});

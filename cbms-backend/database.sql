@@ -122,9 +122,9 @@ VALUES (1, 1, TRUE),
        (4, 4, TRUE);
 
 INSERT INTO Agendas (meeting_id, position, heading, content, duration, presenter_id)
-VALUES (1, 1000, 'Confirm Attendance', '', 5, 1),
-       (1, 2000, 'Goals and Objectives', '', 10, 2),
-       (1, 2500, 'Implementation', '', 10, 2),
-       (1, 3000, 'Previous Meeting Review', '', 10, 3),
-       (1, 3500, 'Action taken', '', 20, 3),
-       (1, 4000, 'Closing', '', 5, 1);
+VALUES (1, 1000, 'Confirm Attendance', 'Confirm Attendance', 5, 1),
+       (1, 2000, 'Goals and Objectives', 'Goals and Objectives', 10, 2),
+       (1, 2500, 'Implementation', 'Implementation', 10, 2),
+       (1, 3000, 'Previous Meeting Review', 'Previous Meeting Review', 10, 3),
+       (1, 3500, 'Action Taken', 'Action Taken', 20, 3),
+       (1, 4000, 'Closing', 'Closing', 5, 1);
