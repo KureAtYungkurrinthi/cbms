@@ -18,7 +18,13 @@ const Meeting = sequelize.define('Meeting', {
             model: Room, key: 'id'
         },
     }, notes: {
+<<<<<<< HEAD
         type: DataTypes.TEXT
+=======
+        type: DataTypes.STRING
+    }, isPublished: {
+        type: DataTypes.BOOLEAN, defaultValue: false, field: 'is_published'
+>>>>>>> origin/develop
     }, createdAt: {
         type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'created_at'
     }, updatedAt: {
