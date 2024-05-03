@@ -15,7 +15,7 @@ const Meeting = sequelize.define('Meeting', {
         type: DataTypes.DATE, allowNull: false, field: 'end_time'
     }, roomId: {
         type: DataTypes.INTEGER, field: 'room_id', references: {
-            model: Room, key: 'id',
+            model: Room, key: 'id'
         },
     }, notes: {
         type: DataTypes.STRING
@@ -31,14 +31,16 @@ const Meeting = sequelize.define('Meeting', {
 const Attendee = sequelize.define('Attendee', {
     meetingId: {
         type: DataTypes.INTEGER, allowNull: false, field: 'meeting_id', references: {
-            model: Meeting, key: 'id',
+            model: Meeting, key: 'id'
         },
     }, userId: {
         type: DataTypes.INTEGER, allowNull: false, field: 'user_id', references: {
-            model: User, key: 'id',
+            model: User, key: 'id'
         },
     }, isPresenter: {
         type: DataTypes.BOOLEAN, defaultValue: false, field: 'is_presenter'
+    }, isAttended: {
+        type: DataTypes.BOOLEAN, defaultValue: false, field: 'is_attended'
     }, createdAt: {
         type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'created_at'
     }, updatedAt: {

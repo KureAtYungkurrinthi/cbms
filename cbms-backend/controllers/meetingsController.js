@@ -100,7 +100,10 @@ const updateMeeting = async (req, res) => {
                 if (!user) return res.status(404).json({message: `User ID ${attendee.id} not found`});
 
                 const attendeeRecord = await Attendee.create({
-                    meetingId: meeting.id, userId: user.id, isPresenter: attendee.isPresenter
+                    meetingId: meeting.id,
+                    userId: user.id,
+                    isPresenter: attendee.isPresenter,
+                    isAttended: attendee.isAttended
                 });
                 attendeesArray.push(attendeeRecord);
             }
