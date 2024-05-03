@@ -19,6 +19,8 @@ const Meeting = sequelize.define('Meeting', {
         },
     }, notes: {
         type: DataTypes.STRING
+    }, isPublished: {
+        type: DataTypes.BOOLEAN, defaultValue: false, field: 'is_published'
     }, createdAt: {
         type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'created_at'
     }, updatedAt: {
