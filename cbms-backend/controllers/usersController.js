@@ -36,9 +36,10 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create users'});
+
         const {name, email, role, password} = req.body;
         if (!name || !email || !password || !role) return res.status(400).json({message: 'Name, email, role, and password are required'});
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create users'});
 
         // Hash the password
         const salt = crypto.randomBytes(16).toString("hex");
@@ -62,9 +63,10 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin' && req.params.id !== req.decoded.id) return res.status(403).json({message: 'Members can only update their own details'});
+
         const {name, email, role, password} = req.body;
         if (!name && !email && !password && !role) return res.status(400).json({message: 'Name, email, role, or password are required'});
-        if (req.decoded.role !== 'admin' && req.params.id !== req.decoded.id) return res.status(403).json({message: 'Members can only update their own details'});
 
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({message: 'User not found'});
@@ -92,6 +94,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         if (req.decoded.role !== 'admin' && req.params.id !== req.decoded.id) return res.status(403).json({message: 'Members can only delete their own details'});
+
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({message: 'User not found'});
 

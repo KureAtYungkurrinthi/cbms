@@ -55,12 +55,12 @@ const getMeetingById = async (req, res) => {
 
 const createMeeting = async (req, res) => {
     try {
-        const {title, startTime, endTime, roomId, notes, attendees} = req.body;
-        if (!title || !startTime || !endTime || !roomId || !attendees) return res.status(400).json({message: 'Title, start time, end time, room ID, and attendees are required'});
         if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
 
-        const meeting = await Meeting.create({title, startTime, endTime, roomId, notes});
+        const {title, startTime, endTime, roomId, notes, attendees} = req.body;
+        if (!title || !startTime || !endTime || !roomId || !attendees) return res.status(400).json({message: 'Title, start time, end time, room ID, and attendees are required'});
 
+        const meeting = await Meeting.create({title, startTime, endTime, roomId, notes});
         const attendeesArray = [];
         for (const attendee of attendees) {
             const user = await User.findByPk(attendee.id);
@@ -81,9 +81,10 @@ const createMeeting = async (req, res) => {
 
 const updateMeeting = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
+
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
 
         const {title, startTime, endTime, roomId, notes, attendees} = req.body;
         if (title) meeting.title = title;
@@ -120,9 +121,10 @@ const updateMeeting = async (req, res) => {
 
 const deleteMeeting = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
+
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();

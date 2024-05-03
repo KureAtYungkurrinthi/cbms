@@ -32,9 +32,10 @@ const getRoomById = async (req, res) => {
 
 const createRoom = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create rooms'});
+
         const {name, location, capacity} = req.body;
         if (!name || !location || !capacity) return res.status(400).json({message: 'Name, location and capacity are required'});
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create rooms'});
 
         const [room, created] = await Room.findOrCreate({
             where: {name: name}, defaults: {location: location, capacity: capacity}
@@ -50,9 +51,10 @@ const createRoom = async (req, res) => {
 
 const updateRoom = async (req, res) => {
     try {
+        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update room details'});
+
         const {name, location, capacity} = req.body;
         if (!name && !location && !capacity) return res.status(400).json({message: 'Name, location or capacity is required'});
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update room details'});
 
         const room = await Room.findByPk(req.params.id);
         if (!room) return res.status(404).json({message: 'Room not found'});
@@ -72,6 +74,7 @@ const updateRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
     try {
         if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete rooms'});
+
         const room = await Room.findByPk(req.params.id);
         if (!room) return res.status(404).json({message: 'Room not found'});
 
