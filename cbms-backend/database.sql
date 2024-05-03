@@ -127,4 +127,4 @@ VALUES (1, 1000, 'Confirm Attendance', '', 5, 1),
        (1, 2500, 'Implementation', '', 10, 2),
        (1, 3000, 'Previous Meeting Review', '', 10, 3),
        (1, 3500, 'Action taken', '', 20, 3),
-       (1, 4000, 'Closing', '', 5, 1)
+       (1, 4000, 'Closing', '', 5, 1);

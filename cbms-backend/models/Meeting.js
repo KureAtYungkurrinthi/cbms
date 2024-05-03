@@ -18,7 +18,7 @@ const Meeting = sequelize.define('Meeting', {
             model: Room, key: 'id'
         },
     }, notes: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     }, createdAt: {
         type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'created_at'
     }, updatedAt: {

@@ -1,14 +1,30 @@
-const {Agenda, Meeting, User} = require('../models/Agenda');
-const {Attendee} = require("../models/Meeting");
+const {Agenda, Meeting, User, Attendee} = require('../models/Agenda');
 
 const getAgendas = async (req, res) => {
     try {
+        const attendee = await Attendee.findAll({where: {meetingId: req.params.id, userId: req.decoded.id}});
+        if (!attendee || req.decoded.role !== 'admin') return res.status(403).json({message: 'Members can only view their own meeting agendas'});
+
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
-        if (agendas.length > 0) {
-            return res.json(agendas);
-        } else {
-            return res.status(404).json({message: 'No agendas found'});
+        if (agendas.length <= 0) return res.status(404).json({message: 'No agendas found'});
+
+        const agendasArray = [];
+        for (const agenda of agendas) {
+            let presenter = null;
+            if (agenda.presenterId) {
+                const user = await User.findByPk(agenda.presenterId);
+                presenter = {id: user.id, name: user.name, email: user.email};
+            }
+            agendasArray.push({
+                id: agenda.id,
+                position: agenda.position,
+                heading: agenda.heading,
+                content: agenda.content,
+                duration: agenda.duration,
+                presenter: presenter
+            });
         }
+        return res.json(agendasArray);
     } catch (error) {
         console.error('Error fetching agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});

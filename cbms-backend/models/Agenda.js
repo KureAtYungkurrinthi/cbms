@@ -1,8 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../lib/database');
 
-const {Meeting} = require("./Meeting");
-const User = require('./User');
+const {Meeting, User, Attendee} = require("./Meeting");
 
 const Agenda = sequelize.define('Agenda', {
     id: {
@@ -38,4 +37,4 @@ Agenda.belongsTo(Meeting, {foreignKey: 'meetingId', onDelete: 'SET NULL'});
 User.hasMany(Agenda, {foreignKey: 'presenterId'});
 Agenda.belongsTo(User, {foreignKey: 'presenterId'});
 
-module.exports = {Agenda, Meeting, User};
+module.exports = {Agenda, Meeting, User, Attendee};
