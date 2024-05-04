@@ -25,7 +25,7 @@ const getAllMeetings = async (req, res) => {
         console.error('Error fetching meetings:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const getMeetingById = async (req, res) => {
     try {
@@ -51,7 +51,7 @@ const getMeetingById = async (req, res) => {
         console.error('Error fetching meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const createMeeting = async (req, res) => {
     try {
@@ -75,7 +75,7 @@ const createMeeting = async (req, res) => {
         console.error('Error creating meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const updateMeeting = async (req, res) => {
     try {
@@ -117,7 +117,7 @@ const updateMeeting = async (req, res) => {
         console.error('Error updating meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const deleteMeeting = async (req, res) => {
     try {
@@ -131,6 +131,6 @@ const deleteMeeting = async (req, res) => {
         console.error('Error deleting meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 module.exports = {getAllMeetings, getMeetingById, createMeeting, updateMeeting, deleteMeeting};

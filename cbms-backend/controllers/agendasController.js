@@ -37,7 +37,7 @@ const getAgendas = async (req, res) => {
         console.error('Error fetching agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const createAgendas = async (req, res) => {
     try {
@@ -114,7 +114,7 @@ const createAgendas = async (req, res) => {
         console.error('Error creating agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const updateAgendas = async (req, res) => {
     try {
@@ -170,7 +170,7 @@ const updateAgendas = async (req, res) => {
         console.error('Error updating agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const deleteAgendas = async (req, res) => {
     try {
@@ -183,6 +183,6 @@ const deleteAgendas = async (req, res) => {
         console.error('Error deleting agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 module.exports = {getAgendas, createAgendas, updateAgendas, deleteAgendas};
