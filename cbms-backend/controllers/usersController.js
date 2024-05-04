@@ -36,8 +36,6 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create users'});
-
         const {name, email, role, password} = req.body;
         if (!name || !email || !password || !role) return res.status(400).json({message: 'Name, email, role, and password are required'});
 

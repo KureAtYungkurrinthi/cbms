@@ -41,8 +41,6 @@ const getAgendas = async (req, res) => {
 
 const createAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length > 0) return res.status(409).json({message: 'Agendas already exists for this meeting'});
 
@@ -120,8 +118,6 @@ const createAgendas = async (req, res) => {
 
 const updateAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length <= 0) return res.status(404).json({message: 'Agendas not found'});
 
@@ -178,8 +174,6 @@ const updateAgendas = async (req, res) => {
 
 const deleteAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (!agendas) return res.status(404).json({message: 'Agenda not found'});
 

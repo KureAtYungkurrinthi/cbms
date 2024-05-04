@@ -2,7 +2,7 @@ const {Meeting, Attendee, Room, User} = require('../models/Meeting');
 
 const getAllMeetings = async (req, res) => {
     try {
-        const whereClause = req.decoded.role !== 'admin' ? {id: req.decoded.id} : {};
+        const whereClause = req.decoded.role === 'admin' ? {} : {id: req.decoded.id};
 
         const meetings = await Meeting.findAll({
             include: [{
@@ -29,7 +29,7 @@ const getAllMeetings = async (req, res) => {
 
 const getMeetingById = async (req, res) => {
     try {
-        const whereClause = req.decoded.role !== 'admin' ? {id: req.decoded.id} : {};
+        const whereClause = req.decoded.role === 'admin' ? {} : {id: req.decoded.id};
 
         const meeting = await Meeting.findByPk(req.params.id, {
             include: [{
@@ -55,8 +55,6 @@ const getMeetingById = async (req, res) => {
 
 const createMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
-
         const {title, startTime, endTime, roomId, notes, attendees} = req.body;
         if (!title || !startTime || !endTime || !roomId || !attendees) return res.status(400).json({message: 'Title, start time, end time, room ID, and attendees are required'});
 
@@ -81,8 +79,6 @@ const createMeeting = async (req, res) => {
 
 const updateMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
-
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
 
@@ -125,8 +121,6 @@ const updateMeeting = async (req, res) => {
 
 const deleteMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
-
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
 
