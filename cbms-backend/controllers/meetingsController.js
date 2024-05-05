@@ -126,7 +126,7 @@ const deleteMeeting = async (req, res) => {
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();
-        return res.json(meeting);
+        return res.statusCode(204);
     } catch (error) {
         console.error('Error deleting meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});

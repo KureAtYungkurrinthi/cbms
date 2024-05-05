@@ -178,7 +178,7 @@ const deleteAgendas = async (req, res) => {
         if (!agendas) return res.status(404).json({message: 'Agenda not found'});
 
         await Agenda.destroy({where: {meetingId: req.params.id}});
-        return res.json({message: 'Agenda deleted'});
+        return res.statusCode(204);
     } catch (error) {
         console.error('Error deleting agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});

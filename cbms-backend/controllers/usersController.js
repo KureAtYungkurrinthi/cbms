@@ -98,7 +98,7 @@ const deleteUser = async (req, res) => {
 
         // Delete the user
         await user.destroy();
-        return res.json(user);
+        return res.statusCode(204);
     } catch (error) {
         console.error('Error deleting user:', error);
         return res.status(500).json({message: 'Internal Server Error'});
