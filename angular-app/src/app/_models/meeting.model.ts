@@ -42,6 +42,8 @@ export class Meeting {
     public startTime?: string,
     public endTime?: string,
     public isPublish?: boolean,
-    public agenda?: Agenda  // Optional property to hold an Agenda
+    public agenda?: Agenda,
+    public roomId?: number,
+    public room?: Room,
   ) {}
 }

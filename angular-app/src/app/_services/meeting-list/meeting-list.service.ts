@@ -90,7 +90,10 @@ export class MeetingListService {
     if (!this.meetings) {
       this.meetings = [];
     }
-    this.meetings.push(meeting);
+    this.createMeeting(meeting).subscribe((value ) => {
+      console.log(value);
+      this.meetings.push(meeting);
+    })
   }
 
   getMeetingById(id: number): Meeting | undefined {
@@ -124,5 +127,9 @@ export class MeetingListService {
   publishMeeting(meeting: Meeting) {
     meeting.isPublish = true;
     return this.updateMeeting( meeting);
+  }
+
+  private createMeeting(meeting: Meeting) {
+    return this.commonHttpService.post('/meetings/', meeting);
   }
 }

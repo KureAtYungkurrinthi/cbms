@@ -34,7 +34,7 @@
             <label for="meeting-room">Location</label>
             <select class="form-control" id="meeting-room" formControlName="room">
               <option value="" disabled selected>Choose a room</option>
-              <option *ngFor="let room of rooms" [value]="room.name">{{room.name}} ({{room.location}}, Capacity: {{room.capacity}})</option>
+              <option *ngFor="let room of rooms" [ngValue]="room">{{room.name}} ({{room.location}}, Capacity: {{room.capacity}})</option>
             </select>
           </div>
 <!--          <div class="form-group">-->
@@ -43,12 +43,10 @@
 <!--          </div>-->
 
           <div class="form-group">
-            <label for="meeting-room">Attendees</label>
-
-            <select id="attendees"  multiple="multiple" required class="validate form-control" name="attendees"
-                    (change)="onSelect($event)">
-              <option style="display:none"></option>
-              <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+            <label for="attendees">Attendees</label>
+            <select multiple="multiple" required class="validate form-control" id="attendees" name="attendees"
+                    formControlName="attendees">
+              <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
             </select>
 
           </div>

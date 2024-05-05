@@ -9,4 +9,16 @@ export class FormatUtil {
     };
     return date.toLocaleTimeString('en-US', options);
   }
+
+  static createTimeStamp(time: string): string {
+    const currentDate = new Date();  // Gets today's date
+    const [hours, minutes] = time.split(':').map(Number);  // Splits the time string into hours and minutes and converts them to numbers
+
+    // Set the hours and minutes to the current date object
+    currentDate.setHours(hours, minutes, 0, 0);  // Sets seconds and milliseconds to 0
+
+    // Convert the date object to an ISO string and slice to remove seconds and timezone info
+    const isoDate = currentDate.toISOString();
+    return isoDate.slice(0, 19);  // Keeps only the date and time up to seconds
+  }
 }

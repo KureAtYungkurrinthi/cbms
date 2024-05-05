@@ -4,6 +4,7 @@ import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
 import {User} from "src/app/_models/user";
 import {Room} from "src/app/_models/room.model";
+import {FormatUtil} from "src/app/_helpers/format.util";
 
 @Component({
   selector: 'app-add-meeting',
@@ -22,8 +23,8 @@ export class AddMeetingComponent implements OnInit {
       date: '',
       startTime: '',
       endTime: '',
-      room: '',
-      attendees: '',
+      room: null,
+      attendees: <User>[],
       notes: '',
     });
   }
@@ -37,8 +38,8 @@ export class AddMeetingComponent implements OnInit {
       date: '',
       startTime: '',
       endTime: '',
-      room: '',
-      attendees: '',
+      room: null,
+      attendees: <User>[],
       notes: '',
     });
   }
@@ -46,7 +47,13 @@ export class AddMeetingComponent implements OnInit {
   onSubmit() {
     if (this.meetingForm) {
 
-      var meeting = this.meetingForm.value as Meeting
+      let meeting = this.meetingForm.value as Meeting
+      console.log(meeting);
+      meeting.startTime = FormatUtil.createTimeStamp(meeting.startTime);
+      meeting.endTime = FormatUtil.createTimeStamp(meeting.endTime);
+      meeting.roomId = meeting.room.id;
+      meeting.Room = meeting.room;
+      console.log("tuning for add meeting");
       console.log(meeting);
       this.meetingListService.pushMeeting(meeting);
       this.createForm();
@@ -60,7 +67,5 @@ export class AddMeetingComponent implements OnInit {
     this.closeModal.emit();
   }
 
-  onSelect($event: Event) {
-    console.log($event);
-  }
+
 }
