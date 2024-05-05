@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.meetingListService.getMeetings().subscribe(meetings => {
+      console.log("checking meetings in dashboard");
+      console.log(meetings);
       this.meetings = meetings;
     });
   }

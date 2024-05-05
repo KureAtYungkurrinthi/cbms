@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "src/app/_services/authentication.service";
 import {UserService} from "src/app/_services/user.service";
+import {User} from "src/app/_models/user";
 
 @Component({
   selector: 'app-sidemenu',
@@ -11,9 +12,14 @@ export class SidemenuComponent implements OnInit {
   currentDate: string | undefined;
   currentTime: string | undefined;
   @Output() openModal = new EventEmitter<void>();
+  user: User;
 
 
-  constructor(private authenticationService: AuthenticationService, private userService: UserService) {}
+  constructor(
+    private authenticationService: AuthenticationService, private userService: UserService,
+    ) {
+    this.user = authenticationService.userValue;
+  }
 
   ngOnInit(): void {
     this.updateDateTime();

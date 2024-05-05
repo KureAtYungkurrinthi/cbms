@@ -1,5 +1,6 @@
 import {User} from "src/app/_models/user";
 import {Agenda} from "src/app/_models/agenda.model";
+import {Room} from "src/app/_models/room.model";
 
 // export class Meeting {
 //   id?: number;
@@ -35,11 +36,12 @@ export class Meeting {
     public title: string,
     public date: string,
     public time: string,
-    public room: string,
-    public note: string,
-    public attendees: string,
+    public Room: Room,
+    public notes: string,
+    public attendees: User[],
     public startTime?: string,
     public endTime?: string,
+    public isPublish?: boolean,
     public agenda?: Agenda  // Optional property to hold an Agenda
   ) {}
 }

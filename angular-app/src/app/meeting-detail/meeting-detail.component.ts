@@ -4,6 +4,7 @@ import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
 import {AuthenticationService} from "src/app/_services/authentication.service";
 import {User} from "src/app/_models/user";
+import {FormatUtil} from "src/app/_helpers/format.util";
 
 @Component({
   selector: 'app-meeting-detail',
@@ -32,10 +33,24 @@ export class MeetingDetailComponent implements OnInit {
       this.meetingId = parseInt(idParam, 10);
 
       this.meeting = this.meetingService.getMeetingById(this.meetingId);
+      // if (this.meeting.agenda) {
+        this.getAgenda();
+      // }
     }
   }
 
+  getAgenda() {
+    this.meetingService.getAgenda(this.meetingId).subscribe((agenda) => {
+      this.meeting.agenda = agenda;
+    });
+  }
+
   publishMeeting() {
+    this.meetingService.publishMeeting(this.meeting).subscribe((value) => {
+      console.log("line 50 meeting-detail");
+      console.log(value);
+      this.openModal();
+    });
   }
 
   makeAgenda() {
@@ -95,4 +110,6 @@ export class MeetingDetailComponent implements OnInit {
 
     this.meetingService.deleteAgenda(this.meetingId);
   }
+
+  protected readonly FormatUtil = FormatUtil;
 }
