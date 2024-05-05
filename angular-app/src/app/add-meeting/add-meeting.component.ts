@@ -49,8 +49,9 @@ export class AddMeetingComponent implements OnInit {
 
       let meeting = this.meetingForm.value as Meeting
       console.log(meeting);
-      meeting.startTime = FormatUtil.createTimeStamp(meeting.startTime);
-      meeting.endTime = FormatUtil.createTimeStamp(meeting.endTime);
+      console.log(meeting.date);
+      meeting.startTime = FormatUtil.createTimeStamp(meeting.date, meeting.startTime);
+      meeting.endTime = FormatUtil.createTimeStamp(meeting.date, meeting.endTime);
       meeting.roomId = meeting.room.id;
       meeting.Room = meeting.room;
       console.log("tuning for add meeting");
