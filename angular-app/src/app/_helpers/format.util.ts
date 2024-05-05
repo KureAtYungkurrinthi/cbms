@@ -1,5 +1,5 @@
 export class FormatUtil {
-  static formatDate(dateString: string): string {
+  static formatTime(dateString: string): string {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
@@ -8,6 +8,16 @@ export class FormatUtil {
       timeZone: 'Australia/Sydney'
     };
     return date.toLocaleTimeString('en-US', options);
+  }
+
+  static formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit'
+    };
+    return date.toLocaleDateString('en-US', options);
   }
 
   static createTimeStamp(date:string, time: string): string {
