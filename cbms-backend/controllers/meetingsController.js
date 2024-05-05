@@ -12,7 +12,7 @@ const getAllMeetings = async (req, res) => {
                     attributes: ['isPresenter'],
                 }, as: 'attendees',
             }, {
-                model: Room, attributes: {exclude: ['createdAt', 'updatedAt']},
+                model: Room, attributes: {exclude: ['createdAt', 'updatedAt']}, as: 'room',
             }], attributes: {exclude: ['roomId', 'createdAt', 'updatedAt']},
         });
 
@@ -39,7 +39,7 @@ const getMeetingById = async (req, res) => {
                     attributes: ['isPresenter'],
                 }, as: 'attendees',
             }, {
-                model: Room,
+                model: Room, as: 'room',
             }], attributes: {exclude: ['roomId']},
         });
         if (meeting) {

@@ -53,7 +53,7 @@ const Attendee = sequelize.define('Attendee', {
 });
 
 Room.hasMany(Meeting, {foreignKey: 'roomId'});
-Meeting.belongsTo(Room, {foreignKey: 'roomId'});
+Meeting.belongsTo(Room, {foreignKey: 'roomId', as: 'room'});
 
 User.belongsToMany(Meeting, {through: Attendee, foreignKey: 'userId'});
 Meeting.belongsToMany(User, {through: Attendee, foreignKey: 'meetingId'});
