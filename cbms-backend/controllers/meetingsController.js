@@ -2,7 +2,7 @@ const {Meeting, Attendee, Room, User} = require('../models/Meeting');
 
 const getAllMeetings = async (req, res) => {
     try {
-        const whereClause = req.decoded.role !== 'admin' ? {id: req.decoded.id} : {};
+        const whereClause = req.decoded.role === 'admin' ? {} : {id: req.decoded.id};
 
         const meetings = await Meeting.findAll({
             include: [{
@@ -12,7 +12,7 @@ const getAllMeetings = async (req, res) => {
                     attributes: ['isPresenter'],
                 }, as: 'attendees',
             }, {
-                model: Room, attributes: {exclude: ['createdAt', 'updatedAt']},
+                model: Room, attributes: {exclude: ['createdAt', 'updatedAt']}, as: 'room',
             }], attributes: {exclude: ['roomId', 'createdAt', 'updatedAt']},
         });
 
@@ -25,11 +25,11 @@ const getAllMeetings = async (req, res) => {
         console.error('Error fetching meetings:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const getMeetingById = async (req, res) => {
     try {
-        const whereClause = req.decoded.role !== 'admin' ? {id: req.decoded.id} : {};
+        const whereClause = req.decoded.role === 'admin' ? {} : {id: req.decoded.id};
 
         const meeting = await Meeting.findByPk(req.params.id, {
             include: [{
@@ -39,7 +39,7 @@ const getMeetingById = async (req, res) => {
                     attributes: ['isPresenter'],
                 }, as: 'attendees',
             }, {
-                model: Room,
+                model: Room, as: 'room',
             }], attributes: {exclude: ['roomId']},
         });
         if (meeting) {
@@ -51,12 +51,10 @@ const getMeetingById = async (req, res) => {
         console.error('Error fetching meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const createMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
-
         const {title, startTime, endTime, roomId, notes, attendees} = req.body;
         if (!title || !startTime || !endTime || !roomId || !attendees) return res.status(400).json({message: 'Title, start time, end time, room ID, and attendees are required'});
 
@@ -77,12 +75,10 @@ const createMeeting = async (req, res) => {
         console.error('Error creating meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const updateMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
-
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
 
@@ -121,22 +117,20 @@ const updateMeeting = async (req, res) => {
         console.error('Error updating meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const deleteMeeting = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
-
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();
-        return res.json(meeting);
+        return res.statusCode(204);
     } catch (error) {
         console.error('Error deleting meeting:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 module.exports = {getAllMeetings, getMeetingById, createMeeting, updateMeeting, deleteMeeting};

@@ -37,12 +37,10 @@ const getAgendas = async (req, res) => {
         console.error('Error fetching agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const createAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can create meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length > 0) return res.status(409).json({message: 'Agendas already exists for this meeting'});
 
@@ -116,12 +114,10 @@ const createAgendas = async (req, res) => {
         console.error('Error creating agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const updateAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can update meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length <= 0) return res.status(404).json({message: 'Agendas not found'});
 
@@ -174,21 +170,19 @@ const updateAgendas = async (req, res) => {
         console.error('Error updating agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 const deleteAgendas = async (req, res) => {
     try {
-        if (req.decoded.role !== 'admin') return res.status(403).json({message: 'Only admins can delete meetings'});
-
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (!agendas) return res.status(404).json({message: 'Agenda not found'});
 
         await Agenda.destroy({where: {meetingId: req.params.id}});
-        return res.json({message: 'Agenda deleted'});
+        return res.statusCode(204);
     } catch (error) {
         console.error('Error deleting agendas:', error);
         return res.status(500).json({message: 'Internal Server Error'});
     }
-}
+};
 
 module.exports = {getAgendas, createAgendas, updateAgendas, deleteAgendas};

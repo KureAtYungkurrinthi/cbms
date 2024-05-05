@@ -20,4 +20,10 @@ const verifyJWT = (req, res, next) => {
     });
 };
 
-module.exports = {verifyJWT};
+const verifyRoles = (req, res, next) => {
+    if (!req?.decoded?.role) return res.sendStatus(401);
+    if (req.decoded.role !== 'admin') return res.sendStatus(403);
+    next();
+};
+
+module.exports = {verifyJWT, verifyRoles};
