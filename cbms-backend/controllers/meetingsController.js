@@ -1,4 +1,5 @@
 const {Meeting, Attendee, Room, User} = require('../models/Meeting');
+const {Agenda} = require('../models/Agenda');
 
 const getAllMeetings = async (req, res) => {
     try {
@@ -17,6 +18,9 @@ const getAllMeetings = async (req, res) => {
         });
 
         if (meetings.length > 0) {
+            for (const meeting of meetings) {
+                meeting.setDataValue('hasAgendas', await Agenda.count({where: {meetingId: meeting.id}}) > 0);
+            }
             return res.json(meetings);
         } else {
             return res.status(404).json({message: 'No meetings found'});
@@ -43,6 +47,7 @@ const getMeetingById = async (req, res) => {
             }], attributes: {exclude: ['roomId']},
         });
         if (meeting) {
+            meeting.setDataValue('hasAgendas', await Agenda.count({where: {meetingId: meeting.id}}) > 0);
             return res.json(meeting);
         } else {
             return res.status(404).json({message: 'Meeting not found'});
