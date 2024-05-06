@@ -20,9 +20,9 @@
   border-bottom: 1px solid #E0E0E0;
 }
 
-.meeting-row:nth-child(even) {
-  background-color: #f2f2f2;
-}
+/*.meeting-row:nth-child(even) {*/
+/*  background-color: #f2f2f2;*/
+/*}*/
 
 /*.meeting-row:hover {*/
 /*  background-color: #ddd;*/

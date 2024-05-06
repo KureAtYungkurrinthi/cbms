@@ -9,7 +9,7 @@
       </div>
       <div class="col-4">
         <div class="button-group">
-          <button *ngIf="user.role == 'admin' && !meeting.isPublish" class="btn publish" (click)="publishMeeting()">Publish</button>
+          <button *ngIf="user.role == 'admin' && !meeting.isPublished" class="btn publish" (click)="publishMeeting()">Publish</button>
           <button *ngIf="user.role == 'admin' && !meeting.agenda" class="btn make-agenda" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
           <button *ngIf="meeting.agenda" class="btn make-agenda" (click)="openAgendaModal()">Agenda</button>
           <button *ngIf="user.role == 'admin'" (click)="openDeleteMeetingModal()" class="delete">-</button>

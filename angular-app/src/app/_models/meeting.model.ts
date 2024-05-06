@@ -41,7 +41,7 @@ export class Meeting {
     public attendees: User[],
     public startTime?: string,
     public endTime?: string,
-    public isPublish?: boolean,
+    public isPublished?: boolean,
     public agenda?: Agenda,
     public roomId?: number,
     public room?: Room,

@@ -125,7 +125,7 @@ export class MeetingListService {
   }
 
   publishMeeting(meeting: Meeting) {
-    meeting.isPublish = true;
+    meeting.isPublished = true;
     return this.updateMeeting( meeting);
   }
 

@@ -7,7 +7,7 @@
   </div>
   <hr>
   <div class="meetings-table">
-    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [class.bg-color]="i % 2 === 0">
+    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [ngStyle]="{'background-color': meeting.isPublished? '' : '#f2f2f2'}">
       <div class="col-2">
         <div class="meeting-date">{{ FormatUtil.formatDate2(meeting.startTime) }} </div>
       </div>
@@ -15,9 +15,9 @@
         <div class="meeting-details">
           <h5>{{ meeting.title }} </h5>
           Time: {{ FormatUtil.formatTime(meeting.startTime) }} Location: {{ meeting.room.name }}</div>
-        <button class="button" (click)="onPublish(meeting.id)">Publish</button>
-        <button class="button" (click)="onMakeAgenda(meeting.id)">Make Agenda</button>
-        <button class="button" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
+        <button class="button" *ngIf="!meeting.isPublished" (click)="onPublish(meeting.id)">Publish</button>
+        <button class="button" *ngIf="!meeting.agenda" (click)="onMakeAgenda(meeting.id)">Make Agenda</button>
+        <button class="button" *ngIf="meeting.agenda" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
       </div>
       <div class="col-3 button-col">
         <button class="edit-button meeting-buttons">Edit</button>
