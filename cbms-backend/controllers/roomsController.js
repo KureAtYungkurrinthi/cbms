@@ -74,7 +74,7 @@ const deleteRoom = async (req, res) => {
 
         // Delete the room
         await room.destroy();
-        return res.statusCode(204);
+        return res.sendStatus(204);
     } catch (error) {
         console.error('Error deleting room:', error);
         return res.status(500).json({message: 'Internal Server Error'});
