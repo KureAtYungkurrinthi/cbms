@@ -20,7 +20,7 @@
         <button class="button" *ngIf="meeting.agenda" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
       </div>
       <div class="col-3 button-col">
-        <button class="edit-button meeting-buttons">Edit</button>
+        <button class="edit-button meeting-buttons" (click)="openMeetingModalFromApp(meeting)">Edit</button>
         <button class="delete-button meeting-buttons" (click)="openDeleteMeetingModal()">×</button>
       </div>
 
@@ -54,6 +54,18 @@
     <button class="pagination-button">3</button>
     <!-- etc. -->
   </div>
+
+
+  <div #meetingModal class="modal fade" id="meetingModal" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel" aria-hidden="true">
+    <app-add-meeting
+      [users]="users"
+      [rooms]="rooms"
+      [meetingToEdit]="meetingToEdit$"
+      (closeModal)="closeMeetingModalFromApp()">
+    </app-add-meeting>
+  </div>
+  <div *ngIf="showModal" class="modal-backdrop"  (click)="closeMeetingModalFromApp()"></div>
+
 </div>
 
 

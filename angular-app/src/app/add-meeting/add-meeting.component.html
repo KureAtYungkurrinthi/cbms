@@ -2,7 +2,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="meetingModalLabel" style="width: 100%">Add A Meeting</h5>
+        <h5 class="modal-title" id="meetingModalLabel" style="width: 100%">
+          <span *ngIf="!currentMeeting">Add A Meeting</span>
+          <span *ngIf="currentMeeting">Edit Meeting</span>
+        </h5>
         <button type="button" class="close" (click)="closeMeetingModal()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -45,7 +48,7 @@
           <div class="form-group">
             <label for="attendees">Attendees</label>
             <select multiple="multiple" required class="validate form-control" id="attendees" name="attendees"
-                    formControlName="attendees">
+                    formControlName="attendees" [compareWith]="compareFn">
               <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
             </select>
 
