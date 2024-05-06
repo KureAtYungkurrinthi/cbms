@@ -34,7 +34,9 @@ export class MeetingDetailComponent implements OnInit {
     if (idParam) {
       this.meetingId = parseInt(idParam, 10);
 
-      this.meeting = this.meetingService.getMeetingById(this.meetingId);
+    this.meetingService.getMeetingById(this.meetingId).subscribe(value => {
+        this.meeting = value;
+      });
       // if (this.meeting.agenda) {
         this.getAgenda();
       // }
@@ -122,26 +124,7 @@ export class MeetingDetailComponent implements OnInit {
   }
 
   confirmDeleteMeeting() {
-    this.meetingService.deleteMeeting(this.meetingId).subscribe((value) => {
-
-    }, (error) => {
-
-    }); // internal 500?
-
-    this.meetingService.deleteMeeting(this.meetingId).subscribe({
-      next: value => {
-        console.log('next meeting delete')
-        this.closeDeleteMeetingModal();
-      },
-      error: err => {
-        console.log('err meeting delete')
-        this.closeDeleteMeetingModal();
-      },
-      complete: () => {
-        console.log('complete meeting delete')
-        this.closeDeleteMeetingModal();
-      }
-    });
+    this.meetingService.deleteMeeting(this.meetingId);
     this.router.navigate(['/dashboard']);
   }
 

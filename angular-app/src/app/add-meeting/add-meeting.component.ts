@@ -56,7 +56,7 @@ export class AddMeetingComponent implements OnInit {
       meeting.room = meeting.room;
       console.log("tuning for add meeting");
       console.log(meeting);
-      this.meetingListService.pushMeeting(meeting);
+      this.meetingListService.addMeeting(meeting);
       this.createForm();
     }
 

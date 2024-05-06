@@ -31,7 +31,9 @@ export class AgendaComponent implements OnInit {
     if (idParam) {
       this.meetingId = parseInt(idParam, 10);
 
-      this.meeting = this.meetingService.getMeetingById(this.meetingId);
+    this.meetingService.getMeetingById(this.meetingId).subscribe((meeting) => {
+        this.meeting = meeting;
+      })
     }
 
     this.agendaForm = this.formBuilder.group({
