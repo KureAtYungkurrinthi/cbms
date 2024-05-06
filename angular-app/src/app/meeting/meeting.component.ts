@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
+import {FormatUtil} from "src/app/_helpers/format.util";
 
 @Component({
   selector: 'app-meeting',
@@ -25,4 +26,6 @@ export class MeetingComponent implements OnInit {
 
   onSeeAgenda(id: number | undefined) {
   }
+
+  protected readonly FormatUtil = FormatUtil;
 }

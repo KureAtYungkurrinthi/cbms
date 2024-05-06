@@ -20,6 +20,16 @@ export class FormatUtil {
     return date.toLocaleDateString('en-US', options);
   }
 
+  static formatDate2(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit'
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
+
   static createTimeStamp(date:string, time: string): string {
     const currentDate = new Date(date);
     const [hours, minutes] = time.split(':').map(Number);  // Splits the time string into hours and minutes and converts them to numbers

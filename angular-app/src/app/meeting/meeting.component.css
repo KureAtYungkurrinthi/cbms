@@ -17,7 +17,7 @@
 .meetings-table th, .meetings-table td {
   text-align: left;
   padding: 8px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 .meeting-row:nth-child(even) {
@@ -114,4 +114,22 @@
 
 .delete-button {
   margin: 0;
+}
+
+.button {
+  background-color: #D9D9D9;
+  color: #178348;
+  border: none;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.button:hover {
+  background-color: #66c164;
 }
