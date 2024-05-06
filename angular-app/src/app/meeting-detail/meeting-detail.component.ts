@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Meeting} from "src/app/_models/meeting.model";
 import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
 import {AuthenticationService} from "src/app/_services/authentication.service";
@@ -17,12 +17,14 @@ export class MeetingDetailComponent implements OnInit {
   showModal: boolean = false;
   agendaModal: boolean = false;
   deleteAgendaModal: boolean = false;
+  deleteMeetingModal: boolean = false;
   user: User;
 
   constructor(
     private route: ActivatedRoute,
     private meetingService: MeetingListService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router,
     ) {
     this.user = authenticationService.userValue;
   }
@@ -91,6 +93,14 @@ export class MeetingDetailComponent implements OnInit {
     this.deleteAgendaModal= false;
   }
 
+  openDeleteMeetingModal() {
+    this.deleteMeetingModal = true;
+  }
+
+  closeDeleteMeetingModal() {
+    this.deleteMeetingModal= false;
+  }
+
   downloadAgenda(selectedMeeting: any) {
 
   }
@@ -109,6 +119,30 @@ export class MeetingDetailComponent implements OnInit {
     this.closeAgendaModal();
 
     this.meetingService.deleteAgenda(this.meetingId);
+  }
+
+  confirmDeleteMeeting() {
+    this.meetingService.deleteMeeting(this.meetingId).subscribe((value) => {
+
+    }, (error) => {
+
+    }); // internal 500?
+
+    this.meetingService.deleteMeeting(this.meetingId).subscribe({
+      next: value => {
+        console.log('next meeting delete')
+        this.closeDeleteMeetingModal();
+      },
+      error: err => {
+        console.log('err meeting delete')
+        this.closeDeleteMeetingModal();
+      },
+      complete: () => {
+        console.log('complete meeting delete')
+        this.closeDeleteMeetingModal();
+      }
+    });
+    this.router.navigate(['/dashboard']);
   }
 
   protected readonly FormatUtil = FormatUtil;

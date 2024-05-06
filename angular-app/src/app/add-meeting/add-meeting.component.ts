@@ -53,7 +53,7 @@ export class AddMeetingComponent implements OnInit {
       meeting.startTime = FormatUtil.createTimeStamp(meeting.date, meeting.startTime);
       meeting.endTime = FormatUtil.createTimeStamp(meeting.date, meeting.endTime);
       meeting.roomId = meeting.room.id;
-      meeting.Room = meeting.room;
+      meeting.room = meeting.room;
       console.log("tuning for add meeting");
       console.log(meeting);
       this.meetingListService.pushMeeting(meeting);

@@ -132,4 +132,9 @@ export class MeetingListService {
   private createMeeting(meeting: Meeting) {
     return this.commonHttpService.post('/meetings/', meeting);
   }
+
+  deleteMeeting(meetingId: number) {
+    this.meetings = this.meetings.filter(meeting => meeting.id != meetingId);
+    return this.commonHttpService.delete('/meetings/' + meetingId);
+  }
 }
