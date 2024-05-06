@@ -41,7 +41,8 @@ export class MeetingComponent implements OnInit {
 
   confirmDeleteMeeting(meetingId: number) {
       this.meetingService.deleteMeeting(meetingId);
-    this.router.navigate(['/meeting']);
+      this.closeDeleteMeetingModal();
+    // this.router.navigate(['/meeting']);
   }
 
   protected readonly FormatUtil = FormatUtil;
