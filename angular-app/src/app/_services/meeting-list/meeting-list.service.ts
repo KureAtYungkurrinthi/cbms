@@ -242,19 +242,31 @@ export class MeetingListService {
     );
   }
 
-  updateMeeting(meeting: Meeting): Observable<Meeting> {
-    // @ts-ignore
-    return this.commonHttpService.put<Meeting>("/meetings/" + meeting.id, meeting).pipe(
-      tap(updatedMeeting => {
+  // updateMeeting(meeting: Meeting): void {
+  //   console.log("checking add meeting");
+  //   console.log(meeting);
+  //   this.createMeeting(meeting).subscribe(addedMeeting => {
+  //     meeting.id = addedMeeting["meeting"]["id"];
+  //     const updatedMeetings = [...this.meetingsSubject.value, meeting];
+  //     console.log(updatedMeetings);
+  //     this.meetingsSubject.next(updatedMeetings);
+  //   });
+  // }
+
+  updateMeeting(meeting: Meeting) {
+    this.commonHttpService.put<Meeting>("/meetings/" + meeting.id, meeting).subscribe(
+      (updatedMeeting => {
         const index = this.meetingsSubject.value.findIndex(m => m.id === meeting.id);
+        console.log("checking index");
+        console.log(index);
         const updatedMeetings = [...this.meetingsSubject.value];
-        if (updatedMeeting instanceof Meeting) {
-          updatedMeetings[index] = updatedMeeting;
-        }
+        // if (updatedMeeting instanceof Meeting) {
+          updatedMeetings[index] = meeting;
+        // }
         this.meetingsSubject.next(updatedMeetings);
-        console.log('Meeting updated:', updatedMeeting);
+        console.log('Meeting updated:', updatedMeetings);
       }),
-      catchError(error => {
+      (error => {
         console.error('Error updating meeting', error);
         throw error;
       })

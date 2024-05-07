@@ -85,8 +85,14 @@ export class AddMeetingComponent implements OnInit {
       meeting.endTime = FormatUtil.createTimeStamp(meeting.date, meeting.endTime);
       meeting.roomId = meeting.room.id;
       console.log("tuning for add meeting");
-      console.log(meeting);
-      this.meetingListService.addMeeting(meeting);
+      if(this.currentMeeting) {
+        meeting.id = this.currentMeeting.id;
+        console.log("in updating, ", meeting);
+        this.meetingListService.updateMeeting(meeting);
+      } else {
+        console.log("in creating");
+        this.meetingListService.addMeeting(meeting);
+      }
       this.createForm();
     }
 

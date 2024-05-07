@@ -31,8 +31,8 @@ export class CommonHttpService {
       );
   }
 
-  put(apiRoute: string, body: any) {
-    return this.http.put(`${this.url + apiRoute}`, body, { headers: this.getHttpHeaders() })
+  put<T>(apiRoute: string, body: any) : Observable<T>{
+    return this.http.put<T>(`${this.url + apiRoute}`, body, { headers: this.getHttpHeaders() })
       .pipe(
         catchError(this.handleError)
       );

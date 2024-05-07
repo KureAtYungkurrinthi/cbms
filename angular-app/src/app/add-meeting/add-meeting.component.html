@@ -61,7 +61,10 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeMeetingModal()">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">
+              <span *ngIf="!currentMeeting">Add</span>
+              <span *ngIf="currentMeeting">Update</span>
+            </button>
           </div>
         </form>
       </div>
