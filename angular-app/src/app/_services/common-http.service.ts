@@ -17,8 +17,8 @@ export class CommonHttpService {
     this.url = environment.apiUrl + "/v1";
   }
 
-  post(apiRoute: string, body: any) {
-    return this.http.post(`${this.url + apiRoute}`, body, { headers: this.getHttpHeaders() })
+  post<T>(apiRoute: string, body: any):Observable<T> {
+    return this.http.post<T>(`${this.url + apiRoute}`, body, { headers: this.getHttpHeaders() })
       .pipe(
         catchError(this.handleError)
       );

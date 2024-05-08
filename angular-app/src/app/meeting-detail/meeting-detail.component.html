@@ -142,7 +142,7 @@
           <div class="modal-body">
             <h5>Title: {{ meeting.title }}</h5>
             <p>Date: {{ FormatUtil.formatDate(meeting.startTime) }}</p>
-            <p>Time: {{ FormatUtil.formatTime(meeting.startTime) }} - {{ meeting.endTime }}</p>
+            <p>Time: {{ FormatUtil.formatTime(meeting.startTime) }} - {{ FormatUtil.formatTime(meeting.endTime) }}</p>
             <p>Location: {{ meeting.room.name }}</p>
             <p>Presenter: {{ meeting.agenda?.welcomePresenter.name }}</p>
             <p>Attendees:

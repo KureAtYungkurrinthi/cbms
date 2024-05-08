@@ -5,6 +5,8 @@ import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.se
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Agenda} from "src/app/_models/agenda.model";
 import { Location } from '@angular/common'
+import {UserService} from "src/app/_services/user.service";
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-agenda',
@@ -15,6 +17,7 @@ export class AgendaComponent implements OnInit {
   meetingId: number | null = null;
   meeting: Meeting | undefined;
   showModal: boolean = false;
+  users: User[];
   // @ts-ignore
   agendaForm: FormGroup;
 
@@ -23,7 +26,8 @@ export class AgendaComponent implements OnInit {
     private meetingService: MeetingListService,
     private router: Router,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +39,10 @@ export class AgendaComponent implements OnInit {
         this.meeting = meeting;
       })
     }
+
+    // this.userService.getAll().subscribe(value => this.users = value);
+
+    this.users = this.meeting.attendees;
 
     this.agendaForm = this.formBuilder.group({
       welcomeDuration: ['', [Validators.required, Validators.min(1)]],
@@ -76,7 +84,7 @@ export class AgendaComponent implements OnInit {
   submitAgenda() {
     console.log("submitted");
     if (this.agendaForm
-      && this.agendaForm.valid
+      // && this.agendaForm.valid
     ) {
       console.log(this.agendaForm.value);
       const agendaData: Agenda = this.agendaForm.value as Agenda;

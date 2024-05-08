@@ -167,7 +167,6 @@ export class MeetingListService {
   }
 
   private createMeeting(meeting: Meeting): Observable<Meeting> {
-    // @ts-ignore
     return this.commonHttpService.post<Meeting>('/meetings', meeting).pipe(
       tap(addedMeeting => {
         console.log('Meeting created:', addedMeeting);
@@ -297,16 +296,49 @@ export class MeetingListService {
   //   // });
   // }
 
-  public addAgendaToMeeting(meetingId: number, agenda: Agenda): void {
-    const meetings = this.meetingsSubject.value;
-    const index = meetings.findIndex(m => m.id === meetingId);
-    if (index !== -1) {
-      const updatedMeetings = [...meetings];
-      updatedMeetings[index].agenda = agenda;
-      this.meetingsSubject.next(updatedMeetings);
-      console.log('Updated meeting with new agenda:', updatedMeetings[index]);
-    } else {
-      console.error('Meeting not found with ID:', meetingId);
+  private createAgenda(meetingId: number, agenda: Agenda): Observable<Agenda> {
+    let agendaToPost = {
+      "welcomeDuration": agenda.welcomeDuration,
+      "welcomePresenter": agenda.welcomePresenter.id,
+      "purposeDuration": agenda.purposeDuration,
+      "goalsAndObjectives2_1": agenda.goalsAndObjectives2_1,
+      "implementation2_2": agenda.implementation2_2,
+      "purposePresenter": agenda.purposePresenter.id,
+      "agendaDuration": agenda.agendaDuration,
+      "previousMeetingReview3_1": agenda.previousMeetingReview3_1,
+      "actionTaken3_2": agenda.actionTaken3_2,
+      "agendaPresenter": agenda.agendaPresenter.id,
+      "closingDuration": agenda.closingDuration,
+      "notes": agenda.note,
+      "closingPresenter": agenda.closingPresenter.id
     }
+    return this.commonHttpService.post<Agenda>('/meetings/'+meetingId+'/agendas', agendaToPost).pipe(
+      tap(addedAgenda => {
+        console.log('Agenda created:', addedAgenda);
+
+        return addedAgenda;
+      }),
+      catchError(error => {
+        console.error('Error creating Agenda', error);
+        throw error;
+      })
+    );
+  }
+
+  public addAgendaToMeeting(meetingId: number, agenda: Agenda): void {
+    this.createAgenda(meetingId, agenda).subscribe(
+      (value) => {
+        const meetings = this.meetingsSubject.value;
+        const index = meetings.findIndex(m => m.id === meetingId);
+        if (index !== -1) {
+          const updatedMeetings = [...meetings];
+          updatedMeetings[index].agenda = agenda;
+          this.meetingsSubject.next(updatedMeetings);
+          console.log('Updated meeting with new agenda:', updatedMeetings[index]);
+        } else {
+          console.error('Meeting not found with ID:', meetingId);
+        }
+      }
+    )
   }
 }
