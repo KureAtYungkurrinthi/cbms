@@ -37,15 +37,17 @@ export class MeetingDetailComponent implements OnInit {
     this.meetingService.getMeetingById(this.meetingId).subscribe(value => {
         this.meeting = value;
       });
-      // if (this.meeting.agenda) {
+      if (!this.meeting.agenda) {
         this.getAgenda();
-      // }
+      }
     }
   }
 
   getAgenda() {
     this.meetingService.getAgenda(this.meetingId).subscribe((agenda) => {
       this.meeting.agenda = agenda;
+      console.log("checking agenda");
+      console.log(this.meeting.agenda);
     });
   }
 

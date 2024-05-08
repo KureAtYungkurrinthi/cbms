@@ -141,32 +141,41 @@
           </div>
           <div class="modal-body">
             <h5>Title: {{ meeting.title }}</h5>
-            <p>Date: {{ meeting.date }}</p>
-            <p>Time: {{ meeting.startTime }} - {{ meeting.endTime }}</p>
-            <p>Location: {{ meeting.room }}</p>
-            <p>Presenter: {{ meeting.agenda?.welcomePresenter }}</p>
-            <p>Attendees: {{ meeting.attendees }}</p>
+            <p>Date: {{ FormatUtil.formatDate(meeting.startTime) }}</p>
+            <p>Time: {{ FormatUtil.formatTime(meeting.startTime) }} - {{ meeting.endTime }}</p>
+            <p>Location: {{ meeting.room.name }}</p>
+            <p>Presenter: {{ meeting.agenda?.welcomePresenter.name }}</p>
+            <p>Attendees:
+              <ng-container *ngFor="let attendee of meeting.attendees; let isLast = last">
+                <span>{{ attendee.name }}</span><span *ngIf="!isLast">, </span>
+              </ng-container>
+            </p>
+
             <hr>
 
             <div class="row">
               <div class="col-8">
                 <h4>1. Welcome</h4>
-                <p>Presenter name: {{ meeting.agenda?.welcomePresenter }}</p>
+                <p>Presenter name: {{ meeting.agenda?.welcomePresenter.name }}</p>
                 <h5>1.1. Confirm Attendance</h5>
-                <p>{{ meeting.agenda?.confirmAttendance }}</p>
+<!--                <p>{{ meeting.agenda?.confirmAttendance }}</p>-->
+                <ng-container *ngFor="let attendee of meeting.attendees; let isLast = last">
+                  <span>{{ attendee.name }}</span><span *ngIf="!isLast">, </span>
+                </ng-container>
               </div>
               <div class="col-4">
                 <p>Time: {{ meeting.agenda?.welcomeDuration }} minutes</p>
               </div>
             </div>
 
+            <br>
+
             <div class="row">
               <div class="col-8">
                 <h4>2. Meeting Purpose</h4>
-                <p>Presenter name: {{ meeting.agenda?.purposePresenter }}</p>
-                <p>Time: {{ meeting.agenda?.purposeDuration }} minutes</p>
+                <p>Presenter name: {{ meeting.agenda?.purposePresenter.name }}</p>
                 <h5>2.1. Goals and Objectives</h5>
-                <p>{{ meeting.agenda?.goalsAndObjectives2_1 }}</p>
+                <p>{{ meeting.agenda?.goalsAndObjectives2_1 }} testing</p>
                 <h5>2.2. Implementation</h5>
                 <p>{{ meeting.agenda?.implementation2_2 }}</p>
               </div>
@@ -175,25 +184,11 @@
               </div>
             </div>
 
-
-            <div class="row">
-              <div class="col-8">
-                <h4>2. Meeting Purpose</h4>
-                <p>Presenter name: {{ meeting.agenda?.purposePresenter }}</p>
-                <h5>2.1. Goals and Objectives</h5>
-                <p>{{ meeting.agenda?.goalsAndObjectives2_1 }}</p>
-                <h5>2.2. Implementation</h5>
-                <p>{{ meeting.agenda?.implementation2_2 }}</p>
-              </div>
-              <div class="col-4">
-                <p>Time: {{ meeting.agenda?.purposeDuration}} minutes</p>
-              </div>
-            </div>
 
             <div class="row">
               <div class="col-8">
                 <h4>3. Agenda Item</h4>
-                <p>Presenter name: {{ meeting.agenda?.agendaPresenter }}</p>
+                <p>Presenter name: {{ meeting.agenda?.agendaPresenter.name }}</p>
                 <h5>3.1. Previous Meeting Review</h5>
                 <p>{{ meeting.agenda?.previousMeetingReview3_1 }}</p>
                 <h5>3.2. Action Taken</h5>
@@ -207,7 +202,7 @@
             <div class="row">
               <div class="col-8">
                 <h5>4. Closing</h5>
-                <p>Presenter name: {{ meeting.agenda?.closingPresenter }}</p>
+                <p>Presenter name: {{ meeting.agenda?.closingPresenter.name }}</p>
                 <p>Note: {{ meeting.agenda?.note }}</p>
               </div>
               <div class="col-4">

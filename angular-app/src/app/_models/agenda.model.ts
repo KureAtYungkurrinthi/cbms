@@ -49,22 +49,24 @@
 //     this.closingPresenter = closingPresenter;
 //   }
 // }
+import {User} from "src/app/_models/user";
+
 export class Agenda {
   constructor(
     public id?: number,
     public welcomeDuration?: number,
-    public welcomePresenter?: string,
+    public welcomePresenter?: User,
     public confirmAttendance?: string,
     public purposeDuration?: number,
     public goalsAndObjectives2_1?: string,
     public implementation2_2?: string,
-    public purposePresenter?: string,
+    public purposePresenter?: User,
     public agendaDuration?: number,
     public previousMeetingReview3_1?: string,
     public actionTaken3_2?: string,
-    public agendaPresenter?: string,
+    public agendaPresenter?: User,
     public closingDuration?: number,
     public note?: string,
-    public closingPresenter?: number
+    public closingPresenter?: User,
   ) {}
 }

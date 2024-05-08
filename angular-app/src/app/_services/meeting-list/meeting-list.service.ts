@@ -212,7 +212,7 @@ export class MeetingListService {
   }
 
   getAgenda(meetingId: number): Observable<Agenda> {
-    return this.commonHttpService.get<Agenda>('/meetings/' + meetingId + '/agenda').pipe(
+    return this.commonHttpService.get<Agenda>('/meetings/' + meetingId + '/agendas').pipe(
       catchError(error => {
         console.error('Error fetching agenda', error);
         return of(null); // Return null or an appropriate default object on error
