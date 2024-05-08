@@ -110,7 +110,7 @@ export class MeetingDetailComponent implements OnInit {
   }
 
   editAgenda(selectedMeeting: any) {
-
+    this.router.navigate(['/meeting/' + selectedMeeting.id + '/agenda/edit']);
   }
 
   deleteAgenda(selectedMeeting: any) {

@@ -26,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'meeting', component: MeetingComponent},
   {path: 'meeting/:id', component: MeetingDetailComponent},
   {path: 'meeting/:id/agenda', component: AgendaComponent},
+  {path: 'meeting/:id/agenda/edit', component: AgendaComponent},
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
