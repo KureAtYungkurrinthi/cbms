@@ -105,8 +105,40 @@ export class MeetingDetailComponent implements OnInit {
     this.deleteMeetingModal= false;
   }
 
-  downloadAgenda(selectedMeeting: any) {
+  downloadAgenda(meeting: any) {
+    const jsPDF = window['jspdf'].jsPDF;  // Accessing jsPDF from the window object
+    const doc = new jsPDF();
 
+    // Optional: Set properties for the PDF document
+    doc.setProperties({
+      title: 'Meeting Agenda',
+      subject: 'Agenda for ' + meeting.title,
+      author: 'Kaung',
+      keywords: 'generated, javascript, web 2.0, ajax',
+      creator: 'Kaung'
+    });
+
+    // Use the html method to capture the modal content
+    const content = document.getElementById('toPrint');
+
+    console.log(content);
+
+    if (content) {
+      doc.html(content, {
+        html2canvas: {
+          scale: 0.5,
+          logging: true,
+          useCORS: true,
+          windowHeight: content.scrollHeight,
+          windowWidth: content.scrollWidth
+        },
+        callback: function (doc) {
+          doc.save('meeting-agenda.pdf');
+        },
+        x: 10,
+        y: 10
+      });
+    }
   }
 
   editAgenda(selectedMeeting: any) {
