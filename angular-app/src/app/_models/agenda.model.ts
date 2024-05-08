@@ -66,7 +66,7 @@ export class Agenda {
     public actionTaken3_2?: string,
     public agendaPresenter?: User,
     public closingDuration?: number,
-    public note?: string,
+    public notes?: string,
     public closingPresenter?: User,
   ) {}
 }

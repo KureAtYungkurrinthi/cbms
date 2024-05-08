@@ -273,8 +273,22 @@ export class MeetingListService {
   }
 
   deleteAgenda(id: number) {
-    // const meeting: Meeting = this.getMeetingById(id);
-    // meeting.agenda = null;
+    let meeting: Meeting;
+    this.getMeetingById(id).subscribe(
+      (value) => {
+
+
+        this.commonHttpService.delete('/meetings/' +id +'/agendas').subscribe(
+          (agenda) => {
+            console.log("deleting agend");
+            console.log(agenda);
+            meeting = value;
+            meeting.agenda = null;
+          }
+        );
+      }
+    );
+
     // call service
   }
 
@@ -309,7 +323,7 @@ export class MeetingListService {
       "actionTaken3_2": agenda.actionTaken3_2,
       "agendaPresenter": agenda.agendaPresenter.id,
       "closingDuration": agenda.closingDuration,
-      "notes": agenda.note,
+      "notes": agenda.notes,
       "closingPresenter": agenda.closingPresenter.id
     }
     return this.commonHttpService.post<Agenda>('/meetings/'+meetingId+'/agendas', agendaToPost).pipe(
