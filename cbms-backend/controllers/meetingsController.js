@@ -1,4 +1,8 @@
 const {Meeting, Attendee, Room, User} = require('../models/Meeting');
+const {Agenda} = require('../models/Agenda');
+
+const transporter = require('../lib/email');
+const ical = require('ical-generator').default;
 
 const getAllMeetings = async (req, res) => {
     try {
@@ -17,6 +21,9 @@ const getAllMeetings = async (req, res) => {
         });
 
         if (meetings.length > 0) {
+            for (const meeting of meetings) {
+                meeting.setDataValue('hasAgendas', await Agenda.count({where: {meetingId: meeting.id}}) > 0);
+            }
             return res.json(meetings);
         } else {
             return res.status(404).json({message: 'No meetings found'});
@@ -43,6 +50,7 @@ const getMeetingById = async (req, res) => {
             }], attributes: {exclude: ['roomId']},
         });
         if (meeting) {
+            meeting.setDataValue('hasAgendas', await Agenda.count({where: {meetingId: meeting.id}}) > 0);
             return res.json(meeting);
         } else {
             return res.status(404).json({message: 'Meeting not found'});
@@ -88,10 +96,6 @@ const updateMeeting = async (req, res) => {
         if (endTime) meeting.endTime = endTime;
         if (roomId) meeting.roomId = roomId;
         if (notes) meeting.notes = notes;
-        if (isPublished) {
-            meeting.isPublished = isPublished;
-            // TBD send email to attendees
-        }
 
         if (attendees) {
             await Attendee.destroy({where: {meetingId: meeting.id}});
@@ -111,6 +115,52 @@ const updateMeeting = async (req, res) => {
             meeting.attendees = attendeesArray;
         }
 
+        if (isPublished) {
+            const room = await Room.findByPk(meeting.roomId);
+
+            const dateString = meeting.startTime.toLocaleDateString('en-AU', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            const timeString = meeting.startTime.toLocaleTimeString('en-AU') + ' - ' + meeting.endTime.toLocaleTimeString('en-AU') + ', ' + new Date().toLocaleDateString('en-AU', {
+                day: '2-digit', timeZoneName: 'short'
+            }).substring(4);
+
+            const calendar = ical({
+                prodId: '//CBMS//Meeting Notification//EN', method: 'request', events: [{
+                    start: meeting.startTime,
+                    end: meeting.endTime,
+                    summary: meeting.title,
+                    description: meeting.notes,
+                    location: room.name + ', ' + room.location
+                }]
+            });
+
+            const attendees = await Attendee.findAll({where: {meetingId: meeting.id}});
+            if (attendees.length > 0) {
+                for (const attendee of attendees) {
+                    const user = await User.findByPk(attendee.userId);
+                    const message = {
+                        from: 'Meeting Notification <no-reply@cbms.sa.gov.au>',
+                        to: `${user.name} <${user.email}>`,
+                        subject: 'You Meeting Has Been Updated',
+                        text: `Dear ${user.name},\n\nYour meeting "${meeting.title}" has been updated.\nNew details are provided below for your reference.\n\nLocation: ${room.name}, ${room.location}\nDate: ${dateString}\nTime: ${timeString}\nNotes: ${meeting.notes}\n\nPlease check the calendar invitation for the latest details.\n\nRegards,\nCBMS Team`,
+                        icalEvent: {
+                            method: 'request', content: calendar.toString()
+                        }
+                    };
+
+                    await transporter.sendMail(message, (error, info) => {
+                        if (error) {
+                            console.error('Error sending email:', error);
+                        } else {
+                            console.log('Email sent:', info.response);
+                        }
+                    });
+                }
+            }
+            meeting.isPublished = isPublished;
+        }
+
         await meeting.save();
         return res.json(meeting);
     } catch (error) {
@@ -123,6 +173,52 @@ const deleteMeeting = async (req, res) => {
     try {
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
+
+        if (meeting.isPublished) {
+            const room = await Room.findByPk(meeting.roomId);
+
+            const dateString = meeting.startTime.toLocaleDateString('en-AU', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            const timeString = meeting.startTime.toLocaleTimeString('en-AU') + ' - ' + meeting.endTime.toLocaleTimeString('en-AU') + ', ' + new Date().toLocaleDateString('en-AU', {
+                day: '2-digit', timeZoneName: 'short'
+            }).substring(4);
+
+            const calendar = ical({
+                prodId: '//CBMS//Meeting Notification//EN', method: 'cancel', events: [{
+                    start: meeting.startTime,
+                    end: meeting.endTime,
+                    summary: meeting.title,
+                    description: meeting.notes,
+                    location: room.name + ', ' + room.location
+                }]
+            });
+
+            const attendees = await Attendee.findAll({where: {meetingId: meeting.id}});
+            if (attendees.length > 0) {
+                for (const attendee of attendees) {
+                    const user = await User.findByPk(attendee.userId);
+
+                    const message = {
+                        from: 'Meeting Notification <no-reply@cbms.sa.gov.au>',
+                        to: `${user.name} <${user.email}>`,
+                        subject: 'You Meeting Has Been Cancelled',
+                        text: `Dear ${user.name},\n\nYour meeting "${meeting.title}" has been cancelled.\nOriginal details are provided below for your reference.\n\nLocation: ${room.name}, ${room.location}\nDate: ${dateString}\nTime: ${timeString}\nNotes: ${meeting.notes}\n\nPlease check the calendar invitation for the latest details.\n\nRegards,\nCBMS Team`,
+                        icalEvent: {
+                            method: 'cancel', content: calendar.toString()
+                        }
+                    };
+
+                    await transporter.sendMail(message, (error, info) => {
+                        if (error) {
+                            console.error('Error sending email:', error);
+                        } else {
+                            console.log('Email sent:', info.response);
+                        }
+                    });
+                }
+            }
+        }
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();

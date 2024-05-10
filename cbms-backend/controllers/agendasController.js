@@ -3,7 +3,7 @@ const {Agenda, Meeting, User, Attendee} = require('../models/Agenda');
 const getAgendas = async (req, res) => {
     try {
         const attendee = await Attendee.findAll({where: {meetingId: req.params.id, userId: req.decoded.id}});
-        if (!attendee || req.decoded.role !== 'admin') return res.status(403).json({message: 'Members can only view their own meeting agendas'});
+        if (!attendee && req.decoded.role !== 'admin') return res.status(403).json({message: 'Members can only view their own meeting agendas'});
 
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
         if (agendas.length <= 0) return res.status(404).json({message: 'No agendas found'});
@@ -175,7 +175,7 @@ const updateAgendas = async (req, res) => {
 const deleteAgendas = async (req, res) => {
     try {
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
-        if (!agendas) return res.status(404).json({message: 'Agenda not found'});
+        if (agendas.length <= 0) return res.status(404).json({message: 'Agenda not found'});
 
         await Agenda.destroy({where: {meetingId: req.params.id}});
         return res.sendStatus(204);

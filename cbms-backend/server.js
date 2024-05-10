@@ -14,6 +14,10 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
+app.all('/', (req, res) => {
+    res.json({message: 'Committee/Board Management System (CBMS) API, you are not supposed to be here.'});
+});
+
 // Unprotected route for authentication
 app.use('/v1/auth', require('./routes/auth'));
 // Protected routes
