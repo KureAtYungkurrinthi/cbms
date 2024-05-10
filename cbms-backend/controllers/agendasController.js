@@ -175,7 +175,7 @@ const updateAgendas = async (req, res) => {
 const deleteAgendas = async (req, res) => {
     try {
         const agendas = await Agenda.findAll({where: {meetingId: req.params.id}});
-        if (!agendas) return res.status(404).json({message: 'Agenda not found'});
+        if (agendas.length <= 0) return res.status(404).json({message: 'Agenda not found'});
 
         await Agenda.destroy({where: {meetingId: req.params.id}});
         return res.sendStatus(204);
