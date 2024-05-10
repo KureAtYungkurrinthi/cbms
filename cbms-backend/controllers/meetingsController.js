@@ -1,6 +1,8 @@
 const {Meeting, Attendee, Room, User} = require('../models/Meeting');
 const {Agenda} = require('../models/Agenda');
 
+const transporter = require('../lib/email');
+
 const getAllMeetings = async (req, res) => {
     try {
         const whereClause = req.decoded.role === 'admin' ? {} : {id: req.decoded.id};
@@ -93,10 +95,6 @@ const updateMeeting = async (req, res) => {
         if (endTime) meeting.endTime = endTime;
         if (roomId) meeting.roomId = roomId;
         if (notes) meeting.notes = notes;
-        if (isPublished) {
-            meeting.isPublished = isPublished;
-            // TBD send email to attendees
-        }
 
         if (attendees) {
             await Attendee.destroy({where: {meetingId: meeting.id}});
@@ -116,6 +114,43 @@ const updateMeeting = async (req, res) => {
             meeting.attendees = attendeesArray;
         }
 
+        if (isPublished) {
+            const attendees = await Attendee.findAll({where: {meetingId: meeting.id}});
+            if (attendees.length > 0) {
+                for (const attendee of attendees) {
+                    const user = await User.findByPk(attendee.userId);
+                    const room = await Room.findByPk(meeting.roomId);
+
+                    const date = meeting.startTime.toLocaleDateString('en-AU', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    const time = `${meeting.startTime.toLocaleTimeString('en-AU')} - ${meeting.endTime.toLocaleTimeString('en-AU')}, ${new Date().toLocaleDateString('en-AU', {
+                        day: '2-digit',
+                        timeZoneName: 'short'
+                    }).substring(4)}`;
+
+                    const message = {
+                        from: 'Meeting Notification <no-reply@cbms.sa.gov.au>',
+                        to: `${user.name} <${user.email}>`,
+                        subject: 'You Meeting Has Been Updated',
+                        text: `Dear ${user.name},\n\nYour meeting "${meeting.title}" has been updated.\nNew details are provided below for your reference.\n\nLocation: ${room.name}, ${room.location}\nDate: ${date}\nTime: ${time}\nNotes: ${meeting.notes}\n\nRegards,\nCBMS Team`,
+                    };
+
+                    transporter.sendMail(message, (error, info) => {
+                        if (error) {
+                            console.error('Error sending email:', error);
+                        } else {
+                            console.log('Email sent:', info.response);
+                        }
+                    });
+                }
+            }
+            meeting.isPublished = isPublished;
+        }
+
         await meeting.save();
         return res.json(meeting);
     } catch (error) {
@@ -128,6 +163,42 @@ const deleteMeeting = async (req, res) => {
     try {
         const meeting = await Meeting.findByPk(req.params.id);
         if (!meeting) return res.status(404).json({message: 'Meeting not found'});
+
+        if (meeting.isPublished) {
+            const attendees = await Attendee.findAll({where: {meetingId: meeting.id}});
+            if (attendees.length > 0) {
+                for (const attendee of attendees) {
+                    const user = await User.findByPk(attendee.userId);
+                    const room = await Room.findByPk(meeting.roomId);
+
+                    const date = meeting.startTime.toLocaleDateString('en-AU', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    const time = `${meeting.startTime.toLocaleTimeString('en-AU')} - ${meeting.endTime.toLocaleTimeString('en-AU')}, ${new Date().toLocaleDateString('en-AU', {
+                        day: '2-digit',
+                        timeZoneName: 'short'
+                    }).substring(4)}`;
+
+                    const message = {
+                        from: 'Meeting Notification <no-reply@cbms.sa.gov.au>',
+                        to: `${user.name} <${user.email}>`,
+                        subject: 'You Meeting Has Been Cancelled',
+                        text: `Dear ${user.name},\n\nYour meeting "${meeting.title}" has been cancelled.\nOriginal details are provided below for your reference.\n\nLocation: ${room.name}, ${room.location}\nDate: ${date}\nTime: ${time}\nNotes: ${meeting.notes}\n\nRegards,\nCBMS Team`,
+                    };
+
+                    transporter.sendMail(message, (error, info) => {
+                        if (error) {
+                            console.error('Error sending email:', error);
+                        } else {
+                            console.log('Email sent:', info.response);
+                        }
+                    });
+                }
+            }
+        }
 
         await Attendee.destroy({where: {meetingId: meeting.id}});
         await meeting.destroy();
