@@ -1,6 +1,8 @@
 const crypto = require('node:crypto');
 const User = require('../models/User');
 
+const transporter = require('../lib/email');
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll({
@@ -48,6 +50,21 @@ const createUser = async (req, res) => {
         });
         if (!created) return res.status(409).json({message: 'Email is already registered'});
 
+        const message = {
+            from: 'Account Notification <no-reply@cbms.sa.gov.au>',
+            to: `${user.name} <${user.email}>`,
+            subject: 'Welcome to CBMS!',
+            text: `Dear ${user.name},\n\nYour account has been created successfully.\n\nRegards,\nCBMS Team`
+        };
+
+        await transporter.sendMail(message, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
+
         // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
         delete user.dataValues.salt;
@@ -69,6 +86,8 @@ const updateUser = async (req, res) => {
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({message: 'User not found'});
 
+        const oldEmail = user.email;
+
         if (name) user.name = name;
         if (email) user.email = email;
         if (role) user.role = role;
@@ -77,6 +96,21 @@ const updateUser = async (req, res) => {
             user.hash = crypto.scryptSync(password, user.salt, 64).toString('hex');
         }
         await user.save();
+
+        const message = {
+            from: 'Account Notification <no-reply@cbms.sa.gov.au>',
+            to: `${user.name} <${oldEmail}>`,
+            subject: 'CBMS Account Change',
+            text: `Dear ${user.name},\n\nYour account details have been changed, if this was not you please contact us immediately.\n\nRegards,\nCBMS Team`
+        };
+
+        await transporter.sendMail(message, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
 
         // Avoid returning hashed password back to frontend
         delete user.dataValues.hash;
@@ -98,6 +132,22 @@ const deleteUser = async (req, res) => {
 
         // Delete the user
         await user.destroy();
+
+        const message = {
+            from: 'Account Notification <no-reply@cbms.sa.gov.au>',
+            to: `${user.name} <${user.email}>`,
+            subject: 'CBMS Account Deletion',
+            text: `Dear ${user.name},\n\nYour account has been deleted, if this was not you please contact us immediately.\n\nRegards,\nCBMS Team`
+        };
+
+        await transporter.sendMail(message, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
+
         return res.sendStatus(204);
     } catch (error) {
         console.error('Error deleting user:', error);

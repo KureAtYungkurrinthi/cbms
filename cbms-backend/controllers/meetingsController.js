@@ -149,7 +149,7 @@ const updateMeeting = async (req, res) => {
                         }
                     };
 
-                    transporter.sendMail(message, (error, info) => {
+                    await transporter.sendMail(message, (error, info) => {
                         if (error) {
                             console.error('Error sending email:', error);
                         } else {
@@ -209,7 +209,7 @@ const deleteMeeting = async (req, res) => {
                         }
                     };
 
-                    transporter.sendMail(message, (error, info) => {
+                    await transporter.sendMail(message, (error, info) => {
                         if (error) {
                             console.error('Error sending email:', error);
                         } else {
