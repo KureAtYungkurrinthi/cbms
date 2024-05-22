@@ -7,7 +7,7 @@
   </div>
   <hr>
   <div class="meetings-table">
-    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [ngStyle]="{'background-color': meeting.isPublished? '' : '#f2f2f2'}">
+    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [ngStyle]="{'background-color': meeting.isPublished? '' : '#f2f2f2'}" routerLink="/meeting/{{meeting.id}}">
       <div class="col-2">
         <div class="meeting-date">{{ FormatUtil.formatDate2(meeting.startTime) }} </div>
       </div>
