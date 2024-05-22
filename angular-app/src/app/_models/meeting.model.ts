@@ -45,5 +45,6 @@ export class Meeting {
     public agenda?: Agenda,
     public roomId?: number,
     public room?: Room,
+    public hasAgendas?: boolean,
   ) {}
 }

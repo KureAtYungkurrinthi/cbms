@@ -4,7 +4,8 @@
 
 export const environment = {
     // apiUrl: 'http://52.63.52.42:3000'
-  apiUrl: 'http://localhost:3000'
+  // apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://api.sigure.net/'
 };
 
 /*
