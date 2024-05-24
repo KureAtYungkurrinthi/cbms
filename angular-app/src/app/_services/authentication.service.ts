@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {User} from "src/app/models/user";
+import {User} from "src/app/_models/user";
 import {environment} from "src/environments/environment";
+import {StorageUtil} from "src/app/_helpers/storage.util";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -15,7 +16,7 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient
   ) {
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+    this.userSubject = new BehaviorSubject(JSON.parse(StorageUtil.getItem('user')!));
     this.user = this.userSubject.asObservable();
   }
 
@@ -23,15 +24,20 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
+  public get userObservable() {
+    return this.user;
+  }
+
   login(username: string, password: string) {
-    return this.http.post<any>(`http://localhost:3000/v1/auth`, { "email": username, "password": password })
+    return this.http.post<any>(`${environment.apiUrl}/v1/auth`, { "email": username, "password": password })
       .pipe(map(obj => {
         var accessToken = obj['accessToken'];
         var user = obj['user'];
         console.log(accessToken);
         console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user));
+        StorageUtil.setItem('user', JSON.stringify(user));
+        StorageUtil.setItem('accessToken', accessToken);
         this.userSubject.next(user);
         return user;
       }));
@@ -39,7 +45,7 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    StorageUtil.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/login']);
   }

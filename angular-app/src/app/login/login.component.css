@@ -54,4 +54,13 @@ h1 {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
 }
 
+.clear-float {
+  clear: right;
+}
+
+.invalid-feedback {
+  display: block;
+  /*background-color: #8e3e3e;*/
+}
+
 

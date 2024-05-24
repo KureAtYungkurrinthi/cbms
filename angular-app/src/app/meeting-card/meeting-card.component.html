@@ -1,11 +1,14 @@
-<div class="meeting-item" *ngIf="meeting">
+<div class="meeting-item" *ngIf="meeting" routerLink="/meeting/{{meeting.id}}">
+<!--  <div routerLink="/meeting/{{meeting.id}}">-->
+
   <div class="meeting-date">
-    <span class="meeting-day">{{ meeting.date | date:'dd' }}</span>
-    <span class="meeting-day-name">{{ meeting.date | date:'EEE' }}</span>
+    <span class="meeting-day">{{ meeting.startTime | date:'dd' }}</span>
+    <span class="meeting-day-name">{{ meeting.startTime| date:'EEE' }}</span>
   </div>
   <div class="meeting-details">
     <h3>{{ meeting.title }}</h3>
-    <p class="meeting-time">{{ meeting.time }}</p>
-    <p class="meeting-room"><i class="fas fa-suitcase"></i> {{ meeting.room }}</p>
+    <p class="meeting-time">{{ FormatUtil.formatTime(meeting.startTime) }}</p>
+    <p class="meeting-room"><i class="fas fa-suitcase"></i> {{ meeting.room.name }}</p>
   </div>
+<!--  </div>-->
 </div>

@@ -4,4 +4,9 @@
     email?: string;
     role?: string;
     token?: string;
+    Attendee?: Attendee;
+}
+
+export class Attendee {
+  isPresenter?: boolean;
 }

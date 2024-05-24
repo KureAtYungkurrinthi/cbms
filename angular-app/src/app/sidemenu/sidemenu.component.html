@@ -1,0 +1,27 @@
+<div class=" sidebar">
+  <div class="profile-section">
+    <img src="assets/logo.png" class="avatar" alt="">
+    <p style="font-size: 26px;">Hello, [{{user.name}}]</p>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+  <div class="current-time">
+    <div class="flex-container">
+      <div class="today">Today</div>
+      <div class="time-display">{{ currentTime }}</div>
+    </div>
+    <div class="date-display">{{ currentDate }}</div>
+  </div>
+  <button *ngIf="user.role == 'admin'" class="add-meeting-button" (click)="openMeetingModal()">+ Add Meeting</button>
+  <div>
+  </div>
+  <div class="navigation nav-cus-box">
+    <ul class="nav flex-column">
+      <li class="nav-item "><a class="nav-link" routerLink="/dashboard">Home</a></li>
+      <hr class="nav-cus">
+      <li class="nav-item"><a class="nav-link" routerLink="/meeting">Meetings</a></li>
+      <hr class="nav-cus">
+      <li class="nav-item"><a class="nav-link" routerLink="#">Documents</a></li>
+      <hr class="nav-cus">
+    </ul>
+  </div>
+</div>

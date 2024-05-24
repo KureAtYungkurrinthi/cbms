@@ -38,3 +38,7 @@
 .meeting-details .icon-room {
   /* Add style for your room icon here, if using a font icon set */
 }
+
+.meeting-item:hover {
+  cursor: pointer;
+}

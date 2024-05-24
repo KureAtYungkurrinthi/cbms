@@ -14,10 +14,19 @@ import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { MeetingCardComponent } from './meeting-card/meeting-card.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { MeetingComponent } from './meeting/meeting.component';
+import { MeetingFormComponent } from './meeting-form/meeting-form.component';
+import { MeetingDetailComponent } from './meeting-detail/meeting-detail.component';
+import { AgendaComponent } from './agenda/agenda.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'meeting', component: MeetingComponent},
+  {path: 'meeting/:id', component: MeetingDetailComponent},
+  {path: 'meeting/:id/agenda', component: AgendaComponent},
+  {path: 'meeting/:id/agenda/edit', component: AgendaComponent},
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -30,7 +39,12 @@ const appRoutes: Routes = [
     DashboardComponent,
     AddMeetingComponent,
     MeetingCardComponent,
-    CalendarComponent
+    CalendarComponent,
+    SidemenuComponent,
+    MeetingComponent,
+    MeetingFormComponent,
+    MeetingDetailComponent,
+    AgendaComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +52,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(
-      appRoutes, {enableTracing: true}  // <-- debugging purposes only
+      appRoutes, {enableTracing: false}  // <-- debugging purposes onl
     ),
     FormsModule,
     ReactiveFormsModule

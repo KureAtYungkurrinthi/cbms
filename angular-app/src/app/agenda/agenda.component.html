@@ -1,0 +1,194 @@
+<div class="meeting-detail-container">
+
+  <div *ngIf="meetingId && meeting">
+    <form [formGroup]="agendaForm" (ngSubmit)="submitAgenda()">
+      <div class="row">
+        <h4>Meeting Agenda <span *ngIf="meeting.agenda"> Edit</span></h4>
+        <div class="col-8">
+          <h1>Title: {{meeting.title}}</h1>
+        </div>
+        <div class="col-4">
+          <div class="button-group">
+            <button class="btn publish" (click)="goBack()">Cancel</button>
+            <button  type="submit" class="btn make-agenda">
+              <span *ngIf="meeting.agenda">Update</span>
+              <span *ngIf="!meeting.agenda">Create</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-container">
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-3">
+            <h4>1. Welcome</h4>
+            <div class="row"><h6>Duration:
+              <input formControlName="welcomeDuration"  type="number" name=""> min</h6>
+              <div *ngIf="agendaForm.get('welcomeDuration').invalid && (agendaForm.get('welcomeDuration').touched || agendaForm.get('welcomeDuration').dirty)">
+                <small class="text-danger">Duration is required and must be at least 1 minute.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 grey-background" style="padding-bottom: 10px">
+            <h4>1.1. Confirm Attendance</h4>
+            <div>
+              <ng-container *ngFor="let attendee of meeting.attendees; let isLast = last">
+                <span>{{ attendee.name }}</span><span *ngIf="!isLast">, </span>
+              </ng-container>
+            </div>
+<!--            <div *ngIf="agendaForm.get('confirmAttendance').invalid && (agendaForm.get('confirmAttendance').touched || agendaForm.get('confirmAttendance').dirty)">-->
+<!--              <small class="text-danger">Confirmation of attendance is required.</small>-->
+
+<!--            </div>-->
+            <hr>
+<!--            <p>Presenter <input formControlName="welcomePresenter" type="text"></p>-->
+            <label for="welcomePresenter">Presenter</label>
+            <select class="form-control" id="welcomePresenter" formControlName="welcomePresenter">
+              <option value="" disabled selected>Choose a Presenter</option>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
+            </select>
+            <div *ngIf="agendaForm.get('welcomePresenter').invalid && (agendaForm.get('welcomePresenter').touched || agendaForm.get('welcomePresenter').dirty)">
+              <small class="text-danger">Presenter name is required.</small>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-3">
+            <h4>2. Purpose</h4>
+            <div class="row"><h6>Duration:
+              <input formControlName="purposeDuration" type="number" name=""> min</h6>
+              <div *ngIf="agendaForm.get('purposeDuration').invalid && (agendaForm.get('purposeDuration').touched || agendaForm.get('purposeDuration').dirty)">
+                <small class="text-danger">Duration is required and must be at least 1 minute.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 grey-background">
+            <h4>2.1. Goals and Objectives</h4>
+            <textarea formControlName="goalsAndObjectives2_1" ></textarea>
+            <div *ngIf="agendaForm.get('goalsAndObjectives2_1').invalid && (agendaForm.get('goalsAndObjectives2_1').touched || agendaForm.get('goalsAndObjectives2_1').dirty)">
+              <small class="text-danger">Goals and objectives are required.</small>
+            </div>
+            <h4>2.2. Implementation </h4>
+            <textarea formControlName="implementation2_2" ></textarea>
+            <div *ngIf="agendaForm.get('implementation2_2').invalid && (agendaForm.get('implementation2_2').touched || agendaForm.get('implementation2_2').dirty)">
+              <small class="text-danger">Implementation details are required.</small>
+            </div>
+<!--            <p>Presenter<input formControlName="purposePresenter" type="text"></p>-->
+
+            <label for="purposePresenter">Presenter</label>
+            <select class="form-control" id="purposePresenter" formControlName="purposePresenter">
+              <option value="" disabled selected>Choose a Presenter</option>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
+            </select>
+
+            <div *ngIf="agendaForm.get('purposePresenter').invalid && (agendaForm.get('purposePresenter').touched || agendaForm.get('purposePresenter').dirty)">
+              <small class="text-danger">Presenter name is required.</small>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-3">
+            <h4>3. Agenda Item</h4>
+            <div class="row"><h6>Duration: <input formControlName="agendaDuration" type="number" name=""> min</h6>
+              <div *ngIf="agendaForm.get('agendaDuration')?.invalid && (agendaForm.get('agendaDuration')?.touched || agendaForm.get('agendaDuration')?.dirty)">
+                <small class="text-danger">Duration is required and must be at least 1 minute.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 grey-background">
+            <h4>3.1. Previous Meeting Review</h4>
+            <textarea formControlName="previousMeetingReview3_1"></textarea>
+            <div *ngIf="agendaForm.get('previousMeetingReview3_1')?.invalid && (agendaForm.get('previousMeetingReview3_1')?.touched || agendaForm.get('previousMeetingReview3_1')?.dirty)">
+              <small class="text-danger">Review of the previous meeting is required.</small>
+            </div>
+            <h4>3.2. Action Taken</h4>
+            <textarea formControlName="actionTaken3_2"></textarea>
+            <div *ngIf="agendaForm.get('actionTaken3_2')?.invalid && (agendaForm.get('actionTaken3_2')?.touched || agendaForm.get('actionTaken3_2')?.dirty)">
+              <small class="text-danger">Details of actions taken are required.</small>
+            </div>
+<!--            <p>Presenter<input formControlName="agendaPresenter" type="text"></p>-->
+
+            <label for="agendaPresenter">Presenter</label>
+            <select class="form-control" id="agendaPresenter" formControlName="agendaPresenter">
+              <option value="" disabled selected>Choose a Presenter</option>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
+            </select>
+
+            <div *ngIf="agendaForm.get('agendaPresenter')?.invalid && (agendaForm.get('agendaPresenter')?.touched || agendaForm.get('agendaPresenter')?.dirty)">
+            <small class="text-danger">Presenter name is required.</small>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-3">
+            <h4>4. Closing</h4>
+            <div class="row"><h6>Duration: <input formControlName="closingDuration" type="number" name="" id=""> min</h6>
+              <div *ngIf="agendaForm.get('closingDuration')?.invalid && (agendaForm.get('closingDuration')?.touched || agendaForm.get('closingDuration')?.dirty)">
+                <small class="text-danger">Closing duration is required and must be at least 1 minute.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 grey-background">
+            <h4>Note:</h4>
+            <textarea formControlName="note"></textarea>
+            <hr>
+<!--            <p>Presenter<input formControlName="closingPresenter" type="text"></p>-->
+
+            <label for="closingPresenter">Presenter</label>
+            <select class="form-control" id="closingPresenter" formControlName="closingPresenter">
+              <option value="" disabled selected>Choose a Presenter</option>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
+            </select>
+
+            <div *ngIf="agendaForm.get('closingPresenter')?.invalid && (agendaForm.get('closingPresenter')?.touched || agendaForm.get('closingPresenter')?.dirty)">
+              <small class="text-danger">Presenter name is required.</small>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+      </div>
+    </form>
+
+      <!--    Modal-->
+      <div class="modal-backdrop" *ngIf="showModal" [ngStyle]="{'display': showModal ? 'block' : 'none'}"></div>
+
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+           aria-hidden="true" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Status</h3>
+            </div>
+            <div class="modal-body">
+              <h5>
+                The agenda has been saved.<br>
+                Do you want to send a notice to attendees?
+              </h5>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn make-agenda" (click)="closeModal()">YES</button>
+              <button type="button" class="btn cancel" (click)="closeModal()">NO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>

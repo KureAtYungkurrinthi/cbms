@@ -1,0 +1,72 @@
+<!-- Main Content -->
+<div class="col-md-9 meetings-container">
+  <div class="row">
+    <div class="col-10">
+      <h1 class="meetings-header">Meetings</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="meetings-table">
+    <div class="meeting-row row" *ngFor="let meeting of meetings; let i = index" [ngStyle]="{'background-color': meeting.isPublished? '' : '#f2f2f2'}" >
+      <div class="col-2">
+        <div class="meeting-date">{{ FormatUtil.formatDate2(meeting.startTime) }} </div>
+      </div>
+      <div class="col-7 meeting-details" routerLink="/meeting/{{meeting.id}}">
+        <div class="meeting-details">
+          <h5>{{ meeting.title }} </h5>
+          Time: {{ FormatUtil.formatTime(meeting.startTime) }} Location: {{ meeting.room.name }}</div>
+        <button class="button" *ngIf="!meeting.isPublished" (click)="onPublish(meeting.id)">Publish</button>
+        <button class="button" *ngIf="!meeting.hasAgendas" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
+        <button class="button" *ngIf="meeting.hasAgendas" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
+      </div>
+      <div class="col-3 button-col">
+        <button class="edit-button meeting-buttons" (click)="openMeetingModalFromApp(meeting)">Edit</button>
+        <button class="delete-button meeting-buttons" (click)="openDeleteMeetingModal()">×</button>
+      </div>
+
+      <!--    delete meeting TODO:: refactor with common popup-->
+      <div class="modal-backdrop-delete" *ngIf="deleteMeetingModal" [ngStyle]="{'display': deleteMeetingModal ? 'block' : 'none'}"></div>
+      <div class="modal fade" id="deleteMeetingModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': deleteMeetingModal}" [ngStyle]="{'display': deleteMeetingModal ? 'block' : 'none'}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Confirmation</h3>
+            </div>
+            <div class="modal-body">
+              <h5>
+                Do you want to delete this meeting?
+              </h5>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn make-agenda" (click)="confirmDeleteMeeting(meeting.id)">Yes</button>
+              <button type="button" class="btn cancel" (click)="closeDeleteMeetingModal()">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="pagination">
+    <!-- Add pagination if needed -->
+    <button class="pagination-button">1</button>
+    <button class="pagination-button">2</button>
+    <button class="pagination-button">3</button>
+    <!-- etc. -->
+  </div>
+
+
+  <div #meetingModal class="modal fade" id="meetingModal" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel" aria-hidden="true">
+    <app-add-meeting
+      [users]="users"
+      [rooms]="rooms"
+      [meetingToEdit]="meetingToEdit$"
+      (closeModal)="closeMeetingModalFromApp()">
+    </app-add-meeting>
+  </div>
+  <div *ngIf="showModal" class="modal-backdrop"  (click)="closeMeetingModalFromApp()"></div>
+
+</div>
+
+
+

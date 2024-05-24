@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Meeting} from "src/app/meeting.model";
+import {Meeting} from "src/app/_models/meeting.model";
+import {FormatUtil} from "src/app/_helpers/format.util";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-meeting-card',
@@ -14,4 +16,7 @@ export class MeetingCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  protected readonly FormatUtil = FormatUtil;
+  protected readonly formatDate = formatDate;
 }

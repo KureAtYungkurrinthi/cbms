@@ -1,0 +1,20 @@
+.container-fluid {
+  padding-right:0;
+  padding-left:0;
+  margin-right:auto;
+  margin-left:auto
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(108, 117, 125, 0.6); /* Light grey background with some opacity */
+}
+
+.modal-open .modal-backdrop {
+  display: block;
+}

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {AddMeetingComponent} from "src/app/add-meeting/add-meeting.component";
-import {Meeting} from "src/app/meeting.model";
+import {Meeting} from "src/app/_models/meeting.model";
+import {AuthenticationService} from "src/app/_services/authentication.service";
+import {MeetingListService} from "src/app/_services/meeting-list/meeting-list.service";
+import {User} from "src/app/_models/user";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,56 +14,36 @@ import {Meeting} from "src/app/meeting.model";
 export class DashboardComponent implements OnInit {
   // bsModalRef: BsModalRef | undefined;
 
-  currentDate: string | undefined;
-  currentTime: string | undefined;
+  public meetings: Meeting[] = [];
+  user: User;
 
-  meetings: Meeting[] = [
-    {
-      id: 1,
-      title: 'Quarterly Planning',
-      date: '2024-03-11',
-      time: '10:00 AM',
-      room: 'Visionary Room A'
-    },
-    {
-      id: 2,
-      title: 'Marketing Strategy',
-      date: '2024-03-14',
-      time: '09:30 AM',
-      room: 'Visionary Room C'
-    },
-    {
-      id: 3,
-      title: 'Product Launch',
-      date: '2024-03-20',
-      time: '02:30 PM',
-      room: 'Board Room A'
-    }
-  ];
-
-  constructor() { }
+  constructor(private meetingListService:MeetingListService, private authenticationService: AuthenticationService) {
+    this.user = authenticationService.userValue;
+  }
 
   ngOnInit(): void {
-    this.updateDateTime();
-    // Update the time every minute to keep it current
-    setInterval(() => this.updateDateTime(), 60000);
+    this.meetingListService.getMeetings().subscribe(meetings => {
+      console.log("checking meetings in dashboard");
+      console.log(meetings);
+
+      if (this.user.role == 'admin') {
+        this.meetings = meetings;
+      } else {
+        this.meetings = this.filterMeetingsByAttendeeId(meetings, this.user.id);
+      }
+    });
+  }
+
+  filterMeetingsByAttendeeId(meetings, attendeeId) {
+    return meetings.filter(meeting =>
+      meeting.attendees.some(attendee => attendee.id === attendeeId)
+    );
   }
 
   addMeeting() {
     // this.bsModalRef = this.modalService.show(AddMeetingComponent);
   }
 
-  private updateDateTime() {
-    const now = new Date();
-    this.currentDate = now.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-    this.currentTime = now.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  }
+
+
 }
