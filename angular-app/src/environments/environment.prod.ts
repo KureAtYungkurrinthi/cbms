@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000'
-  // apiUrl: 'https://api.sigure.net/'
+  // apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://api.sigure.net'
 };

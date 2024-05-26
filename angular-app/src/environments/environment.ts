@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
-  // apiUrl: 'https://api.sigure.net/'
+  // apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://api.sigure.net'
 };
 
 /*

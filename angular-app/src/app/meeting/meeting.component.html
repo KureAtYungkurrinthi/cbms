@@ -11,7 +11,7 @@
       <div class="col-2">
         <div class="meeting-date">{{ FormatUtil.formatDate2(meeting.startTime) }} </div>
       </div>
-      <div class="col-7 meeting-details" routerLink="/meeting/{{meeting.id}}">
+      <div class="col-7 meeting-details" routerLink="/meeting/{{meeting.id}}"m>
         <div class="meeting-details">
           <h5>{{ meeting.title }} </h5>
           Time: {{ FormatUtil.formatTime(meeting.startTime) }} Location: {{ meeting.room.name }}</div>
