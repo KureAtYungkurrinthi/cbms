@@ -24,6 +24,7 @@ export class MeetingComponent implements OnInit {
   public meetingToEdit: Meeting = null;
 
   public meetingToEdit$: Subject<Meeting> = new Subject();
+  user: User;
 
   @ViewChild('meetingModal') meetingModal: any;
   showModal: boolean = false;
@@ -32,7 +33,9 @@ export class MeetingComponent implements OnInit {
                 private userService: UserService,
                 private roomService: RoomService,
                 private router: Router,
-                ) { }
+                ) {
+      this.user = authenticationService.userValue;
+    }
 
   ngOnInit(): void {
     this.meetingService.getMeetings().subscribe(meetings => {

@@ -15,8 +15,8 @@
         <div class="meeting-details">
           <h5>{{ meeting.title }} </h5>
           Time: {{ FormatUtil.formatTime(meeting.startTime) }} Location: {{ meeting.room.name }}</div>
-        <button class="button" *ngIf="!meeting.isPublished" (click)="onPublish(meeting.id)">Publish</button>
-        <button class="button" *ngIf="!meeting.hasAgendas" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
+        <button class="button" *ngIf="!meeting.isPublished && user.role == 'admin'" (click)="onPublish(meeting.id)">Publish</button>
+        <button class="button" *ngIf="!meeting.hasAgendas && user.role == 'admin'" routerLink="/meeting/{{meeting.id}}/agenda">Make Agenda</button>
         <button class="button" *ngIf="meeting.hasAgendas" (click)="onSeeAgenda(meeting.id)">See Agenda</button>
       </div>
       <div class="col-3 button-col">
